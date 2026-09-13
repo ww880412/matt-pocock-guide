@@ -1293,126 +1293,23 @@ a code {
 }
 .harness-map {
   margin:0;
-  background:#142238;
-  border:1px solid #24394f;
+  background:var(--surface, #fff);
+  border:1px solid var(--border);
   border-radius:10px;
-  color:#f2f6fd;
-  overflow:hidden;
 }
 .harness-map figcaption {
   display:flex;
   justify-content:space-between;
-  gap:24px;
-  align-items:center;
-  padding:22px 26px;
-  border-bottom:1px solid #34465c;
-}
-.harness-map figcaption strong {
-  font-size:1rem;
-  font-weight:550;
-}
-.flow-legend {
-  display:flex;
   flex-wrap:wrap;
-  gap:20px;
-  font-size:.875rem;
+  gap:14px;
+  align-items:center;
+  padding:22px 26px 12px;
 }
-.flow-legend span:before {
-  content:"";
-  display:inline-block;
-  vertical-align:middle;
-  width:18px;
-  border-top:2px solid currentColor;
-  margin-right:8px;
-}
-.flow-legend .state:before {
-  border-top-style:dashed;
-}
-.control {
-  color:#7db4ff;
-}
-.state {
-  color:#5ed9bf;
-}
-.proof {
-  color:#e5b86c;
-}
-.desktop-map {
-  display:block;
-  width:100%;
-  height:auto;
-  font-family:inherit;
-}
-.desktop-map text {
-  fill:#e8f0fb;
-}
-.desktop-map .host-zone {
-  fill:#1b2e46;
-  stroke:#4b6482;
-}
-.desktop-map .task-zone {
-  fill:#1b3353;
-  stroke:#6b9edc;
-}
-.desktop-map .graph-node {
-  fill:#223a55;
-  stroke:#486380;
-}
-.desktop-map .adapter-node {
-  fill:#294664;
-  stroke:#6b9edc;
-}
-.desktop-map .proof-node {
-  fill:#3e3840;
-  stroke:#bda376;
-}
-.desktop-map .state-node {
-  fill:#193e43;
-  stroke:#539e94;
-}
-.desktop-map .resource-node {
-  fill:#1d3540;
-  stroke:#557f89;
-}
-.desktop-map .zone-title {
-  font-size:20px;
-  font-weight:600;
-}
-.desktop-map .zone-note {
-  font-size:15px;
-  fill:#b4c6dd;
-}
-.desktop-map .node-title {
-  font-size:17px;
-  font-weight:600;
-}
-.desktop-map .node-copy {
-  font-size:15px;
-  fill:#c5d4e7;
-}
-.desktop-map .control-line,.desktop-map .state-line,.desktop-map .proof-line {
-  fill:none;
-  stroke-width:2;
-}
-.desktop-map .control-line {
-  stroke:#7db4ff;
-}
-.desktop-map .return-line {
-  stroke-dasharray:4 4;
-}
-.desktop-map .state-line {
-  stroke:#5ed9bf;
-  stroke-dasharray:5 3;
-}
-.desktop-map .proof-line {
-  stroke:#e5b86c;
-}
-.desktop-map .edge-control,.desktop-map .edge-state,.desktop-map .edge-proof {
-  font-size:15px;
-}
-.desktop-map .edge-control { fill:#8fbfff; }
-.desktop-map .edge-state { fill:#79e2cc; }
-.desktop-map .edge-proof { fill:#ebc589; }
+.harness-map figcaption strong { font-size:1rem; font-weight:600; }
+.diagram-link { color:var(--primary, #2563eb); font-size:.875rem; white-space:nowrap; }
+.map-instructions,.map-caption { padding:0 26px 18px; font-size:.875rem; line-height:1.8; }
+.map-caption { padding-top:16px; color:var(--muted); }
+.archify-viewer { display:block; width:100%; height:900px; border:0; border-block:1px solid var(--border); }
 .map-readout {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -1642,7 +1539,6 @@ a code {
   .arch-heading h2 { font-size:1.5rem; }
   .arch-map-section,.arch-section { padding-block:32px; scroll-margin-top:145px; }
   .harness-map figcaption { display:block; padding:18px; }
-  .flow-legend { margin-top:14px; gap:16px; }
   .map-readout,.tradeoff-grid,.ownership-strip { grid-template-columns:1fr; gap:24px; }
   .scenario,.evidence-layout { grid-template-columns:1fr; gap:24px; }
   .scenario { padding-block:28px; }
@@ -1662,97 +1558,8 @@ a code {
 }
 
 
-/* Keep the complete diagram visible in side panels; zoom is an optional reading aid. */
-.diagram-open,.diagram-controls button {
-  background:#243c58;
-  color:#eef5ff;
-  border:1px solid #7189a4;
-  border-radius:5px;
-  padding:8px 12px;
-  font-size:.875rem;
-  cursor:pointer;
-}
-.diagram-open {
-  margin-left:auto;
-  white-space:nowrap;
-}
-.diagram-open[hidden] {
-  display:none;
-}
-.diagram-open:hover,.diagram-controls button:hover {
-  background:#36567a;
-}
-.diagram-dialog {
-  width:calc(100vw - 32px);
-  max-width:1600px;
-  height:calc(100dvh - 32px);
-  max-height:none;
-  padding:0;
-  border:1px solid #526b86;
-  border-radius:10px;
-  background:#142238;
-  color:#edf4fc;
-}
-.diagram-dialog[open] {
-  display:flex;
-  flex-direction:column;
-}
-.diagram-dialog::backdrop {
-  background:#071121bd;
-}
-.diagram-toolbar {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:12px;
-  padding:16px 20px;
-  border-bottom:1px solid #41566d;
-}
-.diagram-toolbar>strong {
-  font-size:1rem;
-  font-weight:550;
-}
-.diagram-controls {
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-.diagram-hint {
-  color:#bdcfe3;
-  font-size:.875rem;
-  padding:12px 20px;
-}
-.diagram-viewport {
-  flex:1;
-  min-height:0;
-  overflow:auto;
-  padding:16px;
-  overscroll-behavior:contain;
-}
-.diagram-viewport .desktop-map {
-  max-width:none;
-  margin:auto;
-}
 @media(max-width:760px) {
-  .harness-map figcaption {
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-  }
-  .flow-legend {
-    flex-basis:100%;
-    margin-top:0;
-  }
-  .diagram-dialog {
-    width:calc(100vw - 12px);
-    height:calc(100dvh - 12px);
-  }
-  .diagram-toolbar {
-    padding:12px;
-  }
-  .diagram-controls button {
-    min-height:40px;
-    padding:6px 10px;
-  }
+  .harness-map figcaption { display:flex; padding:18px; }
+  .map-instructions,.map-caption { padding-inline:18px; }
+  .archify-viewer { height:900px; }
 }
