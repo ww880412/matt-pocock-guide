@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="在 Codex 中第一次使用 Matt Pocock 插件：启动工作流、讨论需求、形成规格、拆解任务，以及恢复问题与常用操作。">
+  <meta name="theme-color" content="#ffffff"><title>完整使用指南 · Matt Pocock 工程工作流</title>
+  <link rel="stylesheet" href="styles.css"><script src="site.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到主要内容</a>
+  <header class="header"><div class="header-inner">
+    <a class="brand" href="./" aria-label="Matt Pocock 首页"><span class="brand-mark" aria-hidden="true">m<span>.</span></span><span>Matt Pocock<span class="brand-sub">工程工作流</span></span></a>
+    <nav aria-label="主导航"><a href="./">概览</a><a href="architecture.html">架构设计</a><a href="guide.html" aria-current="page">使用指南</a><a href="#reference">操作速查</a></nav>
+    <span class="edition">Codex 指南</span>
+  </div></header>
+  <div class="doc-layout">
+    <aside class="doc-sidebar" aria-label="本页目录"><div class="doc-sidebar-inner">
+      <p class="sidebar-label">使用指南</p>
+      <nav class="doc-nav" aria-label="章节导航">
+        <a href="#before">安装与启用</a><a href="#updates">本版变化</a><a href="#entry">入口与自动触发</a><a href="#capabilities">能力目录与独立使用</a><a href="#resources">资料如何加载</a><a href="#deslop">评审与代码清理</a><a href="#start">01 你提出任务</a><a href="#spec">02 agent 接着推进</a><a href="#tickets">03 你如何介入</a><a href="#completion">完成、取消与遗留要求</a><a href="#reference">手动操作速查</a><a href="#routes">路线选择</a><a href="#questions">问答与恢复</a><a href="#troubleshooting">常见故障</a>
+      </nav>
+      <p class="sidebar-foot"><strong>先理清，再推进。</strong>下一步需要什么，<br>由任务和讨论结果决定。</p>
+    </div></aside>
+    <main class="article" id="main">
+      <div class="breadcrumb"><a href="./">文档首页</a><span aria-hidden="true">/</span><span>使用指南</span></div>
+      <h1>从一个想法开始</h1>
+      <p class="intro">你说明目标、边界和授权范围，agent 负责选择适用步骤并持续推进；需要你决定或补充信息时，再回到对话。下面以“给任务列表增加标签筛选”为例说明如何配合。</p>
+      <div class="article-meta"><span>适用：Codex Desktop · native.14-rc.1</span><span>更新：2026-09-13</span></div>
+
+      <section id="before"><h2>安装与启用</h2>
+        <p>本插件把 Matt Pocock 方法串成可恢复的工作流，并接入 Codex 原生问题交互。适用场景见<a href="./#comparison">两种用法对比</a>；以下说明面向 Codex Desktop。</p>
+        <p><a class="button primary" href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-codex.zip" download="matt-pocock-codex.zip">下载 Codex 插件 · ZIP <span aria-hidden="true">↓</span></a></p>
+        <ol>
+          <li>下载上面的 ZIP 安装包。</li>
+          <li>把 ZIP 拖入 Codex Desktop 的对话框。</li>
+          <li>发送下面这句话，让 Codex 完成解压和安装。</li>
+        </ol>
+        <div class="code-block"><div class="code-top"><span>复制后，与 ZIP 一起发送</span><button class="copy" type="button" data-copy="prompt-install" aria-label="复制安装提示">复制</button></div><pre><code id="prompt-install">请解压并安装这个插件，保留我已有的其他插件和配置。</code></pre></div>
+        <p>安装后，Codex 会直接在当前对话说明两个 hooks 的用途：开始任务时恢复工作流、发送消息时识别插件入口。你确认<strong>“信任并启用”</strong>后，Codex 自动完成设置并检查结果，<strong>无需自己去设置里查找</strong>。选择暂不启用时保留安装，稍后可在对话中继续确认。</p>
+        <p>确认就绪后开始新任务，通过 <code>@</code> 选择 Matt Pocock，或发送 <code>$matt-pocock</code> 打开路线菜单。</p>
+        <details><summary>如果 Codex 读不到 ZIP 附件</summary><p>把 ZIP 的本地文件路径发给 Codex；也可以自己解压后，在 Codex 中打开文件夹，再让它按 README 安装。</p></details>
+        <details><summary>手动安装（备用）</summary>
+          <p>以下步骤以 macOS 为例，需要终端可用的 <code>node</code> 和 <code>codex</code> 命令。解压 ZIP，将整个 <code>matt-pocock-codex</code> 文件夹放到准备长期保留的位置，并保留隐藏的 <code>.agents</code> 文件夹。</p>
+          <p>在终端进入包含 README 的解压目录，执行：</p>
+          <div class="code-block"><div class="code-top"><span>终端 · 在解压后的文件夹内执行</span><button class="copy" type="button" data-copy="command-install" aria-label="复制手动安装命令">复制</button></div><pre><code id="command-install">codex plugin marketplace add .
+codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
+          <p>在 Codex 中确认插件已启用，并完成 <code>SessionStart</code> 和 <code>UserPromptSubmit</code> 两个 hooks 的信任确认，再开始新任务；仍显示旧状态时重启 Codex。</p>
+        </details>
+        <details><summary>已有旧版，如何更新？</summary><p>下载新版 ZIP，拖入 Codex，让它先保存旧插件包和对应的工作流状态，再更新并保留现有配置。需要回退时使用这组匹配的保存点，不要用旧版覆盖新产生的记录。已信任且启用的 hooks 不重复询问；需要重新信任时，仍在当前对话确认，由 Codex 完成设置。若有其他来源的同名插件，让 Codex 检查重复安装，避免同时启用两份。</p></details>
+        <div class="callout"><strong>随时打开完整指南</strong><p>单独发送 <code>$matt-pocock help</code>，或选中插件后输入 <code>help</code>。agent 会打开随安装包附带的本地网页；查看指南不会切换或结束当前工作流。网页地址随预览进程变化，固定入口始终是这条命令。</p></div>
+      </section>
+
+      <section id="updates"><h2>本版变化</h2>
+        <p>native.14-rc.1 延续默认同步、可选异步；空答保持待答，改配置只影响新题。答案校验修复已在本机安装并通过同步阅读、点选及收集的真人验收。当前下载页已提供此修复版；异步原回合结束后答题入口不可用是已接受的宿主限制，恢复原题需发送一条恢复消息。</p>
+        <p>此前版本将五项增量放进同一套使用方式：能力更容易找到，资料按需跟上，跳步后仍记得欠什么，结束时分清完成和取消。</p>
+        <ul><li><strong>统一能力目录：</strong>保留原34项，新增独立 deslop，共35项。</li><li><strong>完整资料加载：</strong>必需参考随能力一起读取，可选附件需要时再读。</li><li><strong>明确推进路径：</strong>正常推进与常见返工可自主进行，你改变路径时保留遗留要求。</li><li><strong>完成和取消分开：</strong>完成前核对已登记要求与待答问题；取消保留未完成事项。</li><li><strong>评审后限定清理：</strong>评审增加 AI slop 检查，deslop 在授权范围内修改并验证。</li></ul>
+        <details><summary>验证范围</summary><p>五项增量已通过自动化回归、包完整性及指定真实宿主场景验证；写作问答恢复与所选产物、待答守卫和真实指令来源已补验。其他场景及真人体验按风险保留，Claude Code 验证继续后置。</p></details>
+      </section>
+
+      <section id="entry"><h2>入口与自动触发</h2>
+        <div class="table-scroll"><table><thead><tr><th scope="col">你的输入</th><th scope="col">预期行为</th></tr></thead><tbody>
+          <tr><td>只选中插件发送，或 <code>$matt-pocock</code></td><td>打开路线菜单，等待你选择。</td></tr>
+          <tr><td>选中插件并描述任务</td><td>先推荐合适能力或路线并说明理由，等待你选择；保留原工作流。</td></tr>
+          <tr><td>不选插件，直接描述工程任务</td><td>agent 可在判断需要结构化、多步骤工作流时调用插件；安装不等于每条消息都强制进入工作流。</td></tr>
+          <tr><td>普通问答、简单修改或其他 skill 已承接的工作</td><td>通常直接处理。想明确使用插件时，通过 <code>@</code> 或 <code>$matt-pocock</code> 指定。</td></tr>
+        </tbody></table></div>
+        <p>入口名字、显示样式由宿主决定；不需要手写 MCP 工具名。开始路线后，后续步骤由任务进展和授权范围决定，见<a href="#spec">自动推进示例</a>。</p>
+      </section>
+
+      <section id="capabilities"><h2>能力目录与独立使用</h2>
+        <p>只想写一份问卷、听一遍简化解释或做一次评审时，可以独立使用能力，同时保留正在进行的工作流。</p>
+
+        <div class="table-scroll"><table><thead><tr><th scope="col">你想做什么</th><th scope="col">输入</th></tr></thead><tbody>
+          <tr><td>浏览能力、用途和产出</td><td><code>$matt-pocock skills</code></td></tr>
+          <tr><td>描述任务，获得推荐</td><td><code>$matt-pocock skills 帮我编写一份问卷</code></td></tr>
+          <tr><td>直接使用选定能力</td><td><code>$matt-pocock use to-questionnaire</code></td></tr>
+          <tr><td>重新解释当前进展</td><td><code>$matt-pocock use wait-what</code></td></tr>
+        </tbody></table></div>
+        <p>当前下载包包含35项公开能力。ask-matt 提供流程地图，loop-me 编写业务循环规格，三项 writing 能力承接素材与成文；三个项目工具需在使用时核对配置和依赖授权；新增 deslop 用于限定范围的代码清理。Beta / misc 标识保留上游层级。</p>
+        <p>推荐会说明理由，等你选择后再执行。独立能力完成后交付结果，不会自动推进原路线；需要追问时仍使用原有问题卡。没有活跃工作流也能使用。</p>
+        <p>目录只列公开能力，模板和内部参考不会作为入口。本页及下载包面向 Codex；Claude Code 的实际使用验证另行进行。</p>
+      </section>
+
+      <section id="resources"><h2>资料如何跟随能力加载</h2>
+        <p>无论进入工作流步骤还是独立使用能力，agent 都会拿到正文和该能力声明的全部必需参考，共享资料只加载一次。可选模板、示例或附件会提示出来，需要时再读取；你不必逐份提醒。</p>
+        <p>遇到资料缺失、循环依赖或内容超出加载上限，插件会报错并保留当前进度，不把残缺资料当作已经加载完成。附件中的脚本只作为资料提供，不会因读取而自动执行。</p>
+      </section>
+
+      <section id="deslop"><h2>评审与限定范围的代码清理</h2>
+        <p>code-review 会检查缺少依据的类型断言、丢失精确信息的类型放宽、多余防御、替换内部实现的测试 mock，以及空泛命名等 AI slop，结合项目规则和具体变更给出证据；已有工具覆盖的检查不重复制造问题。</p>
+        <p>要清理评审发现的问题，单独发送 <code>$matt-pocock use deslop</code>，再说明修改范围和目标。例如：</p>
+        <div class="code-block"><div class="code-top"><span>限定清理范围 · 示例</span><button class="copy" type="button" data-copy="prompt-deslop" aria-label="复制清理示例">复制</button></div><pre><code id="prompt-deslop">清理本次标签筛选改动中评审确认的多余代码。先列问题和修复意图，再在这次改动范围内修改；保持行为不变，运行相关验证，不新增功能、不提交代码。</code></pre></div>
+        <p>agent 先列问题和修复意图，再按已有授权修改、验证和报告。缺少必要行为验证时只给问题清单，不自动重写；验证失败时停止这次清理，保留可恢复状态，不顺手修无关问题。deslop 不会默认插入每条路线，独立调用也不会切换原工作流。</p>
+      </section>
+
+      <section id="start"><h2>01 / 你提出任务与边界</h2>
+        <p>在输入框通过 <code>@</code> 选择插件，随后输入你要讨论的任务。这里的 <code>@</code> 是宿主里的插件选择入口，不需要在消息里手写插件工具名。</p>
+        <div class="code-block"><div class="code-top"><span>选中插件后输入 · 示例</span><button class="copy" type="button" data-copy="prompt-start" aria-label="复制启动示例">复制</button></div><pre><code id="prompt-start">给任务列表增加标签筛选。先讨论行为，再形成规格、拆解任务、实现并评审。复用现有组件，不新增依赖；文档保存在项目内，不发布到外部平台，不提交或推送代码。</code></pre></div>
+        <p>这类新功能通常会推荐 <strong>Idea to Ship</strong>。选择该路线后，从需求讨论开始；也可单独发送 <code>$matt-pocock idea-to-ship</code> 明确启动。你可以补充使用者是谁、单选还是多选、没有结果时如何显示，以及哪些事这次不做。</p>
+        <p>有必要由你决定的问题时，agent 会发起提问。进入工作流本身不要求立即出现问题卡；也不表示已经开始编写代码。</p>
+        <p>如果这次只想讨论，直接加上<strong>“这轮只讨论，先不要写文档或代码”</strong>。开始工作流不会取消你的范围限制。</p>
+        <div class="outcome"><span>这一步得到</span><p>清楚的目标、边界和关键决定；默认步骤也会按任务需要记录上下文与决策文档。</p></div>
+      </section>
+
+      <section id="spec"><h2>02 / agent 根据进展继续推进</h2>
+        <p>正常情况下，<strong>你不需要逐步输入切换命令</strong>。当前步骤的完成条件已满足、下一步明确且仍在授权范围内时，agent 应调用工作流工具切换，并开始下一步。约定路径内的常见返工也可直接推进。需要图外跳转时由你决定；可以先研究或做原型，但跳过步骤不会自动取消原有要求。</p>
+        <p>对上面的标签筛选任务，一条可能的推进路径如下。这是使用示例，不是已经执行的结果：</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="任务推进示例"><table><thead><tr><th scope="col">任务进展</th><th scope="col">agent 的工作</th><th scope="col">你参与什么</th></tr></thead><tbody>
+          <tr><td>行为尚不明确</td><td>查看现有列表，讨论多标签关系、空结果与清空筛选行为</td><td>决定标签之间是“任意匹配”还是“全部匹配”等产品选择</td></tr>
+          <tr><td>关键决定已明确</td><td>切换到 <code>to-spec</code>，把决定写成行为与验收标准</td><td>发现理解偏差时纠正；不必为了切换再发一次命令</td></tr>
+          <tr><td>规格足够实施</td><td>切换到 <code>to-tickets</code>，提出可交付任务及依赖关系</td><td>决定拆分过程中发现的产品选择；常规拆票由 agent 完成</td></tr>
+          <tr><td>任务明确且允许开发</td><td>选择可执行任务，进入实现、验证和评审，继续未被阻塞的工作</td><td>处理未决产品选择、授权范围变化或需要你完成的外部动作</td></tr>
+        </tbody></table></div>
+        <div class="callout"><strong>“继续推进”有条件</strong><p>判断完成条件的是 agent。插件检查路径、待答问题和已登记要求，并保存、恢复进度，不会仅凭一次步骤切换就判定功能已经做对。最终仍要看产物、测试和真实使用结果。</p></div>
+      </section>
+
+      <section id="tickets"><h2>03 / 你随时可以介入</h2>
+        <p>用户的任务范围和明确指令优先。要缩小范围、补充行为或改变推进方向，直接在对话中说明：</p>
+        <div class="code-block"><div class="code-top"><span>限制推进范围 · 示例</span><button class="copy" type="button" data-copy="prompt-boundary" aria-label="复制范围限制示例">复制</button></div><pre><code id="prompt-boundary">先停在规格这一步，不进入实现。我想把多标签筛选改成“匹配任意一个”，请同步修正规格和验收标准。</code></pre></div>
+        <p>想知道现在处于哪一步，发送 <code>$matt-pocock status</code>。希望明确指定步骤，可以使用下方手动切换命令；它们是干预和查询入口，不是每次使用都必须执行的清单。</p>
+        <p>对于尚未回答的问题，回到原任务说<strong>“继续回答问题”</strong>。恢复的是原题，原来的期限仍然有效；详见<a href="#questions">问答与恢复</a>。</p>
+        <div class="outcome"><span>完成时检查</span><p>需求是否落进实际产物，哪些验证已做，哪些问题仍未解决。记录的步骤不能替代交付结果。</p></div>
+        <p>工作完成时，agent 根据当前范围、产物和证据正式登记完成。主动发送 <code>$matt-pocock end</code> 表示取消当前工作流，保留遗留要求；这不代表已经完成。临时独立调用能力仍保留原工作流。</p>
+      </section>
+
+      <section id="completion"><h2>完成、取消与遗留要求</h2>
+        <p>例如你要求“先做原型，规格稍后补”，agent 可以按你的明确指令改变路径，并保留“规格待补”及其来源。只有等价成果已满足要求，或你明确取消该要求，才能关闭它；换一步不代表少做一项。</p>
+        <p>你可以让 agent <strong>“列出本轮范围、未完成要求和对应证据”</strong>。agent 负责登记范围与要求、引用产物及验证结果；插件检查这些记录是否齐备，不代替你判断最终成果是否有用。</p>
+        <div class="table-scroll"><table><thead><tr><th scope="col">情况</th><th scope="col">处理方式</th></tr></thead><tbody>
+          <tr><td>本轮已登记要求全部解决，且没有待答问题</td><td>agent 核对证据后正式登记完成，保留结果摘要；重复登记不会再次结束后来开始的新任务。</td></tr>
+          <tr><td>仍有遗留要求或未答问题</td><td>保持未完成，列出剩余事项；不能先切阶段清掉问题再宣称完成。</td></tr>
+          <tr><td>你决定停止这轮工作</td><td>发送 <code>$matt-pocock end</code> 取消工作流，保留遗留要求，不标记为成果通过。</td></tr>
+          <tr><td>恢复旧版记录</td><td>承接可识别的步骤；旧记录没有完成证据时，不补成“已完成”。</td></tr>
+        </tbody></table></div>
+        <p>如果仅凭自然语言无法确认改路来源，agent 会请你使用已有切换命令或菜单，不要求重新论证已明确的选择。切阶段和结束都不会扩大外部操作授权。</p>
+      </section>
+
+      <section id="reference"><h2>手动操作速查</h2>
+        <p>需要查询状态或主动干预流程时使用。下面每条命令都在 Codex 消息输入框中<strong>单独发送</strong>。示例中的步骤切换适用于已启动的 Idea to Ship 路线。</p>
+        <div class="table-scroll"><table><thead><tr><th scope="col">你想做什么</th><th scope="col">输入</th></tr></thead><tbody>
+          <tr><td>查看完整指南</td><td><code>$matt-pocock help</code></td></tr>
+          <tr><td>查看能力目录 / 独立调用</td><td><code>$matt-pocock skills</code><br><code>$matt-pocock use to-questionnaire</code></td></tr>
+          <tr><td>查看入口菜单</td><td><code>$matt-pocock</code></td></tr>
+          <tr><td>明确启动新功能路线</td><td><code>$matt-pocock idea-to-ship</code></td></tr>
+          <tr><td>查看当前路线与步骤</td><td><code>$matt-pocock status</code></td></tr>
+          <tr><td>打开步骤切换菜单</td><td><code>$matt-pocock transition</code></td></tr>
+          <tr><td>切换到规格 / 实现 / 评审</td><td><code>$matt-pocock transition to-spec</code><br><code>$matt-pocock transition implement</code><br><code>$matt-pocock transition code-review</code></td></tr>
+          <tr><td>恢复当前任务的未答问题</td><td>继续回答问题</td></tr>
+          <tr><td>取消当前工作流，保留遗留要求</td><td><code>$matt-pocock end</code></td></tr>
+          <tr><td>明确取消一项已登记要求</td><td><code>$matt-pocock cancel-requirement 要求ID</code>（先让 agent 列出实际 ID）</td></tr>
+          <tr><td>单独清理指定范围的代码</td><td><code>$matt-pocock use deslop</code></td></tr>
+        </tbody></table></div>
+        <p>不确定下一步有哪些选择时，使用切换菜单。每条路线可用的步骤不同，不能任意切换到其他路线的步骤。</p>
+        <div class="code-block"><div class="code-top"><span>手动指定规格步骤 · 单独发送</span><button class="copy" type="button" data-copy="command-spec" aria-label="复制规格切换命令">复制</button></div><pre><code id="command-spec">$matt-pocock transition to-spec</code></pre></div>
+      </section>
+
+      <section id="routes"><h2>五条工程路线与可选写作路线</h2>
+        <p>可以通过插件入口描述任务，也可以用 <code>$matt-pocock 路线名</code> 明确启动对应路线。</p>
+        <div class="route-detail" id="idea-to-ship"><div><h3>从想法到交付</h3><code>idea-to-ship</code></div><p>适合新功能和多步骤实现。从需求讨论开始，可根据任务进入研究、原型、规格、拆解、实现、评审和交接。</p></div>
+        <div class="route-detail" id="hard-bug"><div><h3>疑难故障</h3><code>hard-bug</code></div><p>适合难复现、偶发或回归问题。先建立能检验修复效果的反馈，再定位原因，随后进入实现和评审。</p></div>
+        <div class="route-detail" id="triage"><div><h3>需求整理</h3><code>triage</code></div><p>适合零散请求和待处理问题。先整理成清楚的任务说明，再按需要形成规格、拆解和实现。</p></div>
+        <div class="route-detail" id="wayfinding"><div><h3>方向探索</h3><code>wayfinding</code></div><p>适合规模大、未知多的工程工作。先识别调查和决策事项，必要时研究或做原型，再制定可执行的方案。</p></div>
+        <div class="route-detail" id="architecture"><div><h3>架构改善</h3><code>architecture</code></div><p>适合模块、接口和代码结构改进。先寻找改进机会，再选择具体模块深入设计、实现和评审。</p></div>
+      </section>
+
+      <section id="writing"><h2>可选写作路线</h2><p><code>$matt-pocock writing</code> 从素材采集开始。已有素材时，可以直接要求进入 <code>writing-shape</code> 逐段成文，或 <code>writing-beats</code> 逐节点选择走向，不必重新访谈。</p><p>每轮只写你确认的段落或节点；写前重读文件，保留你的编辑，成文时不改原始素材。恢复时核对素材、文章路径与接续位置，缺信息再补问。路线不自动发布；每段内容和实际结果仍由你判断。</p></section>
+
+      <section id="questions"><h2>问题卡与恢复</h2>
+        <details open><summary>如何选择同步或异步卡片？</summary><p>默认优先同步。可让安装助手将插件 MCP server 环境变量 <code>MATT_POCOCK_CARD_MODE</code> 设为 <code>sync</code> 或 <code>async</code>；新题也支持 <code>presentation</code> 显式覆盖。修改只影响新题，已发出的未答题保留原方式。</p><p>同步使用仍受 Codex 当前模式限制，不保证无限等待。同步新题默认没有业务期限，空答不推进；选项较多时需要翻页。旧 native.13 公开包的答案校验仅支持 0.153.4 日志；本机修复版已加入 0.154.0-alpha.6.2 的精确适配，并完成同步原题真人收集；native.14-rc.1 已包含该修复并提供下载。插件答案适配与宿主卡片显示是两个独立问题；异步回合结束后原卡持续可答仍受宿主限制。</p></details>
+        <details open><summary>“保持待答（默认保护）”是什么意思？</summary><p>它保留问题，不会选择业务答案，也不会推进工作流。需要做决定时，请主动选择业务选项；推荐意见会出现在对应业务选项的说明中。</p></details>
+        <details><summary>我点了 Skip，或者这一轮结束了，怎么继续？</summary><p>在原来的任务里说“继续回答问题”。插件会查找保存的未答题；异步模式会为同一业务问题重新呈现一张卡，问题和原期限保留。这需要额外发送一次恢复消息，不是直接重开已结束回合的旧卡；原卡未提交的草稿不保证带入新卡。Skip 本身不表示取消、超时或批准，也不要依赖已结束回合的旧卡仍能直接提交。</p></details>
+        <details><summary>恢复的问题还能回答多久？</summary><p>恢复和翻页不会重置原题的期限。如果问题已经超时，迟到的回复不会成为有效决定；需要重新提问时，明确要求发起新问题。</p></details>
+        <details><summary>我能输入自己的答案吗？</summary><p>问题允许自定义回答时，可以直接在同一张卡上输入。菜单或不允许自定义的问题只接受列出的选项；宿主显示自由输入框，不代表所有题目都接受任意文字。</p></details>
+        <details><summary>想取消问题，或结束整个工作流？</summary><p>取消当前问题时，在对话里明确说“取消当前问题”。如果要取消整个工作流，发送 <code>$matt-pocock end</code>，遗留要求会保留。取消不会登记为完成，两个操作的范围不同。</p></details>
+        <details><summary>为什么没有自动走到下一步？</summary><p>先检查当前步骤是否已完成、是否有未答问题，以及你是否限定了“只讨论”或“先不实现”。如果下一步明确且没有这些阻塞，agent 应直接切换并继续；只因阶段结束而反复问“要不要继续”，不符合当前推进指引。可以要求它说明具体阻塞，并用 <code>$matt-pocock status</code> 查看保存的状态。</p></details>
+        <details><summary>已经有 Matt 原版 skills，还需要这个插件吗？</summary><p>原版 skills 也能互相组合、指导 agent 继续工作。插件增加的是统一路线、可恢复的步骤状态和 Codex 问题交互。只做一次评审或自由组合方法时，原版 skill 就可以；跨多个步骤、需要持续管理进度时，可以选择插件。详见<a href="./#comparison">两种用法对比</a>。</p></details>
+      </section>
+
+      <section id="troubleshooting"><h2>常见故障</h2>
+        <details><summary>@ 列表中没有插件，或更新后仍是旧版</summary><p>检查当前环境的安装与启用状态；不同机器的安装不一定同步。开始新任务再查，必要时重启 Codex。不要仅凭旧任务中已经加载的指令判断新版本是否生效。</p></details>
+        <details><summary>只选中插件发送，却没有打开菜单</summary><p>预期是打开路线菜单。可用 <code>$matt-pocock</code> 再试一次；如果仍失败，请在当前任务中说明“没有出现路线菜单”，让 agent 排查，并保留报错信息。</p></details>
+        <details><summary>提示工作流工具未加载，或者启动超时</summary><p>先确认插件已启用，在新任务中重试。仍然失败时，将完整报错交给 agent 排查；不要把“已读取技能”当作工作流已经启动。</p></details>
+        <details><summary>状态、问题卡与我预想的不一致</summary><p>发送 <code>$matt-pocock status</code> 核对路线与步骤。未答问题用“继续回答问题”恢复；明确取消与结束工作流是不同操作。更换到另一个任务时，不要假设它自动继承原任务的问题与决定。</p></details>
+        <details><summary>指南页面关闭了，收藏的地址打不开</summary><p>本地网页由预览进程提供，关闭进程后该地址会失效。重新发送 <code>$matt-pocock help</code> 即可从当前安装包打开指南。内置浏览器不可用时，agent 应提供本地文件链接并按内容回答。</p></details>
+      </section>
+
+      <div class="doc-end"><a href="./">← 返回首页</a><a href="#main">回到顶部 ↑</a></div>
+    </main>
+  </div>
+  <footer class="footer wrap"><p>Matt Pocock <span>· 工程工作流</span></p><a href="#questions">常见问题 <span aria-hidden="true">↗</span></a></footer>
+</body>
+</html>
