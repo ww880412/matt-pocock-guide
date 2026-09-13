@@ -24,13 +24,35 @@
 
     <section class="arch-map-section wrap" id="structure">
       <div class="arch-heading"><div><p class="arch-kicker">01 / 双层 HARNESS</p><h2>一个负责执行环境，一个负责任务连续性</h2></div><p>同一宿主内协作 · 按职责划分<br>共享源码，按宿主适配</p></div>
+      <!-- site-map:start -->
       <figure class="harness-map" aria-labelledby="map-title">
-        <figcaption id="map-title"><strong>任务如何穿过两层 Harness</strong><a class="diagram-link" href="harness-map.html" target="_blank" rel="noopener">独立窗口探索 ↗</a></figcaption>
-        <p class="map-instructions">选择「控制流 / 状态流 / 答复凭据流」切换阅读视角；通过「动态 / 静止」控制动效，点击「播放故事」逐步探索。支持节点聚焦、缩放与导出。</p>
-        <iframe class="archify-viewer" src="harness-map.html" title="Matt 双层 Harness 交互架构图" allow="clipboard-write; fullscreen" allowfullscreen></iframe>
-        <p class="map-caption">动画演示图中已有关系，不是实时执行日志。小屏可打开独立窗口，放大查看节点细节。</p>
+        <figcaption id="map-title"><strong>任务如何穿过两层 Harness</strong><a class="diagram-link" href="harness-map.html" target="_blank" rel="noopener">完整 Archify 探索 ↗</a></figcaption>
+        <div class="map-toolbar" hidden>
+          <div class="map-views" role="group" aria-label="选择架构流向"><button type="button" data-map-view="all" aria-pressed="true">全图</button><button type="button" data-map-view="control" aria-pressed="false">控制流</button><button type="button" data-map-view="state" aria-pressed="false">状态流</button><button type="button" data-map-view="proof" aria-pressed="false">答复凭据流</button></div>
+          <button class="map-play" type="button" aria-pressed="false">播放流向</button>
+        </div>
+        <p class="map-help">点击节点查看职责与关联。小屏可横向滑动查看全图。</p>
+        <div class="map-scroll" tabindex="0" role="region" aria-label="双层 Harness 架构图，可横向滚动">
+          <div class="site-map">
+            <div class="map-boundary host-boundary"><span>宿主 Harness</span></div>
+            <div class="map-boundary task-boundary"><span>任务 Harness · 共享核心与适配</span></div>
+            <svg class="map-edges" aria-hidden="true" focusable="false"></svg>
+            <button type="button" class="map-node node-human" data-map-node="human" style="grid-column:1;grid-row:1" aria-pressed="false"><strong>用户决定</strong><span>目标、范围与原生答复</span></button>
+            <button type="button" class="map-node node-agent" data-map-node="agent" style="grid-column:1;grid-row:2" aria-pressed="false"><strong>宿主 Agent</strong><span>理解、设计、评审与工具调用</span></button>
+            <button type="button" class="map-node node-tools" data-map-node="tools" style="grid-column:1;grid-row:3" aria-pressed="false"><strong>宿主工程工具</strong><span>文件、命令与验证结果</span></button>
+            <button type="button" class="map-node node-adapter" data-map-node="adapter" style="grid-column:2;grid-row:2" aria-pressed="false"><strong>宿主适配与入口</strong><span>Hook / MCP / 原生答复核验</span></button>
+            <button type="button" class="map-node node-task" data-map-node="task" style="grid-column:3;grid-row:2" aria-pressed="false"><strong>Matt 任务核心</strong><span>路线、要求、待答与合法推进</span></button>
+            <button type="button" class="map-node node-transcript" data-map-node="transcript" style="grid-column:3;grid-row:1" aria-pressed="false"><strong>宿主会话记录</strong><span>问题、提交顺序与答复引用</span></button>
+            <button type="button" class="map-node node-journal" data-map-node="journal" style="grid-column:4;grid-row:2" aria-pressed="false"><strong>会话事件日志</strong><span>状态、源事件与恢复依据</span></button>
+            <button type="button" class="map-node node-delivery" data-map-node="delivery" style="grid-column:4;grid-row:3" aria-pressed="false"><strong>正文交付记录</strong><span>claim / ack / 重投递</span></button>
+            <button type="button" class="map-node node-methods" data-map-node="methods" style="grid-column:3;grid-row:3" aria-pressed="false"><strong>方法与支撑资料</strong><span>固定正文、必需引用与哈希</span></button>
+          </div>
+        </div>
+        <div class="map-detail" aria-live="polite"><strong>三类流向，一张完整图</strong><p>Agent 发起动作，任务核心维护状态，原生答复从宿主记录核验。选择流向或节点，可逐项查看。</p></div>
+        <p class="map-caption">动画说明图中关系，不是实时执行日志。完整探索与导出可在独立 Archify 窗口使用。</p>
+        <script type="application/json" id="site-map-data">{"nodes":[{"id":"human","label":"用户决定","sublabel":"目标、范围与原生答复"},{"id":"agent","label":"宿主 Agent","sublabel":"理解、设计、评审与工具调用"},{"id":"tools","label":"宿主工程工具","sublabel":"文件、命令与验证结果"},{"id":"adapter","label":"宿主适配与入口","sublabel":"Hook / MCP / 原生答复核验"},{"id":"task","label":"Matt 任务核心","sublabel":"路线、要求、待答与合法推进"},{"id":"transcript","label":"宿主会话记录","sublabel":"问题、提交顺序与答复引用"},{"id":"journal","label":"会话事件日志","sublabel":"状态、源事件与恢复依据"},{"id":"delivery","label":"正文交付记录","sublabel":"claim / ack / 重投递"},{"id":"methods","label":"方法与支撑资料","sublabel":"固定正文、必需引用与哈希"}],"edges":[{"id":"goal","from":"human","to":"agent","label":"目标与授权","variant":"emphasis","labelAt":[157.5,280]},{"id":"call","from":"agent","to":"adapter","label":"调用任务动作","variant":"emphasis"},{"id":"dispatch","from":"adapter","to":"task","label":"检查后分发","variant":"emphasis","labelAt":[679.5,460]},{"id":"execute","from":"agent","to":"tools","label":"工程执行","variant":"emphasis","labelAt":[157.5,550]},{"id":"record-answer","from":"human","to":"transcript","label":"宿主记录原生答复","variant":"security"},{"id":"verify-answer","from":"transcript","to":"adapter","label":"核验问题与来源","variant":"security"},{"id":"write-state","from":"task","to":"journal","label":"读写状态","variant":"dashed"},{"id":"load-method","from":"task","to":"methods","label":"校验与加载","labelAt":[859.5,550]},{"id":"receipt","from":"journal","to":"delivery","label":"关联事件与投递","variant":"dashed","labelAt":[1210.5,550]}],"views":[{"id":"control","label":"控制流","focus":["agent","adapter","task","tools"],"note":"Agent 发起任务动作；插件检查前提并返回状态和方法，工程工作仍由宿主工具执行。"},{"id":"state","label":"状态流","focus":["task","journal","delivery","methods"],"note":"任务事件与正文回执分开维护；恢复核对来源事件，资源按声明校验加载。"},{"id":"proof","label":"答复凭据流","focus":["human","transcript","adapter","task"],"note":"Codex native 从宿主记录核验问题身份和答复来源，不接受模型自填答案。"}]}</script>
       </figure>
-      <div class="map-readout"><p><strong>控制流</strong>Agent 发起动作，代码检查允许的推进，专业工作仍由 Agent 与宿主工具执行。</p><p><strong>状态流</strong>任务事件、正文回执分别记录；恢复用历史证据重新确定位置。</p><p><strong>答复凭据流</strong>从宿主原生记录核对“哪一题、哪一次回答”，再交给任务消费。</p></div>
+      <!-- site-map:end -->
     </section>
 
     <section class="arch-section arch-scenarios" id="mechanisms"><div class="wrap">
