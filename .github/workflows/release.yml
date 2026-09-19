@@ -1,0 +1,60 @@
+name: Guarded Pages release
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      failure_probe:
+        description: Verify that an invalid artifact cannot reach deployment
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  validate:
+    name: Validate release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site
+      - uses: actions/checkout@v4
+        with:
+          repository: ww880412/matt-pocock-guide
+          ref: release-policy
+          path: source
+          persist-credentials: false
+      - name: Synthetic invalid artifact
+        if: github.event_name == 'workflow_dispatch' && inputs.failure_probe
+        run: printf '\ninvalid release probe\n' >> site/downloads/matt-pocock-codex.zip
+      - name: Verify approved release
+        run: python3 source/scripts/check-site-artifact.py site source
+      - name: Stage public files only
+        run: |
+          mkdir public
+          cp site/*.html site/*.css site/*.js public/
+          cp -R site/assets site/downloads public/
+          touch public/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: public
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy verified artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
