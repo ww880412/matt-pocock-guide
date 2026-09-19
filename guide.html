@@ -25,7 +25,7 @@
       <div class="breadcrumb"><a href="./">文档首页</a><span aria-hidden="true">/</span><span>使用指南</span></div>
       <h1>从一个想法开始</h1>
       <p class="intro">你说明目标、边界和授权范围，agent 负责选择适用步骤并持续推进；需要你决定或补充信息时，再回到对话。下面以“给任务列表增加标签筛选”为例说明如何配合。</p>
-      <div class="article-meta"><span>适用：Codex Desktop · native.14-rc.1</span><span>更新：2026-09-13</span></div>
+      <div class="article-meta"><span>适用：Codex Desktop · native.15</span><span>更新：2026-09-19</span></div>
 
       <section id="before"><h2>安装与启用</h2>
         <p>本插件把 Matt Pocock 方法串成可恢复的工作流，并接入 Codex 原生问题交互。适用场景见<a href="./#comparison">两种用法对比</a>；以下说明面向 Codex Desktop。</p>
@@ -51,7 +51,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       </section>
 
       <section id="updates"><h2>本版变化</h2>
-        <p>native.14-rc.1 延续默认同步、可选异步；空答保持待答，改配置只影响新题。答案校验修复已在本机安装并通过同步阅读、点选及收集的真人验收。当前下载页已提供此修复版；异步原回合结束后答题入口不可用是已接受的宿主限制，恢复原题需发送一条恢复消息。</p>
+        <p>native.15 将版本白名单改为协议与来源证据校验，Codex 仅升级版本号不再阻断问答和历史恢复。默认同步、可选异步；空答保持待答，改配置只影响新题。真实宿主同步与异步合成测试通过；本版未新增真人交互验收。异步回合结束后的原卡入口限制仍保留，恢复原题需发送恢复消息。</p>
         <p>此前版本将五项增量放进同一套使用方式：能力更容易找到，资料按需跟上，跳步后仍记得欠什么，结束时分清完成和取消。</p>
         <ul><li><strong>统一能力目录：</strong>保留原34项，新增独立 deslop，共35项。</li><li><strong>完整资料加载：</strong>必需参考随能力一起读取，可选附件需要时再读。</li><li><strong>明确推进路径：</strong>正常推进与常见返工可自主进行，你改变路径时保留遗留要求。</li><li><strong>完成和取消分开：</strong>完成前核对已登记要求与待答问题；取消保留未完成事项。</li><li><strong>评审后限定清理：</strong>评审增加 AI slop 检查，deslop 在授权范围内修改并验证。</li></ul>
         <details><summary>验证范围</summary><p>五项增量已通过自动化回归、包完整性及指定真实宿主场景验证；写作问答恢复与所选产物、待答守卫和真实指令来源已补验。其他场景及真人体验按风险保留，Claude Code 验证继续后置。</p></details>
@@ -166,7 +166,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       <section id="writing"><h2>可选写作路线</h2><p><code>$matt-pocock writing</code> 从素材采集开始。已有素材时，可以直接要求进入 <code>writing-shape</code> 逐段成文，或 <code>writing-beats</code> 逐节点选择走向，不必重新访谈。</p><p>每轮只写你确认的段落或节点；写前重读文件，保留你的编辑，成文时不改原始素材。恢复时核对素材、文章路径与接续位置，缺信息再补问。路线不自动发布；每段内容和实际结果仍由你判断。</p></section>
 
       <section id="questions"><h2>问题卡与恢复</h2>
-        <details open><summary>如何选择同步或异步卡片？</summary><p>默认优先同步。可让安装助手将插件 MCP server 环境变量 <code>MATT_POCOCK_CARD_MODE</code> 设为 <code>sync</code> 或 <code>async</code>；新题也支持 <code>presentation</code> 显式覆盖。修改只影响新题，已发出的未答题保留原方式。</p><p>同步使用仍受 Codex 当前模式限制，不保证无限等待。同步新题默认没有业务期限，空答不推进；选项较多时需要翻页。旧 native.13 公开包的答案校验仅支持 0.153.4 日志；本机修复版已加入 0.154.0-alpha.6.2 的精确适配，并完成同步原题真人收集；native.14-rc.1 已包含该修复并提供下载。插件答案适配与宿主卡片显示是两个独立问题；异步回合结束后原卡持续可答仍受宿主限制。</p></details>
+        <details open><summary>如何选择同步或异步卡片？</summary><p>默认优先同步。可让安装助手将插件 MCP server 环境变量 <code>MATT_POCOCK_CARD_MODE</code> 设为 <code>sync</code> 或 <code>async</code>；新题也支持 <code>presentation</code> 显式覆盖。修改只影响新题，已发出的未答题保留原方式。</p><p>同步使用仍受 Codex 当前模式限制，不保证无限等待。同步新题默认没有业务期限，空答不推进；选项较多时需要翻页。native.15 按会话、历史前缀、原题和实际答复证据判断兼容性，不再按产品版本号放行。未知协议会保留待答并说明原因。插件答案适配与宿主卡片显示是两个独立问题；异步回合结束后原卡持续可答仍受宿主限制。</p></details>
         <details open><summary>“保持待答（默认保护）”是什么意思？</summary><p>它保留问题，不会选择业务答案，也不会推进工作流。需要做决定时，请主动选择业务选项；推荐意见会出现在对应业务选项的说明中。</p></details>
         <details><summary>我点了 Skip，或者这一轮结束了，怎么继续？</summary><p>在原来的任务里说“继续回答问题”。插件会查找保存的未答题；异步模式会为同一业务问题重新呈现一张卡，问题和原期限保留。这需要额外发送一次恢复消息，不是直接重开已结束回合的旧卡；原卡未提交的草稿不保证带入新卡。Skip 本身不表示取消、超时或批准，也不要依赖已结束回合的旧卡仍能直接提交。</p></details>
         <details><summary>恢复的问题还能回答多久？</summary><p>恢复和翻页不会重置原题的期限。如果问题已经超时，迟到的回复不会成为有效决定；需要重新提问时，明确要求发起新问题。</p></details>
