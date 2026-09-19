@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>架构与设计理念 · Matt Pocock 工程工作流</title>
+  <meta name="description" content="方法由 Skills 承载，任务状态与交互由代码维护，专业判断交给 Agent。了解 Matt Pocock 跨宿主工程工作流的已实现架构与设计边界。">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="styles.css"><script src="site.js" defer></script>
+</head>
+<body class="architecture-page">
+  <a class="skip" href="#main">跳到主要内容</a>
+  <header class="header"><div class="header-inner">
+    <a class="brand" href="./" aria-label="Matt Pocock 首页"><span class="brand-mark" aria-hidden="true">m<span>.</span></span><span>Matt Pocock<span class="brand-sub">工程工作流</span></span></a>
+    <nav aria-label="主导航"><a href="./">概览</a><a href="architecture.html" aria-current="page">架构设计</a><a href="guide.html">使用指南</a><a href="guide.html#reference">操作速查</a></nav>
+    <span class="edition">设计与实现</span>
+  </div></header>
+  <main id="main">
+    <section class="arch-hero wrap">
+      <div><p class="eyebrow"><span class="small-rule"></span>ENGINEERING THE WORKFLOW</p>
+      <h1>让 Agent 的下一步，<br>有状态，有依据。</h1>
+      <p class="arch-lead">把工程方法接入任务自己的 Harness。宿主提供思考与执行能力，插件把步骤、状态和关键答复连接成可恢复的过程。</p></div>
+      <aside class="design-thesis"><span>核心设计命题</span><p>模型判断、程序检查、人的决定，<strong>各自拥有明确的边界。</strong></p><a href="#decisions">为什么这样划分 <span aria-hidden="true">↘</span></a></aside>
+    </section>
+
+    <section class="arch-map-section wrap" id="structure">
+      <div class="arch-heading"><div><p class="arch-kicker">01 / 双层 HARNESS</p><h2>一个负责执行环境，一个负责任务连续性</h2></div><p>同一宿主内协作 · 按职责划分<br>共享源码，按宿主适配</p></div>
+      <!-- site-map:start -->
+      <figure class="harness-map" aria-labelledby="map-title">
+        <figcaption id="map-title"><strong>任务如何穿过两层 Harness</strong><a class="diagram-link" href="harness-map.html" target="_blank" rel="noopener">完整 Archify 探索 ↗</a></figcaption>
+        <div class="map-toolbar" hidden>
+          <div class="map-views" role="group" aria-label="选择架构流向"><button type="button" data-map-view="all" aria-pressed="true">全图</button><button type="button" data-map-view="control" aria-pressed="false">控制流</button><button type="button" data-map-view="state" aria-pressed="false">状态流</button><button type="button" data-map-view="proof" aria-pressed="false">答复凭据流</button></div>
+          <button class="map-play" type="button" aria-pressed="false">播放流向</button>
+        </div>
+        <p class="map-help">点击节点查看职责与关联。小屏可横向滑动查看全图。</p>
+        <div class="map-scroll" tabindex="0" role="region" aria-label="双层 Harness 架构图，可横向滚动">
+          <div class="site-map">
+            <div class="map-boundary host-boundary"><span>宿主 Harness</span></div>
+            <div class="map-boundary task-boundary"><span>任务 Harness · 共享核心与适配</span></div>
+            <svg class="map-edges" aria-hidden="true" focusable="false"></svg>
+            <button type="button" class="map-node node-human" data-map-node="human" style="grid-column:1;grid-row:1" aria-pressed="false"><strong>用户决定</strong><span>目标、范围与原生答复</span></button>
+            <button type="button" class="map-node node-agent" data-map-node="agent" style="grid-column:1;grid-row:2" aria-pressed="false"><strong>宿主 Agent</strong><span>理解、设计、评审与工具调用</span></button>
+            <button type="button" class="map-node node-tools" data-map-node="tools" style="grid-column:1;grid-row:3" aria-pressed="false"><strong>宿主工程工具</strong><span>文件、命令与验证结果</span></button>
+            <button type="button" class="map-node node-adapter" data-map-node="adapter" style="grid-column:2;grid-row:2" aria-pressed="false"><strong>宿主适配与入口</strong><span>Hook / MCP / 原生答复核验</span></button>
+            <button type="button" class="map-node node-task" data-map-node="task" style="grid-column:3;grid-row:2" aria-pressed="false"><strong>Matt 任务核心</strong><span>路线、要求、待答与合法推进</span></button>
+            <button type="button" class="map-node node-transcript" data-map-node="transcript" style="grid-column:3;grid-row:1" aria-pressed="false"><strong>宿主会话记录</strong><span>问题、提交顺序与答复引用</span></button>
+            <button type="button" class="map-node node-journal" data-map-node="journal" style="grid-column:4;grid-row:2" aria-pressed="false"><strong>会话事件日志</strong><span>状态、源事件与恢复依据</span></button>
+            <button type="button" class="map-node node-delivery" data-map-node="delivery" style="grid-column:4;grid-row:3" aria-pressed="false"><strong>正文交付记录</strong><span>claim / ack / 重投递</span></button>
+            <button type="button" class="map-node node-methods" data-map-node="methods" style="grid-column:3;grid-row:3" aria-pressed="false"><strong>方法与支撑资料</strong><span>固定正文、必需引用与哈希</span></button>
+          </div>
+        </div>
+        <div class="map-detail" aria-live="polite"><strong>三类流向，一张完整图</strong><p>Agent 发起动作，任务核心维护状态，原生答复从宿主记录核验。选择流向或节点，可逐项查看。</p></div>
+        <p class="map-caption">动画说明图中关系，不是实时执行日志。完整探索与导出可在独立 Archify 窗口使用。</p>
+        <script type="application/json" id="site-map-data">{"nodes":[{"id":"human","label":"用户决定","sublabel":"目标、范围与原生答复"},{"id":"agent","label":"宿主 Agent","sublabel":"理解、设计、评审与工具调用"},{"id":"tools","label":"宿主工程工具","sublabel":"文件、命令与验证结果"},{"id":"adapter","label":"宿主适配与入口","sublabel":"Hook / MCP / 原生答复核验"},{"id":"task","label":"Matt 任务核心","sublabel":"路线、要求、待答与合法推进"},{"id":"transcript","label":"宿主会话记录","sublabel":"问题、提交顺序与答复引用"},{"id":"journal","label":"会话事件日志","sublabel":"状态、源事件与恢复依据"},{"id":"delivery","label":"正文交付记录","sublabel":"claim / ack / 重投递"},{"id":"methods","label":"方法与支撑资料","sublabel":"固定正文、必需引用与哈希"}],"edges":[{"id":"goal","from":"human","to":"agent","label":"目标与授权","variant":"emphasis","labelAt":[157.5,280]},{"id":"call","from":"agent","to":"adapter","label":"调用任务动作","variant":"emphasis"},{"id":"dispatch","from":"adapter","to":"task","label":"检查后分发","variant":"emphasis","labelAt":[679.5,460]},{"id":"execute","from":"agent","to":"tools","label":"工程执行","variant":"emphasis","labelAt":[157.5,550]},{"id":"record-answer","from":"human","to":"transcript","label":"宿主记录原生答复","variant":"security"},{"id":"verify-answer","from":"transcript","to":"adapter","label":"核验问题与来源","variant":"security"},{"id":"write-state","from":"task","to":"journal","label":"读写状态","variant":"dashed"},{"id":"load-method","from":"task","to":"methods","label":"校验与加载","labelAt":[859.5,550]},{"id":"receipt","from":"journal","to":"delivery","label":"关联事件与投递","variant":"dashed","labelAt":[1210.5,550]}],"views":[{"id":"control","label":"控制流","focus":["agent","adapter","task","tools"],"note":"Agent 发起任务动作；插件检查前提并返回状态和方法，工程工作仍由宿主工具执行。"},{"id":"state","label":"状态流","focus":["task","journal","delivery","methods"],"note":"任务事件与正文回执分开维护；恢复核对来源事件，资源按声明校验加载。"},{"id":"proof","label":"答复凭据流","focus":["human","transcript","adapter","task"],"note":"Codex native 从宿主记录核验问题身份和答复来源，不接受模型自填答案。"}]}</script>
+      </figure>
+      <!-- site-map:end -->
+    </section>
+
+    <section class="arch-section arch-scenarios" id="mechanisms"><div class="wrap">
+      <div class="arch-heading"><div><p class="arch-kicker">02 / 设计经得起什么情况</p><h2>关键机制，在过程出错时显出价值</h2></div><p>以下是实现规则的情境说明<br>不代表本页新增了产品验收</p></div>
+      <article class="scenario">
+        <div class="scenario-story"><span class="scenario-index">01 / 恢复</span><h3>上下文里的“进行中”，<br>已经不是任务的最新状态。</h3><p>恢复旧会话时，marker 仍指向实现阶段；源实例随后已完成。仅靠那段上下文继续，会把结束的工作重新激活。</p></div>
+        <div class="scenario-mechanism"><div class="trace-row"><span>旧 marker</span><i>→</i><span>源事件核对</span><i>→</i><strong>保留已结束状态</strong></div><h4>恢复要追溯事实来源</h4><p>marker 必须在源会话账本中匹配，并对应相同状态的事件；同一实例的已完成或已取消状态，在恢复时保持终态。</p><div class="mechanism-scope"><b>得到的保证</b>已结束实例不会被旧阶段记录重新激活。历史不可信或不可用时，如实保留恢复限制。</div><details><summary>查看实现落点</summary><p><code>core/restore/index.mjs</code>：可信 marker、源事件匹配、生命周期终态。<code>core/store.mjs</code>：会话事件与锁。</p></details></div>
+      </article>
+      <article class="scenario">
+        <div class="scenario-story"><span class="scenario-index">02 / 决定</span><h3>上一题的迟到答案，<br>不能成为这一题的选择。</h3><p>问题 A 被替换后，旧卡片的回答仍可能到达。模型看到一句“同意”，并不能据此替问题 B 完成决定。</p></div>
+        <div class="scenario-mechanism"><div class="trace-row proof-trace"><span>A 的答复</span><i>→</i><span>问题 / 来源核验</span><i>→</i><strong>B 继续未决</strong></div><h4>核验交互证据，再消费答案</h4><p>Codex 桥接读取可信会话中的原生记录，核对问题关联、提交顺序和有效性；接口拒绝模型传入答案或任意 transcript 路径。</p><div class="mechanism-scope"><b>得到的保证</b>旧回答不能被当作新问题的有效答复。无法唯一关联时，不猜测用户选择。</div><details><summary>查看实现落点</summary><p><code>native/proof.mjs</code>：宿主记录与问题关联。<code>native/server.mjs</code>：bind / collect、只接受回复引用。以上均位于 Codex native 适配目录。</p></details></div>
+      </article>
+      <article class="scenario">
+        <div class="scenario-story"><span class="scenario-index">03 / 投递</span><h3>状态已经写入，<br>方法正文却没有成功送达。</h3><p>一次调用完成了状态记录，却在输出阶段中断。下一次触发需要补送正文，同时识别已经发生过的状态变化。</p></div>
+        <div class="scenario-mechanism"><div class="trace-row state-trace"><span>事件已记录</span><i>→</i><span>待确认投递</span><i>→</i><strong>复用事件重发正文</strong></div><h4>把“任务推进”与“正文送达”分开</h4><p>claim 标记待投递事件，输出写出后 ack；同一待投递事件可以重发，已识别的调用重试复用原事件。</p><div class="mechanism-scope"><b>得到的保证</b>正文补送有明确的事件身份。投递回执只证明对应输出环节，不证明模型已遵循方法，也不承诺外部工具副作用只发生一次。</div><details><summary>查看实现落点</summary><p><code>core/delivery.mjs</code>：claim / ack / unclaim。<code>runtime/server.mjs</code>：调用来源去重与输出回执。</p></details></div>
+      </article>
+    </div></section>
+
+    <section class="arch-section wrap" id="decisions">
+      <div class="arch-heading"><div><p class="arch-kicker">03 / 架构取舍</p><h2>控制到哪里，复用到哪里</h2></div></div>
+      <div class="tradeoff-grid">
+        <article><span>判断边界</span><h3>把可检查的规则交给代码</h3><p>代码校验合法路线、问题是否待答、要求是否未决、资料版本是否匹配。方案是否正确、需求是否充分，保留模型判断与人的验收。</p><p class="tradeoff-cost"><b>代价与边界</b>插件不能自动担保专业质量；完成证据的内容仍需真实验证。</p></article>
+        <article><span>宿主边界</span><h3>共享核心，保留适配差异</h3><p>宿主已有的模型循环、工具和会话直接使用。Hook、MCP 和原生问答按宿主接入；任务规则保持共享，每个安装包自包含。</p><p class="tradeoff-cost"><b>代价与边界</b>协议和交互仍需分宿主验收，新增宿主版本可能需要更新适配。</p></article>
+        <article><span>抽象边界</span><h3>先证明重复负担，再抽 SDK</h3><p>当前机制已经服务 Matt。通用动作契约、决定回执与宿主能力是候选复用职责，仍需第二个真实任务检验，领域状态继续由各任务定义。</p><p class="tradeoff-cost"><b>代价与边界</b>短期保留内部模块，避免在用途尚未证明前引入共同运行时。</p></article>
+      </div>
+      <div class="ownership-strip"><p><strong>人</strong>目标 · 授权 · 关键取舍</p><p><strong>Agent</strong>理解 · 设计 · 实现 · 评审</p><p><strong>程序</strong>前提 · 状态 · 来源 · 可检查规则</p></div>
+    </section>
+
+    <section class="arch-section evidence-section" id="evidence"><div class="wrap evidence-layout">
+      <div><p class="arch-kicker">04 / 证据与交付边界</p><h2>实现深度，<br>与验证范围一起说明。</h2><p>设计理念参考任务插件架构研究；本页能力描述对应 Matt 当前实现。通用 SDK 仍处于设计阶段。</p></div>
+      <div><div class="evidence-levels"><p><strong>C / 组件</strong><span>规则、协议、资源和打包检查</span></p><p><strong>H / 宿主</strong><span>真实 Codex 中的合成任务调用链</span></p><p><strong>U / 用户</strong><span>实际观察过的真人交互场景</span></p></div>
+      <p class="evidence-boundary">截至 2026-09-13，下载版为 Codex native.14-rc.1；Claude Code 的适配和打包已实现，完整用户验收后置。Codex 同步问答已有有限真人观察，异步卡片在回合结束后的入口仍受宿主限制。整体业务效果提升尚未得到验证。</p><a class="text-link" href="guide.html#updates">查看版本变化与使用边界 <span aria-hidden="true">→</span></a></div>
+    </div></section>
+    <section class="arch-origin wrap"><div><p class="arch-kicker">方法与实现的来源</p><h2>工程经验 → 流程产品 → 跨宿主任务 Harness</h2><p>Matt Pocock 提供工程方法，Pi Matt 将方法组织为代码驱动流程。本项目进一步实现共享任务核心、跨宿主恢复和原生问答适配。</p><a class="text-link" href="./#comparison">查看上游来源与采用范围 ↗</a></div><a class="button primary" href="guide.html#before">开始使用 →</a></section>
+  </main>
+  <footer class="footer wrap"><p>Matt Pocock <span>工程工作流 · 架构与设计理念</span></p><a href="./#comparison">查看方法与上游来源</a></footer>
+</body>
+</html>

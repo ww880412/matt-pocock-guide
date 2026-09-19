@@ -33,19 +33,13 @@ jobs:
         if: github.event_name == 'workflow_dispatch' && inputs.failure_probe
         run: printf '\ninvalid release probe\n' >> site/downloads/matt-pocock-codex.zip
       - name: Verify approved release
-        run: python3 source/scripts/check-site-artifact.py site source
-      - name: Stage public files only
-        run: |
-          mkdir public
-          cp site/*.html site/*.css site/*.js public/
-          cp -R site/assets site/downloads public/
-          touch public/.nojekyll
+        run: python3 source/scripts/check-site-artifact.py site source --stage public
       - uses: actions/upload-pages-artifact@v3
-        if: github.event_name != 'pull_request'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
         with:
           path: public
   deploy:
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
     needs: validate
     runs-on: ubuntu-latest
     permissions:
