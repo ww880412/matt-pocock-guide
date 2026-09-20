@@ -57,7 +57,7 @@ You do not need to memorize the commands. Routine progress follows the agreed go
 
 | Area | Status as of September 13, 2026 |
 | --- | --- |
-| Public download | Codex `0.1.0-native.15+codex.20260919094541`, published |
+| Public download | Codex `0.1.0-native.16+codex.20260920013154`, published |
 | Claude Code | Adapter and packaging implemented; full user acceptance deferred |
 | Codex native questions | Limited human observation for synchronous input; asynchronous cards still have host limitations after a turn ends |
 | General-purpose SDK | Under design exploration, not delivered as a standalone product |

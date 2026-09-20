@@ -25,7 +25,7 @@
       <div class="breadcrumb"><a href="./">文档首页</a><span aria-hidden="true">/</span><span>使用指南</span></div>
       <h1>从一个想法开始</h1>
       <p class="intro">你说明目标、边界和授权范围，agent 负责选择适用步骤并持续推进；需要你决定或补充信息时，再回到对话。下面以“给任务列表增加标签筛选”为例说明如何配合。</p>
-      <div class="article-meta"><span>适用：Codex Desktop · native.15</span><span>更新：2026-09-19</span></div>
+      <div class="article-meta"><span>适用：Codex Desktop · native.16</span><span>更新：2026-09-19</span></div>
 
       <section id="before"><h2>安装与启用</h2>
         <p>本插件把 Matt Pocock 方法串成可恢复的工作流，并接入 Codex 原生问题交互。适用场景见<a href="./#comparison">两种用法对比</a>；以下说明面向 Codex Desktop。</p>
@@ -51,7 +51,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       </section>
 
       <section id="updates"><h2>本版变化</h2>
-        <p>native.15 将版本白名单改为协议与来源证据校验，Codex 仅升级版本号不再阻断问答和历史恢复。默认同步、可选异步；空答保持待答，改配置只影响新题。真实宿主同步与异步合成测试通过；本版未新增真人交互验收。异步回合结束后的原卡入口限制仍保留，恢复原题需发送恢复消息。</p>
+        <p>native.16 补齐可选问题的结束状态：可选题空答或明确结束可选等待后记录为未补充，不伪造用户选择；必需题空答仍保持待答。提问用途受宿主限制时，采用已约定的普通对话路径；已有未答题须先明确取消成功。兼容性继续按协议与来源证据校验。本版通过组件与限定真实宿主合成场景验证，新增真人交互尚待验收。异步回合结束后仍需发送恢复消息才能重呈现原题。</p>
         <p>此前版本将五项增量放进同一套使用方式：能力更容易找到，资料按需跟上，跳步后仍记得欠什么，结束时分清完成和取消。</p>
         <ul><li><strong>统一能力目录：</strong>保留原34项，新增独立 deslop，共35项。</li><li><strong>完整资料加载：</strong>必需参考随能力一起读取，可选附件需要时再读。</li><li><strong>明确推进路径：</strong>正常推进与常见返工可自主进行，你改变路径时保留遗留要求。</li><li><strong>完成和取消分开：</strong>完成前核对已登记要求与待答问题；取消保留未完成事项。</li><li><strong>评审后限定清理：</strong>评审增加 AI slop 检查，deslop 在授权范围内修改并验证。</li></ul>
         <details><summary>验证范围</summary><p>五项增量已通过自动化回归、包完整性及指定真实宿主场景验证；写作问答恢复与所选产物、待答守卫和真实指令来源已补验。其他场景及真人体验按风险保留，Claude Code 验证继续后置。</p></details>
@@ -117,7 +117,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       <section id="tickets"><h2>03 / 你随时可以介入</h2>
         <p>用户的任务范围和明确指令优先。要缩小范围、补充行为或改变推进方向，直接在对话中说明：</p>
         <div class="code-block"><div class="code-top"><span>限制推进范围 · 示例</span><button class="copy" type="button" data-copy="prompt-boundary" aria-label="复制范围限制示例">复制</button></div><pre><code id="prompt-boundary">先停在规格这一步，不进入实现。我想把多标签筛选改成“匹配任意一个”，请同步修正规格和验收标准。</code></pre></div>
-        <p>想知道现在处于哪一步，发送 <code>$matt-pocock status</code>。希望明确指定步骤，可以使用下方手动切换命令；它们是干预和查询入口，不是每次使用都必须执行的清单。</p>
+        <p>想知道保存的工作流处于哪一步，发送 <code>$matt-pocock status</code>。独立能力不会启动或切换工作流，因此 inactive 不表示插件没有被使用。希望明确指定步骤，可以使用下方手动切换命令；它们是干预和查询入口，不是每次使用都必须执行的清单。</p>
         <p>对于尚未回答的问题，回到原任务说<strong>“继续回答问题”</strong>。恢复的是原题，原来的期限仍然有效；详见<a href="#questions">问答与恢复</a>。</p>
         <div class="outcome"><span>完成时检查</span><p>需求是否落进实际产物，哪些验证已做，哪些问题仍未解决。记录的步骤不能替代交付结果。</p></div>
         <p>工作完成时，agent 根据当前范围、产物和证据正式登记完成。主动发送 <code>$matt-pocock end</code> 表示取消当前工作流，保留遗留要求；这不代表已经完成。临时独立调用能力仍保留原工作流。</p>
@@ -145,6 +145,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
           <tr><td>查看当前路线与步骤</td><td><code>$matt-pocock status</code></td></tr>
           <tr><td>打开步骤切换菜单</td><td><code>$matt-pocock transition</code></td></tr>
           <tr><td>切换到规格 / 实现 / 评审</td><td><code>$matt-pocock transition to-spec</code><br><code>$matt-pocock transition implement</code><br><code>$matt-pocock transition code-review</code></td></tr>
+          <tr><td>一起查看保存的工作流和待答问题</td><td>请查看 Matt 当前任务的工作流和问题状态</td></tr>
           <tr><td>恢复当前任务的未答问题</td><td>继续回答问题</td></tr>
           <tr><td>取消当前工作流，保留遗留要求</td><td><code>$matt-pocock end</code></td></tr>
           <tr><td>明确取消一项已登记要求</td><td><code>$matt-pocock cancel-requirement 要求ID</code>（先让 agent 列出实际 ID）</td></tr>
@@ -166,7 +167,10 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       <section id="writing"><h2>可选写作路线</h2><p><code>$matt-pocock writing</code> 从素材采集开始。已有素材时，可以直接要求进入 <code>writing-shape</code> 逐段成文，或 <code>writing-beats</code> 逐节点选择走向，不必重新访谈。</p><p>每轮只写你确认的段落或节点；写前重读文件，保留你的编辑，成文时不改原始素材。恢复时核对素材、文章路径与接续位置，缺信息再补问。路线不自动发布；每段内容和实际结果仍由你判断。</p></section>
 
       <section id="questions"><h2>问题卡与恢复</h2>
-        <details open><summary>如何选择同步或异步卡片？</summary><p>默认优先同步。可让安装助手将插件 MCP server 环境变量 <code>MATT_POCOCK_CARD_MODE</code> 设为 <code>sync</code> 或 <code>async</code>；新题也支持 <code>presentation</code> 显式覆盖。修改只影响新题，已发出的未答题保留原方式。</p><p>同步使用仍受 Codex 当前模式限制，不保证无限等待。同步新题默认没有业务期限，空答不推进；选项较多时需要翻页。native.15 按会话、历史前缀、原题和实际答复证据判断兼容性，不再按产品版本号放行。未知协议会保留待答并说明原因。插件答案适配与宿主卡片显示是两个独立问题；异步回合结束后原卡持续可答仍受宿主限制。</p></details>
+        <details open><summary>什么情况下会提问？</summary><p>有需要你决定的范围、成本、兼容性或体验取舍时，agent 才会提问。已经确定的选择、能自行查证的事实和已授权的实现工作应直接推进；没有卡片本身不表示能力没有执行。</p><p>如果宿主不允许用卡片收集某项必需产品决定，agent 会说明限制并在普通对话中讨论。如果已经有相关待答卡片，需要你明确取消该旧题，取消成功后才能按对话中的决定继续。普通聊天不会记作原卡的回答，取消也不会替你作出业务选择。</p></details>
+        <details open><summary>没出卡，怎样知道现在在做什么？</summary><p>可以说“请查看 Matt 当前任务的工作流和问题状态”。agent 会查询统一状态：保存的路线与步骤、未答问题及其呈现方式、最近问题的记录。查询不会出卡或恢复问题。</p><p>独立能力的执行进度没有持久记录；已加载正文不等于已经执行，工作流 inactive 也不等于能力未被使用。已准备的问题不证明你已经看见卡片；没有未答问题也不证明业务任务完成。实际完成情况仍需核对产物和验证证据。</p></details>
+        <details open><summary>如何选择同步或异步卡片？</summary><p>默认优先同步。可让安装助手将插件 MCP server 环境变量 <code>MATT_POCOCK_CARD_MODE</code> 设为 <code>sync</code> 或 <code>async</code>；新题也支持 <code>presentation</code> 显式覆盖。修改只影响新题，已发出的未答题保留原方式。</p><p>同步使用仍受 Codex 当前模式限制，不保证无限等待。同步新题默认没有业务期限，必需题空答不推进；选项较多时需要翻页。native.16 按会话、历史前缀、原题和实际答复证据判断兼容性，不再按产品版本号放行。未知协议会保留待答并说明原因。插件答案适配与宿主卡片显示是两个独立问题；异步回合结束后原卡持续可答仍受宿主限制。</p></details>
+        <details open><summary>可选偏好没有回答，会卡住任务吗？</summary><p>可以不作答。对于创建时已声明为可选的澄清，空返回或“不补充（可选问题）”会结束等待；输入工具不可用时，agent 也可明确结束这一可选等待。它会按你事先允许的默认方式或已授权范围内的自主判断继续，并说明依据，不把默认值记作你的答案。</p><p>必需决定、权限确认和菜单不能改成可选题。可选等待结束不会自动关闭宿主卡片；迟到的旧卡回复不会改写已经完成的结果。正在提交的答案必须先恢复结果，不能被取消覆盖。</p></details>
         <details open><summary>“保持待答（默认保护）”是什么意思？</summary><p>它保留问题，不会选择业务答案，也不会推进工作流。需要做决定时，请主动选择业务选项；推荐意见会出现在对应业务选项的说明中。</p></details>
         <details><summary>我点了 Skip，或者这一轮结束了，怎么继续？</summary><p>在原来的任务里说“继续回答问题”。插件会查找保存的未答题；异步模式会为同一业务问题重新呈现一张卡，问题和原期限保留。这需要额外发送一次恢复消息，不是直接重开已结束回合的旧卡；原卡未提交的草稿不保证带入新卡。Skip 本身不表示取消、超时或批准，也不要依赖已结束回合的旧卡仍能直接提交。</p></details>
         <details><summary>恢复的问题还能回答多久？</summary><p>恢复和翻页不会重置原题的期限。如果问题已经超时，迟到的回复不会成为有效决定；需要重新提问时，明确要求发起新问题。</p></details>
@@ -180,7 +184,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
         <details><summary>@ 列表中没有插件，或更新后仍是旧版</summary><p>检查当前环境的安装与启用状态；不同机器的安装不一定同步。开始新任务再查，必要时重启 Codex。不要仅凭旧任务中已经加载的指令判断新版本是否生效。</p></details>
         <details><summary>只选中插件发送，却没有打开菜单</summary><p>预期是打开路线菜单。可用 <code>$matt-pocock</code> 再试一次；如果仍失败，请在当前任务中说明“没有出现路线菜单”，让 agent 排查，并保留报错信息。</p></details>
         <details><summary>提示工作流工具未加载，或者启动超时</summary><p>先确认插件已启用，在新任务中重试。仍然失败时，将完整报错交给 agent 排查；不要把“已读取技能”当作工作流已经启动。</p></details>
-        <details><summary>状态、问题卡与我预想的不一致</summary><p>发送 <code>$matt-pocock status</code> 核对路线与步骤。未答问题用“继续回答问题”恢复；明确取消与结束工作流是不同操作。更换到另一个任务时，不要假设它自动继承原任务的问题与决定。</p></details>
+        <details><summary>状态、问题卡与我预想的不一致</summary><p>说“请查看 Matt 当前任务的工作流和问题状态”，一起核对保存的路线与待答问题；仅查路线与步骤可发送 <code>$matt-pocock status</code>。未答问题用“继续回答问题”恢复；明确取消与结束工作流是不同操作。更换到另一个任务时，不要假设它自动继承原任务的问题与决定。</p></details>
         <details><summary>指南页面关闭了，收藏的地址打不开</summary><p>本地网页由预览进程提供，关闭进程后该地址会失效。重新发送 <code>$matt-pocock help</code> 即可从当前安装包打开指南。内置浏览器不可用时，agent 应提供本地文件链接并按内容回答。</p></details>
       </section>
 
