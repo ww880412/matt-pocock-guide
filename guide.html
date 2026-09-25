@@ -25,7 +25,7 @@
       <div class="breadcrumb"><a href="./">文档首页</a><span aria-hidden="true">/</span><span>使用指南</span></div>
       <h1>从一个想法开始</h1>
       <p class="intro">你说明目标、边界和授权范围，agent 负责选择适用步骤并持续推进；需要你决定或补充信息时，再回到对话。下面以“给任务列表增加标签筛选”为例说明如何配合。</p>
-      <div class="article-meta"><span>适用：Codex Desktop · native.16</span><span>更新：2026-09-19</span></div>
+      <div class="article-meta"><span>适用：Codex Desktop · native.17</span><span>更新：2026-09-25</span></div>
 
       <section id="before"><h2>安装与启用</h2>
         <p>本插件把 Matt Pocock 方法串成可恢复的工作流，并接入 Codex 原生问题交互。适用场景见<a href="./#comparison">两种用法对比</a>；以下说明面向 Codex Desktop。</p>
@@ -51,9 +51,10 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       </section>
 
       <section id="updates"><h2>本版变化</h2>
+        <p><strong>native.17：上游方法与能力更新。</strong>新增 Beta <code>pr</code>，共有36项公开能力；实现与评审支持未提交改动和已确认需求，评审证据绑定最终候选。指令写作增加触发、资料和权限审计；探索与返工补充可达路径，保留既有合法跳转。本版通过528项组件检查、三种包校验及指定 Codex 宿主合成场景复核；完整真人交互验收和 Claude 实际宿主验收仍待完成。安装过旧版的用户需另行更新插件。</p>
         <p>native.16 补齐可选问题的结束状态：可选题空答或明确结束可选等待后记录为未补充，不伪造用户选择；必需题空答仍保持待答。提问用途受宿主限制时，采用已约定的普通对话路径；已有未答题须先明确取消成功。兼容性继续按协议与来源证据校验。本版通过组件与限定真实宿主合成场景验证，新增真人交互尚待验收。异步回合结束后仍需发送恢复消息才能重呈现原题。</p>
         <p>此前版本将五项增量放进同一套使用方式：能力更容易找到，资料按需跟上，跳步后仍记得欠什么，结束时分清完成和取消。</p>
-        <ul><li><strong>统一能力目录：</strong>保留原34项，新增独立 deslop，共35项。</li><li><strong>完整资料加载：</strong>必需参考随能力一起读取，可选附件需要时再读。</li><li><strong>明确推进路径：</strong>正常推进与常见返工可自主进行，你改变路径时保留遗留要求。</li><li><strong>完成和取消分开：</strong>完成前核对已登记要求与待答问题；取消保留未完成事项。</li><li><strong>评审后限定清理：</strong>评审增加 AI slop 检查，deslop 在授权范围内修改并验证。</li></ul>
+        <ul><li><strong>统一能力目录：</strong>保留原有能力，包含独立 deslop 与 Beta pr，共36项。</li><li><strong>完整资料加载：</strong>必需参考随能力一起读取，可选附件需要时再读。</li><li><strong>明确推进路径：</strong>正常推进与常见返工可自主进行，你改变路径时保留遗留要求。</li><li><strong>完成和取消分开：</strong>完成前核对已登记要求与待答问题；取消保留未完成事项。</li><li><strong>评审后限定清理：</strong>评审增加 AI slop 检查，deslop 在授权范围内修改并验证。</li></ul>
         <details><summary>验证范围</summary><p>五项增量已通过自动化回归、包完整性及指定真实宿主场景验证；写作问答恢复与所选产物、待答守卫和真实指令来源已补验。其他场景及真人体验按风险保留，Claude Code 验证继续后置。</p></details>
       </section>
 
@@ -76,7 +77,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
           <tr><td>直接使用选定能力</td><td><code>$matt-pocock use to-questionnaire</code></td></tr>
           <tr><td>重新解释当前进展</td><td><code>$matt-pocock use wait-what</code></td></tr>
         </tbody></table></div>
-        <p>当前下载包包含35项公开能力。ask-matt 提供流程地图，loop-me 编写业务循环规格，三项 writing 能力承接素材与成文；三个项目工具需在使用时核对配置和依赖授权；新增 deslop 用于限定范围的代码清理。Beta / misc 标识保留上游层级。</p>
+        <p>native.17 包含36项公开能力。ask-matt 提供流程地图，loop-me 编写业务循环规格，三项 writing 能力承接素材与成文；三个项目工具需在使用时核对配置和依赖授权；新增 deslop 用于限定范围的代码清理。Beta / misc 标识保留上游层级。新增 <code>$matt-pocock use pr</code>：根据真实改动生成图示摘要、前后证据与合并风险说明，仅撰写正文，不自动创建或发布 PR。</p>
         <p>推荐会说明理由，等你选择后再执行。独立能力完成后交付结果，不会自动推进原路线；需要追问时仍使用原有问题卡。没有活跃工作流也能使用。</p>
         <p>目录只列公开能力，模板和内部参考不会作为入口。本页及下载包面向 Codex；Claude Code 的实际使用验证另行进行。</p>
       </section>

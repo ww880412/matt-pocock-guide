@@ -26,7 +26,7 @@ Discuss → Specify → Break down tasks → Implement & verify → Review
 | What you need | What Matt provides |
 | --- | --- |
 | Take an idea through implementation | Five engineering routes connecting discussion, specifications, tasks, implementation, and review |
-| Perform one focused action | 35 standalone capabilities, with direct invocation and recommendations |
+| Perform one focused action | 36 standalone capabilities, including Beta pr, with direct invocation and recommendations |
 | Resume a long task | Session events, source verification, and recovery rules that distinguish active and terminal states |
 | Get a human decision when needed | Native question association and answer provenance checks; no model-supplied answers |
 | Preserve the method's context | Declared procedures and supporting resources, loaded and checked against fixed versions |
@@ -55,9 +55,9 @@ You do not need to memorize the commands. Routine progress follows the agreed go
 
 ## Delivery status
 
-| Area | Status as of September 13, 2026 |
+| Area | Status as of September 25, 2026 |
 | --- | --- |
-| Public download | Codex `0.1.0-native.16+codex.20260920013154`, published |
+| Public download | Codex `0.1.0-native.17+codex.20260925100652`, published |
 | Claude Code | Adapter and packaging implemented; full user acceptance deferred |
 | Codex native questions | Limited human observation for synchronous input; asynchronous cards still have host limitations after a turn ends |
 | General-purpose SDK | Under design exploration, not delivered as a standalone product |
@@ -70,12 +70,12 @@ Component checks, real host call chains, and observed human interactions are dis
 SHA-256 of the current ZIP:
 
 ```text
-86e98dbaba797651564542350fd969449ff683b6359efdb34ceb4567879e9b8f
+e4daa2813a1ea9580a713c42bf950f47ca992e3d3054148599673001d172bebb
 ```
 
-[Download the checksum](downloads/matt-pocock-codex.zip.sha256). This website update preserves the existing bundle bytes. Older website links inside the bundle will be updated with a future plugin release.
+[Download the checksum](downloads/matt-pocock-codex.zip.sha256). The pages, user guide, and download bundle are updated together to native.17.
 
-This repository hosts the documentation and download website. Sources are maintained in `docs/site/` of the [plugin project](https://github.com/ww880412/matt-pocock-plugins). Only public pages, diagrams, READMEs, and download files are published here. Plain HTML / CSS / JavaScript, with no backend or build dependencies; GitHub Pages deploys from the root of `main`.
+This repository hosts the documentation and download website. Sources are maintained in `docs/site/` of the [plugin project](https://github.com/ww880412/matt-pocock-plugins). Only public pages, diagrams, READMEs, and download files are published here. Plain HTML / CSS / JavaScript, with no backend or build dependencies; GitHub Pages deploys validated artifacts through an explicitly dispatched workflow on `main`.
 
 </details>
 
