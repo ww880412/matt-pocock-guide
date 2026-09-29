@@ -55,12 +55,12 @@ $matt-pocock 我想给项目增加一个导出功能，先帮我把需求和边�
 
 ## 当前交付范围
 
-| 项目 | 状态（2026-09-25） |
+| 项目 | 状态（2026-09-29） |
 | --- | --- |
-| 公开下载 | Codex `0.1.0-native.17+codex.20260925100652`，已发布 |
+| 公开下载 | Codex `0.1.0-native.18+codex.20260929043415`，已发布 |
 | Claude Code | 适配和打包已实现，完整用户验收后置 |
 | Codex 原生问答 | 同步已有有限真人观察；异步卡片在回合结束后的入口仍受宿主限制 |
-| 通用 SDK | 设计探索，尚未作为独立产品交付 |
+| 通用 SDK | Task State SDK 0.2.1 已嵌入本版；RAC 固定快照已通过第二消费者组件验收 |
 
 组件检查、真实宿主调用链与真人交互是不同证据层级。网站发布不代表新增真人验收，业务效果提升尚未验证。详细变化与边界见[版本说明](https://ww880412.github.io/matt-pocock-guide/guide.html#updates)。
 
@@ -70,10 +70,10 @@ $matt-pocock 我想给项目增加一个导出功能，先帮我把需求和边�
 当前 ZIP 的 SHA-256：
 
 ```text
-e4daa2813a1ea9580a713c42bf950f47ca992e3d3054148599673001d172bebb
+5f6bbc4e030152b18652c390689b737b8e14f1ebdc6e21feb46863721d195678
 ```
 
-[下载校验文件](downloads/matt-pocock-codex.zip.sha256)。页面、使用指南与下载包同步更新至 native.17。
+[下载校验文件](downloads/matt-pocock-codex.zip.sha256)。页面、使用指南与下载包同步更新至 native.18。
 
 这是独立的文档与下载网站仓库。页面源维护在[插件项目](https://github.com/ww880412/matt-pocock-plugins)的 `docs/site/`，本仓库只发布公开页面、架构图、README 与下载文件。HTML / CSS / JavaScript，无服务端或构建依赖；GitHub Pages 经校验后，通过 `main` 上显式触发的工作流部署。
 
