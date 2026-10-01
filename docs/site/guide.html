@@ -25,7 +25,7 @@
       <div class="breadcrumb"><a href="./">文档首页</a><span aria-hidden="true">/</span><span>使用指南</span></div>
       <h1>从一个想法开始</h1>
       <p class="intro">你说明目标、边界和授权范围，agent 负责选择适用步骤并持续推进；需要你决定或补充信息时，再回到对话。下面以“给任务列表增加标签筛选”为例说明如何配合。</p>
-      <div class="article-meta"><span>适用：Codex Desktop · native.19</span><span>更新：2026-09-30</span></div>
+      <div class="article-meta"><span>适用：Codex Desktop · native.20</span><span>更新：2026-09-30</span></div>
 
       <section id="before"><h2>安装与启用</h2>
         <p>本插件把 Matt Pocock 方法串成可恢复的工作流，并接入 Codex 原生问题交互。适用场景见<a href="./#comparison">两种用法对比</a>；以下说明面向 Codex Desktop。</p>
@@ -51,7 +51,8 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       </section>
 
       <section id="updates"><h2>本版变化</h2>
-        <p><strong>native.19：升级 Task State SDK 0.4.1，集中管理 Matt 配置。</strong>补齐状态校验与公共调用接口，将路线、阶段标签和能力适配集中到目录配置；36项公开能力与既有交互保持。RAC M5 已升级并通过独立组件验收；本版通过669项组件检查与三种包校验，完整真人交互和 Claude 实际宿主验收仍待完成。</p>
+        <p><strong>native.20：修正文档与版本说明。</strong>内嵌 Task State SDK 0.4.2，更新 SDK 版本指针、验证环境和已移除示例的说明；运行时代码、状态格式、36项能力与既有交互保持不变。RAC 仍使用已验收的 SDK 0.4.1 快照。本版发布不增加真实宿主或真人交互验收结论。</p>
+        <p><strong>此前 native.19：升级 Task State SDK 0.4.1，集中管理 Matt 配置。</strong>补齐状态校验与公共调用接口，将路线、阶段标签和能力适配集中到目录配置；36项公开能力与既有交互保持。RAC M5 已升级并通过独立组件验收；本版通过669项组件检查与三种包校验，完整真人交互和 Claude 实际宿主验收仍待完成。</p>
         <p><strong>旧版升级：</strong>先备份已有状态，新版在新任务使用；继续旧 Matt 任务前保存进度，待其他任务结束后重启 Codex，避免新旧服务同时写同一任务。新版写入的 v2 日志不能由 native.17 读取；回退需隔离的旧状态快照。更新不会自动回答或取消原待答问题。</p>
         <p>native.16 补齐可选问题的结束状态：可选题空答或明确结束可选等待后记录为未补充，不伪造用户选择；必需题空答仍保持待答。提问用途受宿主限制时，采用已约定的普通对话路径；已有未答题须先明确取消成功。兼容性继续按协议与来源证据校验。native.16 当时通过组件与限定真实宿主合成场景验证，不能外推新版全部交互。异步回合结束后仍需发送恢复消息才能重呈现原题。</p>
         <p>此前版本将五项增量放进同一套使用方式：能力更容易找到，资料按需跟上，跳步后仍记得欠什么，结束时分清完成和取消。</p>
@@ -78,7 +79,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
           <tr><td>直接使用选定能力</td><td><code>$matt-pocock use to-questionnaire</code></td></tr>
           <tr><td>重新解释当前进展</td><td><code>$matt-pocock use wait-what</code></td></tr>
         </tbody></table></div>
-        <p>native.19 包含36项公开能力。ask-matt 提供流程地图，loop-me 编写业务循环规格，三项 writing 能力承接素材与成文；三个项目工具需在使用时核对配置和依赖授权；新增 deslop 用于限定范围的代码清理。Beta / misc 标识保留上游层级。新增 <code>$matt-pocock use pr</code>：根据真实改动生成图示摘要、前后证据与合并风险说明，仅撰写正文，不自动创建或发布 PR。</p>
+        <p>native.20 包含36项公开能力。ask-matt 提供流程地图，loop-me 编写业务循环规格，三项 writing 能力承接素材与成文；三个项目工具需在使用时核对配置和依赖授权；新增 deslop 用于限定范围的代码清理。Beta / misc 标识保留上游层级。新增 <code>$matt-pocock use pr</code>：根据真实改动生成图示摘要、前后证据与合并风险说明，仅撰写正文，不自动创建或发布 PR。</p>
         <p>推荐会说明理由，等你选择后再执行。独立能力完成后交付结果，不会自动推进原路线；需要追问时仍使用原有问题卡。没有活跃工作流也能使用。</p>
         <p>目录只列公开能力，模板和内部参考不会作为入口。本页及下载包面向 Codex；Claude Code 的实际使用验证另行进行。</p>
       </section>
