@@ -55,25 +55,19 @@ You do not need to memorize the commands. Routine progress follows the agreed go
 
 ## Delivery status
 
-| Area | Status as of September 29, 2026 |
+| Area | Status as of September 30, 2026 |
 | --- | --- |
-| Public download | Codex `0.1.0-native.19+codex.20260930044629`, published |
+| Public download | Codex `0.1.0-native.20+codex.20261001020845`, published |
 | Claude Code | Adapter and packaging implemented; full user acceptance deferred |
 | Codex native questions | Limited human observation for synchronous input; asynchronous cards still have host limitations after a turn ends |
-| General-purpose SDK | Task State SDK 0.4.1 embedded; a pinned RAC snapshot has passed second-consumer component acceptance |
+| General-purpose SDK | Task State SDK 0.4.2 documentation revision embedded; RAC remains on its component-accepted 0.4.1 snapshot |
 
 Component checks, real host call chains, and observed human interactions are distinct evidence levels. Publishing the website does not constitute new user acceptance, and improvements in business outcomes have not been verified. See the [release notes and limitations](https://ww880412.github.io/matt-pocock-guide/guide.html#updates).
 
 <details>
 <summary>Download verification and maintenance</summary>
 
-SHA-256 of the current ZIP:
-
-```text
-5f6bbc4e030152b18652c390689b737b8e14f1ebdc6e21feb46863721d195678
-```
-
-[Download the checksum](downloads/matt-pocock-codex.zip.sha256). The pages, user guide, and download bundle are updated together to native.19.
+For the current ZIP SHA-256, [download the checksum](downloads/matt-pocock-codex.zip.sha256). The pages, user guide, and download bundle are updated together to native.20.
 
 This repository hosts the documentation and download website. Sources are maintained in `docs/site/` of the [plugin project](https://github.com/ww880412/matt-pocock-plugins). Only public pages, diagrams, READMEs, and download files are published here. Plain HTML / CSS / JavaScript, with no backend or build dependencies; GitHub Pages deploys validated artifacts through an explicitly dispatched workflow on `main`.
 
