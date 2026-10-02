@@ -461,6 +461,7 @@ a code {
 
 .reading {
   padding-block:56px;
+  scroll-margin-top:110px;
   display:grid;
   grid-template-columns:1fr 1.3fr;
   gap:80px;
@@ -557,6 +558,8 @@ a code {
 .doc-sidebar-inner {
   position:sticky;
   top:116px;
+  max-height:calc(100dvh - 132px);
+  overflow-y:auto;
 }
 
 .sidebar-label {
@@ -572,6 +575,17 @@ a code {
   flex-direction:column;
   gap:4px;
 }
+
+.doc-nav-group {
+  grid-column:1 / -1;
+  margin-top:12px;
+  padding:4px 12px;
+  color:var(--muted);
+  font-size:.75rem;
+  font-weight:600;
+}
+
+.doc-nav-group:first-child { margin-top:0; }
 
 .doc-nav a {
   font-size:.875rem;
@@ -955,7 +969,7 @@ a code {
   line-height:1.8;
 }
 
-.source-note a,.article p a {
+.source-note a,.article p a:not(.button),.source-list a {
   color:var(--primary-strong);
   text-decoration:underline;
   text-underline-offset:3px;
@@ -1104,6 +1118,7 @@ a code {
   .reading {
     grid-template-columns:1fr;
     padding-block:36px;
+    scroll-margin-top:150px;
     gap:28px;
   }
   .reading h2 br {
@@ -1131,6 +1146,8 @@ a code {
     border-bottom:1px solid var(--border);
   }
   .doc-sidebar-inner {
+    max-height:none;
+    overflow-y:visible;
     position:static;
   }
   .doc-nav {
@@ -1591,3 +1608,11 @@ a code {
 }
 
 .task-boundary>span { left:auto; right:10px; }
+
+/* Source attribution shares the existing reading section layout. */
+.source-list article { padding:20px 0; border-bottom:1px solid var(--border); }
+.source-list article:first-child { padding-top:0; }
+.source-list article:last-child { border-bottom:0; }
+.source-list h3 { font-size:1rem; margin-bottom:8px; }
+.source-list p { font-size:.875rem; line-height:1.9; }
+.source-list .source-note { margin-top:8px; }

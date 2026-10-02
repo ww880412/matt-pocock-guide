@@ -19,7 +19,7 @@
         <h1 id="hero-title">让工程任务，<br>有步骤地向前。</h1>
         <p class="lead">把需求讨论、规格、任务拆解、实现与评审串成可恢复的工作流。你说明目标与边界，agent 在 Codex 中按进展继续推进，并在需要你决定时提问。</p>
         <div class="actions"><a class="button primary" href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-codex.zip" download="matt-pocock-codex.zip">下载 Codex 插件 · ZIP <span aria-hidden="true">↓</span></a><a class="text-link" href="guide.html#before">安装步骤 <span aria-hidden="true">→</span></a></div>
-        <p class="hero-note">native.20 · 下载后将 ZIP 拖入 Codex，说“请安装这个插件”即可开始安装。<a href="guide.html#updates">查看本版变化</a></p>
+        <p class="hero-note">native.21 · 下载后将 ZIP 拖入 Codex，说“请安装这个插件”即可开始安装。<a href="guide.html#updates">查看本版变化</a></p>
       </div>
       <div class="journey" aria-label="Idea to Ship 工作流示例">
         <div class="journey-heading"><span class="mono">IDEA TO SHIP</span><span class="example-tag">路径示例</span></div>
@@ -44,7 +44,7 @@
           <tr><th scope="row">怎样记住进度</th><td>通过对话记录、文档和所用工具承接</td><td>保存当前路线、步骤及已登记的遗留要求，恢复时继续承接</td></tr>
           <tr><th scope="row">谁推进下一步</th><td>agent 按 skill 指引继续工作</td><td>agent 沿约定路径推进或返工；你可改变路径，跳过的要求仍会保留</td></tr>
           <tr><th scope="row">怎样参与决策</th><td>按 skill 指引与当前工具的能力提问</td><td>使用 Codex 原生问题卡，保存并恢复未答问题</td></tr>
-          <tr><th scope="row">怎样组织工作</th><td>按需要选择、调整和组合方法</td><td>五条工程路线、可选写作路线，以及36项独立能力（含 Beta pr）</td></tr>
+          <tr><th scope="row">怎样组织工作</th><td>按需要选择、调整和组合方法</td><td>五条工程路线、可选写作路线，以及36项独立能力（含 pr）</td></tr>
         </tbody>
       </table></div>
       <div class="comparison-takeaways"><p><strong>什么时候选插件</strong>任务跨多个步骤，需要明确当前进度、步骤恢复和统一交互时。</p><p><strong>什么时候直接用 skill</strong>只需要一次评审、一次需求讨论，或希望自由组合方法时。</p></div>
@@ -65,7 +65,15 @@
       <div><p class="eyebrow">上手与日常查阅</p><h2 id="reading-title">第一次读懂，<br>下一次快速找到。</h2><p>用同一份指南，连接第一次使用和日常操作。</p></div>
       <div class="reading-links"><a href="guide.html"><span class="reading-index">A</span><div><h3>第一次使用</h3><p>你如何提出任务，agent 如何推进，何时需要你介入。</p></div><span aria-hidden="true">→</span></a><a href="guide.html#reference"><span class="reading-index">B</span><div><h3>操作速查</h3><p>查看状态、切换步骤、恢复问题，区分完成与取消。</p></div><span aria-hidden="true">→</span></a><a href="guide.html#questions"><span class="reading-index">C</span><div><h3>遇到问题时</h3><p>理解保持待答、Skip、恢复入口和使用边界。</p></div><span aria-hidden="true">→</span></a></div>
     </section>
+    <section class="reading wrap" id="sources" aria-labelledby="sources-title">
+      <div><p class="eyebrow">方法与实现的来源</p><h2 id="sources-title">从工程方法，<br>到可恢复的任务流程。</h2><p>三个项目各有职责。以下链接固定到采用或评估时的提交，便于核对；上游的新变化不会自动进入本插件。</p></div>
+      <div class="source-list">
+        <article><h3>Matt Pocock skills · 工程方法</h3><p>提供需求讨论、规格、实现和评审等方法。本插件选取这些能力，并保留其参考资料和来源标识。</p><p class="source-note"><a href="https://github.com/mattpocock/skills/tree/6654f6b60cd9d5be8b54c6fafe44346dabeb3b76">采用基线 · 6654f6b ↗</a>；PR 正文能力与附件更新至 <a href="https://github.com/mattpocock/skills/tree/d81f3a183412e71a5b1e84ca21bc1a35eea03a60/skills/engineering/pr">d81f3a1 · engineering ↗</a>；本版同时适配 CONTEXT / GLOSSARY 领域文档命名，未全量导入该版本其他变化。</p></article>
+        <article><h3>Pi Matt · 工作流组织</h3><p>把方法串成路线、阶段与推进指引。本项目以其已实现行为为移植基线，按 Codex 与 Claude 的宿主能力适配。</p><p class="source-note"><a href="https://github.com/FradSer/pi-packages/tree/eda991d4d793158f3f59d996b8ba049e9fb64d02/packages/matt-pocock">移植基线 · eda991d ↗</a>；后续从 <a href="https://github.com/FradSer/pi-packages/tree/157c21f75481f575f3c3575dc18e6f8ee271c756/packages/matt-pocock">157c21f ↗</a> 选择性采纳评审、写作指引与返工路径，未照搬 Pi 专有 UI。</p></article>
+        <article><h3>本插件 · 跨宿主实现</h3><p>实现共享任务核心、持久状态与恢复、资料加载及 Codex 原生问答适配。公开下载面向 Codex；Claude 完整使用验收仍待完成。</p><p class="source-note"><a href="architecture.html">查看实现与验证边界</a> · <a href="guide.html#updates">查看本版范围</a> · <a href="https://github.com/ww880412/matt-pocock-guide">公开分发仓库 ↗</a></p></article>
+      </div>
+    </section>
   </main>
-  <footer class="footer wrap"><p>Matt Pocock <span>· 工程工作流</span></p><a href="guide.html#questions">常见问题 <span aria-hidden="true">↗</span></a></footer>
+  <footer class="footer wrap"><p>Matt Pocock <span>· 工程工作流</span></p><a href="#sources">方法与上游来源 <span aria-hidden="true">↑</span></a></footer>
 </body>
 </html>
