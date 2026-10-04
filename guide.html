@@ -11,18 +11,18 @@
   <header class="header"><div class="header-inner">
     <a class="brand" href="./" aria-label="Matt Pocock 首页"><span class="brand-mark" aria-hidden="true">m<span>.</span></span><span>Matt Pocock<span class="brand-sub">工程工作流</span></span></a>
     <nav aria-label="主导航"><a href="./">概览</a><a href="architecture.html">架构设计</a><a href="guide.html" aria-current="page">使用指南</a><a href="#reference">操作速查</a></nav>
-    <span class="edition">Codex 指南</span>
+    <span class="edition">宿主支持与指南</span>
   </div></header>
   <div class="doc-layout">
     <aside class="doc-sidebar" aria-label="本页目录"><div class="doc-sidebar-inner">
       <p class="sidebar-label">使用指南</p>
       <nav class="doc-nav" aria-label="章节导航">
         <span class="doc-nav-group">第一次使用</span>
-        <a href="#before">安装与启用</a><a href="#start">01 发起第一个任务</a><a href="#spec">02 agent 如何推进</a><a href="#tickets">03 你如何介入</a><a href="#completion">完成与取消</a>
+        <a href="#hosts">宿主支持与获取</a><a href="#before">Codex 安装与启用</a><a href="#start">01 发起第一个任务</a><a href="#spec">02 agent 如何推进</a><a href="#tickets">03 你如何介入</a><a href="#completion">完成与取消</a>
         <span class="doc-nav-group">日常查阅</span>
         <a href="#reference">手动操作速查</a><a href="#entry">入口与自动触发</a><a href="#capabilities">独立使用能力</a><a href="#routes">工程路线</a><a href="#writing">可选写作路线</a><a href="#questions">问答与恢复</a><a href="#troubleshooting">常见故障</a>
         <span class="doc-nav-group">升级与深入了解</span>
-        <a href="#updates">本版变化与升级</a><a href="#resources">资料如何加载</a><a href="#deslop">评审与代码清理</a>
+        <a href="#updates">本版变化与升级</a><a href="#upstream-candidate">源码候选 · 整规格与复盘</a><a href="#resources">资料如何加载</a><a href="#deslop">评审与代码清理</a>
       </nav>
       <p class="sidebar-foot"><strong>先理清，再推进。</strong>下一步需要什么，<br>由任务和讨论结果决定。</p>
     </div></aside>
@@ -31,7 +31,20 @@
       <h1>从一个想法开始</h1>
       <p class="intro">先完成安装，再用“给任务列表增加标签筛选”走一遍：你提出目标与边界，agent 按进展推进，需要你决定时回到对话。</p>
       <p class="guide-shortcuts">已经安装？<a href="#start">直接开始第一个任务</a> · <a href="#reference">查命令</a> · <a href="#updates">查看升级说明</a></p>
-      <div class="article-meta"><span>适用：Codex Desktop · native.21</span><span>更新：2026-10-02</span></div>
+      <div class="article-meta"><span>已发布：Codex Desktop · native.21</span><span>更新：2026-10-04</span></div>
+
+      <p class="section-note">安装与日常操作适用于已发布的36项能力；本轮38项源码候选的新增用法在<a href="#upstream-candidate">独立章节</a>说明，尚未发布或安装。</p>
+
+      <section id="hosts"><h2>先确认宿主与可获取的版本</h2>
+        <p>同一套任务核心已适配 Codex、Claude Code 和 Devin CLI。当前公开下载是 <strong>Codex native.21 · 36 项能力</strong>；38 项源码候选和新增 Devin 包尚未公开发布。以下 Codex 操作说明不自动适用于其他宿主。</p>
+        <h3 id="devin">Devin CLI：TTY 核心链路已验证</h3>
+        <p>真实 Devin CLI 中已验证工作流、菜单、选项作答、自定义输入、Esc 后恢复、可选题、超时与会话恢复。随后对子目录启动和省略问答默认字段的两项修复完成定向复验。</p>
+        <p><strong>交互问答使用 TTY 终端。</strong>已测 ACP/print 模式可以调用工具，但没有作答通道；问题会保持待答，或按原有可选、取消和超时规则结束，不会替你选答案。压缩后的恢复尚未触发验证；已有进程恢复样本包含人工清理残留锁。</p>
+        <p>当前为已验证的本地候选，暂未提供公开下载。测试者应使用指定候选包；正式发布后这里会提供独立下载和安装步骤。</p>
+        <h3>Claude Code：适配已实现，验收独立进行</h3>
+        <p>Claude Code 有共享源码下的独立适配包。当前候选完整宿主验收仍待完成，暂未提供公开下载；Devin 的安装和验证结果不会自动变成 Claude Code 的验收结果。</p>
+        <p class="section-note">三种宿主分别打包、分别验收。正式分发状态以各自下载入口为准，不能把验收时的临时安装当作持续安装。</p>
+      </section>
 
       <section id="before"><h2>安装与启用</h2>
         <p>本插件把 Matt Pocock 方法串成可恢复的工作流，并接入 Codex 原生问题交互。适用场景见<a href="./#comparison">两种用法对比</a>；以下说明面向 Codex Desktop。</p>
@@ -139,12 +152,12 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
         </tbody></table></div>
         <p>native.21 包含36项公开能力。ask-matt 提供流程地图，loop-me 编写业务循环规格，三项 writing 能力承接素材与成文；三个项目工具需在使用时核对配置和依赖授权；新增 deslop 用于限定范围的代码清理。Beta / misc 标识保留上游层级。新增 <code>$matt-pocock use pr</code>：根据真实改动生成图示摘要、前后证据与合并风险说明，仅撰写正文，不自动创建或发布 PR。</p>
         <p>推荐会说明理由，等你选择后再执行。独立能力完成后交付结果，不会自动推进原路线；需要追问时仍使用原有问题卡。没有活跃工作流也能使用。</p>
-        <p>目录只列公开能力，模板和内部参考不会作为入口。本页及下载包面向 Codex；Claude Code 的实际使用验证另行进行。</p>
+        <p>目录只列公开能力，模板和内部参考不会作为入口。本页日常操作与公开下载面向 Codex；Devin 与 Claude Code 的状态见<a href="#hosts">宿主支持</a>。</p>
       </section>
 
       <section id="routes"><h2>五条工程路线与可选写作路线</h2>
         <p>可以通过插件入口描述任务，也可以用 <code>$matt-pocock 路线名</code> 明确启动对应路线。</p>
-        <div class="route-detail" id="idea-to-ship"><div><h3>从想法到交付</h3><code>idea-to-ship</code></div><p>适合新功能和多步骤实现。从需求讨论开始，可根据任务进入研究、原型、规格、拆解、实现、评审和交接。</p></div>
+        <div class="route-detail" id="idea-to-ship"><div><h3>从想法到交付</h3><code>idea-to-ship</code></div><p>适合新功能和多步骤实现。从需求讨论开始，可根据任务进入研究、原型、规格、拆解、实现、评审和交接。源码候选另提供整规格实施与可选复盘，见<a href="#upstream-candidate">新增分支</a>。</p></div>
         <div class="route-detail" id="hard-bug"><div><h3>疑难故障</h3><code>hard-bug</code></div><p>适合难复现、偶发或回归问题。先建立能检验修复效果的反馈，再定位原因，随后进入实现和评审。</p></div>
         <div class="route-detail" id="triage"><div><h3>需求整理</h3><code>triage</code></div><p>适合零散请求和待处理问题。先整理成清楚的任务说明，再按需要形成规格、拆解和实现。</p></div>
         <div class="route-detail" id="wayfinding"><div><h3>方向探索</h3><code>wayfinding</code></div><p>适合规模大、未知多的工程工作。先识别调查和决策事项，必要时研究或做原型，再制定可执行的方案。</p></div>
@@ -175,7 +188,20 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
         <details><summary>指南页面关闭了，收藏的地址打不开</summary><p>本地网页由预览进程提供，关闭进程后该地址会失效。重新发送 <code>$matt-pocock help</code> 即可从当前安装包打开指南。内置浏览器不可用时，agent 应提供本地文件链接并按内容回答。</p></details>
       </section>
 
-      <section id="updates"><h2>本版变化与升级</h2>
+      <section id="upstream-candidate"><h2>源码候选：整规格实施与只读复盘</h2>
+        <p><strong>尚未发布或安装。</strong>本轮在既有36项能力上加入 <code>implement-spec</code> 与 <code>retro</code>，共38项。以下用法需要包含它们的候选构建；上方下载仍是 native.21。</p>
+        <table><thead><tr><th>你要做什么</th><th>候选构建中的独立入口</th><th>得到什么</th></tr></thead><tbody>
+          <tr><td>按整份规格实施多张票</td><td><code>$matt-pocock use implement-spec</code></td><td>整合分支、逐票证据、统一评审及剩余阻塞事项</td></tr>
+          <tr><td>回看一次会话，改善后续工作</td><td><code>$matt-pocock use retro</code></td><td>有会话证据的改进建议，先核对项目已有检查</td></tr>
+        </tbody></table>
+        <p><strong>Idea to Ship 的新分支：</strong><code>to-tickets</code> 之后可逐票 <code>implement</code>，也可整规格 <code>implement-spec</code>；两者都进入 <code>code-review</code>。评审后可直接完成或交接，也可先做 <code>retro</code>。五条工程路线与写作路线保留；其他路线可独立调用复盘，原路线、阶段和待答问题不变。</p>
+        <p>整规格实施先检查规格、票据、依赖与授权。每票分配唯一负责人和独立 worktree，只启动依赖已完成的票；整合负责人核对最新 integration tip，串行合并并处理冲突。每票做 TDD，最终整合候选统一评审。失败、阻塞或暂停时保留任务账本和接手信息，不把已派发当作已完成。</p>
+        <p>已有用户修改会保留；不会为纠正基点而 reset 用户工作区。已有授权继续有效，缺少推送、外部票据或 PR 操作授权时，交付本地整合结果和待发布内容。本地 tracker 不要求创建 PR；整合本身所需提交若未获授权，保留工作区与阻塞说明，不宣称整合完成。该能力由 agent 使用宿主已有工具执行，没有新增后台调度器；加载正文不表示实际执行已通过。</p>
+        <p>复盘读取当前或你明确指定的会话，分清观察与推断；日志不足时标明可见范围。它先查已有 lint、check、CI 和规则，输出事件、影响、建议与验证方式。调用本身只提出建议；新增检查、依赖、hook、全局规则或配置需要另行授权实施。</p>
+        <p>本轮固定 Matt <code>d81f3a1</code>，Pi <code>74c7e12</code> 没有本次新增源码变化。保留 <code>resolving-merge-conflicts</code> 等全部旧能力；<code>claude-handoff</code>、<code>scaffold-exercises</code> 保留按需候选，<code>git-guardrails-claude-code</code> 暂缓跨宿主定位。新增能力的 Claude 真实宿主与真人交互仍待验证；候选构建与组件检查不代替该验收。</p>
+      </section>
+
+      <section id="updates"><h2>已发布版本变化与升级</h2>
         <p><strong>native.21：领域文档兼容与使用路径优化。</strong>兼容项目既有 CONTEXT / GLOSSARY 命名，沿用项目指定的权威路径；更新正式 pr 能力。首页、指南与架构页改进首次使用路径和来源导航。内嵌 SDK 0.5.0，区分无效输入与内部异常；MCP 诊断版本随构建版本更新。RAC 仍使用 SDK 0.4.1；完整真实宿主和真人交互验收另行记录。</p>
         <p><strong>native.20：修正文档与版本说明。</strong>内嵌 Task State SDK 0.4.2，更新 SDK 版本指针、验证环境和已移除示例的说明；运行时代码、状态格式、36项能力与既有交互保持不变。RAC 仍使用已验收的 SDK 0.4.1 快照。本版发布不增加真实宿主或真人交互验收结论。</p>
         <p><strong>此前 native.19：升级 Task State SDK 0.4.1，集中管理 Matt 配置。</strong>补齐状态校验与公共调用接口，将路线、阶段标签和能力适配集中到目录配置；36项公开能力与既有交互保持。RAC M5 已升级并通过独立组件验收；本版通过669项组件检查与三种包校验，完整真人交互和 Claude 实际宿主验收仍待完成。</p>

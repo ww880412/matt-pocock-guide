@@ -4,7 +4,7 @@
 
 **让 Agent 的下一步，有状态，有依据。**
 
-将工程方法、任务状态与关键决定，接入 Claude Code / Codex 的工作过程。
+将工程方法、任务状态与关键决定，接入 Codex、Claude Code 与 Devin CLI 的工作过程；各宿主分别发布和验收。
 
 **简体中文** · [English](README.en.md)
 
@@ -26,7 +26,7 @@
 | 你需要做的事 | Matt 提供的支撑 |
 | --- | --- |
 | 把想法推进到实现 | 五条工程路线，连接讨论、规格、任务、实现与评审 |
-| 只完成一个明确动作 | 36 项独立能力（含 pr），可单独调用 |
+| 只完成一个明确动作 | 已发布36项独立能力；源码候选38项，可单独调用 |
 | 中断后继续长任务 | 会话事件、来源核对与恢复规则，区分进行中和终态 |
 | 在关键位置让人决定 | 原生问题关联与答复来源核验，不接受模型代填答案 |
 | 保留方法的完整上下文 | 按声明加载方法正文与支撑资料，校验固定资源 |
@@ -40,6 +40,16 @@
 选择 **控制流 / 状态流 / 答复凭据流**，逐步播放章节；支持节点聚焦、缩放、浅深主题与图像导出。README 展示静态预览，完整交互在 GitHub Pages 中运行。动画说明图中关系，不是实时执行日志。
 
 [架构设计页](https://ww880412.github.io/matt-pocock-guide/architecture.html)进一步解释三个真实设计问题：旧状态如何恢复、迟到答案如何隔离、状态已写入但正文未送达时如何补送。
+
+## 宿主支持与获取
+
+| 宿主 | 当前状态 | 获取方式与限制 |
+| --- | --- | --- |
+| Codex | 已发布 native.21，36 项能力 | 下方公开 ZIP；38 项源码候选尚未发布 |
+| Devin CLI | 本地候选的真实 TTY 核心链路、D1/D2 修复复验通过 | 候选待发布，无公开下载；交互问答使用 TTY |
+| Claude Code | 适配与独立包已实现 | 当前候选完整宿主验收待完成，无公开下载 |
+
+Devin 的 ACP/print 在已测环境没有作答通道；压缩恢复仍未验证。详见[宿主支持说明](https://ww880412.github.io/matt-pocock-guide/guide.html#hosts)。
 
 ## 开始使用
 
@@ -58,16 +68,19 @@ $matt-pocock 我想给项目增加一个导出功能，先帮我把需求和边�
 | 项目 | 状态（2026-10-02） |
 | --- | --- |
 | 公开下载 | Codex `0.1.0-native.21+codex.20261002052949`，已发布 |
+| 源码候选 | 38项：新增 implement-spec / retro，尚未发布或安装 |
 | Claude Code | 适配和打包已实现，完整用户验收后置 |
 | Codex 原生问答 | 同步已有有限真人观察；异步卡片在回合结束后的入口仍受宿主限制 |
 | 通用 SDK | Task State SDK 0.5.0 输入错误分类修复已嵌入本版；RAC 仍使用已通过第二消费者组件验收的 0.4.1 固定快照 |
+
+源码候选在拆票后提供逐票 `implement` 与整规格 `implement-spec` 两条分支，统一 `code-review` 后可选 `retro`。整规格实施使用宿主已有 agent / worktree 工具，按依赖派发、串行整合；复盘只读会话并给建议，不自动改检查或配置。旧36项全部保留，其他三项专用候选未纳入；详细边界见[候选说明](https://ww880412.github.io/matt-pocock-guide/guide.html#upstream-candidate)。
 
 组件检查、真实宿主调用链与真人交互是不同证据层级。网站发布不代表新增真人验收，业务效果提升尚未验证。详细变化与边界见[版本说明](https://ww880412.github.io/matt-pocock-guide/guide.html#updates)。
 
 <details>
 <summary>下载校验与维护方式</summary>
 
-当前 ZIP 的 SHA-256 以随包发布的[下载校验文件](downloads/matt-pocock-codex.zip.sha256)为准。页面、使用指南与下载包同步更新至 native.21。
+当前 ZIP 的 SHA-256 以随包发布的[下载校验文件](downloads/matt-pocock-codex.zip.sha256)为准。公开下载保持 native.21；本轮文档源码中的38项候选说明不代表下载包已更新。
 
 这是独立的文档与下载网站仓库。页面源维护在[插件项目](https://github.com/ww880412/matt-pocock-plugins)的 `docs/site/`，本仓库只发布公开页面、架构图、README 与下载文件。HTML / CSS / JavaScript，无服务端或构建依赖；GitHub Pages 经校验后，通过 `main` 上显式触发的工作流部署。
 
@@ -75,4 +88,4 @@ $matt-pocock 我想给项目增加一个导出功能，先帮我把需求和边�
 
 ## 方法与来源
 
-工程方法来自 **Matt Pocock**，流程设计借鉴 **Pi Matt**；本项目实现共享任务核心与宿主适配。来源及采用范围见[三方对比](https://ww880412.github.io/matt-pocock-guide/#comparison)，插件源码见 [matt-pocock-plugins](https://github.com/ww880412/matt-pocock-plugins)。下载包保留相应许可证与来源说明。
+工程方法来自 **Matt Pocock**，流程设计借鉴 **Pi Matt**；本项目实现共享任务核心与宿主适配。来源及采用范围见[三方对比](https://ww880412.github.io/matt-pocock-guide/#sources)，插件源码见 [matt-pocock-plugins](https://github.com/ww880412/matt-pocock-plugins)。下载包保留相应许可证与来源说明。
