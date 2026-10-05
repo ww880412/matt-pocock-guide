@@ -8,7 +8,7 @@
 
 **简体中文** · [English](README.en.md)
 
-[产品主页](https://ww880412.github.io/matt-pocock-guide/) · [架构设计](https://ww880412.github.io/matt-pocock-guide/architecture.html) · [使用指南](https://ww880412.github.io/matt-pocock-guide/guide.html) · [下载 Codex 插件](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-codex.zip)
+[产品主页](https://ww880412.github.io/matt-pocock-guide/) · [架构设计](https://ww880412.github.io/matt-pocock-guide/architecture.html) · [使用指南](https://ww880412.github.io/matt-pocock-guide/guide.html) · [下载 Codex 插件](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-codex.zip) · [下载 Devin 插件](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip)
 
 </div>
 
@@ -46,12 +46,14 @@
 | 宿主 | 当前状态 | 获取方式与限制 |
 | --- | --- | --- |
 | Codex | 已发布 native.22，38 项能力 | 下方公开 ZIP；包含 implement-spec、retro 与 v1.3.1 导航 |
-| Devin CLI | 本地候选的真实 TTY 核心链路、D1/D2 修复复验通过 | 候选待发布，无公开下载；交互问答使用 TTY |
+| Devin CLI | 已发布 `0.1.1+devin.20261005`，38 项能力及 v1.3.1 导航 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip)；交互问答使用 TTY |
 | Claude Code | 适配与独立包已实现 | 当前候选完整宿主验收待完成，无公开下载 |
 
-Devin 的 ACP/print 在已测环境没有作答通道，精确提交边界的中断恢复仍待补验；本机旧候选有38项能力，尚不含 v1.3.1 导航。详见[宿主支持说明](https://ww880412.github.io/matt-pocock-guide/guide.html#hosts)。
+Devin 的 ACP/print 在已测环境没有作答通道，问题自动取消且无业务答案。本机 TTY 与限定精确提交中断恢复已验；首次自动重放可能因可信会话校验失败而需要新一次调用，恢复后的回执不重复。跨设备身份与真人 U 未验证。详见[宿主支持说明](https://ww880412.github.io/matt-pocock-guide/guide.html#hosts)。
 
 ## 开始使用
+
+Devin 用户先[下载独立包](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip)，按包内 README 安装，再在新的 Devin TTY 会话使用 `/matt-pocock:matt-pocock`。下面三步面向 Codex。
 
 1. [下载 Codex 团队分发包](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-codex.zip)，按包内 README 完成安装与 hooks 授权。
 2. 安装完成后，在 Codex 对话中发送 `$matt-pocock` 打开入口，或发送 `$matt-pocock help` 查看指南。
@@ -69,7 +71,8 @@ $matt-pocock 我想给项目增加一个导出功能，先帮我把需求和边�
 | --- | --- |
 | 公开下载 | Codex `0.1.0-native.22+codex.20261005101334`，38项能力 |
 | 本版新增 | implement-spec / retro、ask-matt v1.3.1 导航；原36项全部保留 |
-| Claude Code / Devin CLI | 独立包仍为本地候选，暂未公开下载；各自剩余宿主验收单独记录 |
+| Devin CLI | `0.1.1+devin.20261005` 独立分发，38项能力；本机 TTY 与限定恢复证据已验 |
+| Claude Code | 独立包仍为本地候选，登录阻塞保留，暂未公开下载 |
 | Codex 原生问答 | 同步已有有限真人观察；异步卡片在回合结束后的入口仍受宿主限制 |
 | 通用 SDK | Task State SDK 0.5.0 输入错误分类修复已嵌入本版；RAC 仍使用已通过第二消费者组件验收的 0.4.1 固定快照 |
 
@@ -82,7 +85,7 @@ Codex 本例已观察到任务失败后的 WIP 保留与恢复、真实 Git 冲�
 <details>
 <summary>下载校验与维护方式</summary>
 
-当前 native.22 ZIP 的 SHA-256 以随包发布的[下载校验文件](downloads/matt-pocock-codex.zip.sha256)为准。下载包与本机实际安装分别核对；升级后在新任务检查版本，旧任务不会自动热刷新。
+Codex native.22 与 Devin 包分别使用各自的 [Codex 校验文件](downloads/matt-pocock-codex.zip.sha256)和 [Devin 校验文件](downloads/matt-pocock-devin.zip.sha256)。本次增加 Devin 分发，不重建 Codex native.22 ZIP；随包指南仍是各自构建时的快照。下载包与本机实际安装分别核对；升级后在新任务检查版本，旧任务不会自动热刷新。
 
 这是独立的文档与下载网站仓库。页面源维护在[插件项目](https://github.com/ww880412/matt-pocock-plugins)的 `docs/site/`，本仓库只发布公开页面、架构图、README 与下载文件。HTML / CSS / JavaScript，无服务端或构建依赖；GitHub Pages 经校验后，通过 `main` 上显式触发的工作流部署。
 
