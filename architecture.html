@@ -78,7 +78,7 @@
         <article><span>宿主边界</span><h3>共享核心，保留适配差异</h3><p>宿主已有的模型循环、工具和会话直接使用。Hook、MCP 和原生问答按宿主接入；任务规则保持共享，每个安装包自包含。</p><p class="tradeoff-cost"><b>代价与边界</b>协议和交互仍需分宿主验收，新增宿主版本可能需要更新适配。</p></article>
         <article><span>抽象边界</span><h3>通用机制进入 SDK，领域规则留在 Matt</h3><p>Task State SDK 已抽取：提供状态与锁、持久决定与回执、命令恢复、正文投递和宿主协议适配。Matt 定义路线、菜单、能力与产品策略；RAC 使用固定快照，已完成第二消费者组件验收。</p><p class="tradeoff-cost"><b>代价与边界</b>消费者自带运行时与领域模型；SDK 版本及契约独立维护，不提供外部操作恰好一次保证。</p></article>
       </div>
-      <p class="section-note">本轮源码候选增加整规格实施与复盘：agent 使用宿主已有工具维护任务图、负责人和 worktree，按最新整合分支串行合并，再评审同一候选；retro 只读证据并输出建议。没有新增后台 scheduler 或 SDK 状态格式。<a href="guide.html#upstream-candidate">38项源码候选的使用边界</a>与已发布 native.21 的36项能力分别说明。</p>
+      <p class="section-note">Codex native.22 增加整规格实施与复盘，共38项能力：agent 使用宿主已有工具维护任务图、负责人和 worktree，按最新整合分支串行合并，再评审同一候选；retro 只读证据并输出建议。没有新增后台 scheduler 或 SDK 状态格式。<a href="guide.html#upstream-candidate">查看新增能力与限定验证范围</a>；Claude 和 Devin 的宿主验收及分发单独记录。</p>
       <div class="ownership-strip"><p><strong>人</strong>目标 · 授权 · 关键取舍</p><p><strong>Agent</strong>理解 · 设计 · 实现 · 评审</p><p><strong>程序</strong>前提 · 状态 · 来源 · 可检查规则</p></div>
     </section>
 

@@ -26,7 +26,7 @@ Discuss → Specify → Break down tasks → Implement & verify → Review
 | What you need | What Matt provides |
 | --- | --- |
 | Take an idea through implementation | Five engineering routes connecting discussion, specifications, tasks, implementation, and review |
-| Perform one focused action | 36 released capabilities; 38 in the source candidate, with direct invocation and recommendations |
+| Perform one focused action | 38 released Codex capabilities, with direct invocation and task-based recommendations |
 | Resume a long task | Session events, source verification, and recovery rules that distinguish active and terminal states |
 | Get a human decision when needed | Native question association and answer provenance checks; no model-supplied answers |
 | Preserve the method's context | Declared procedures and supporting resources, loaded and checked against fixed versions |
@@ -45,11 +45,11 @@ The [architecture page](https://ww880412.github.io/matt-pocock-guide/architectur
 
 | Host | Current status | Availability and limits |
 | --- | --- | --- |
-| Codex | Released native.21 with 36 capabilities | Public ZIP below; the 38-capability source candidate is not released |
+| Codex | Released native.22 with 38 capabilities | Public ZIP below; includes implement-spec, retro, and v1.3.1 navigation |
 | Devin CLI | Local candidate verified for core TTY flows and both follow-up fixes | Not publicly released; interactive questions require TTY |
 | Claude Code | Adapter and standalone package implemented | Full host acceptance for the current candidate is pending; no public download |
 
-The tested Devin ACP/print modes have no answer channel. Post-compaction recovery remains unverified. See [host support](https://ww880412.github.io/matt-pocock-guide/guide.html#hosts) (Chinese).
+The tested Devin ACP/print modes have no answer channel. Recovery from interruption at precise commit boundaries still needs verification. The older local candidate has 38 capabilities but does not include v1.3.1 navigation. See [host support](https://ww880412.github.io/matt-pocock-guide/guide.html#hosts) (Chinese).
 
 ## Get started
 
@@ -65,22 +65,24 @@ You do not need to memorize the commands. Routine progress follows the agreed go
 
 ## Delivery status
 
-| Area | Status as of October 2, 2026 |
+| Area | Status as of October 5, 2026 |
 | --- | --- |
-| Public download | Codex `0.1.0-native.21+codex.20261002052949`, published |
-| Source candidate | 38 capabilities: implement-spec and retro added; not published or installed |
-| Claude Code | Adapter and packaging implemented; full user acceptance deferred |
+| Public download | Codex `0.1.0-native.22+codex.20261005101334`, with 38 capabilities |
+| Added in this release | implement-spec, retro, and ask-matt v1.3.1 navigation; all 36 existing capabilities remain |
+| Claude Code / Devin CLI | Separate packages remain local candidates with no public downloads; remaining host acceptance is tracked independently |
 | Codex native questions | Limited human observation for synchronous input; asynchronous cards still have host limitations after a turn ends |
 | General-purpose SDK | Task State SDK 0.5.0 input error classification fix embedded; RAC remains on its component-accepted 0.4.1 snapshot |
 
-After ticketing, the source candidate offers per-ticket `implement` or whole-spec `implement-spec`, followed by `code-review` and optional `retro`. Whole-spec execution uses existing host agents and worktrees, dependency-aware dispatch, and serial integration. Retrospectives read session evidence and propose improvements without changing checks or configuration. All 36 existing capabilities remain; the other three specialized candidates are not included. See the [candidate scope](https://ww880412.github.io/matt-pocock-guide/guide.html#upstream-candidate).
+After ticketing, native.22 offers per-ticket `implement` or whole-spec `implement-spec`, followed by `code-review` and optional `retro`. Whole-spec execution uses existing host agents and worktrees, dependency-aware dispatch, and serial integration. Retrospectives read session evidence and propose improvements without changing checks or configuration. The implement-spec and retro sources are pinned to Matt `d81f3a1`; the ask-matt body uses v1.3.1 navigation from `24fe0ef`. All 36 existing capabilities remain; the other three specialized candidates are not included. See the [new capabilities and scope](https://ww880412.github.io/matt-pocock-guide/guide.html#upstream-candidate).
+
+A bounded synthetic scenario in the real Codex host observed preservation and recovery of work in progress after task failure, resolution of a real Git conflict, and integration in dependency order. Its 11 tests and 33 independent assertions passed. This evidence does not cover every model execution, Claude host acceptance, or new human interactions.
 
 Component checks, real host call chains, and observed human interactions are distinct evidence levels. Publishing the website does not constitute new user acceptance, and improvements in business outcomes have not been verified. See the [release notes and limitations](https://ww880412.github.io/matt-pocock-guide/guide.html#updates).
 
 <details>
 <summary>Download verification and maintenance</summary>
 
-For the current ZIP SHA-256, [download the checksum](downloads/matt-pocock-codex.zip.sha256). The public download remains native.21. Documentation for the 38-capability source candidate does not mean the download has been updated.
+For the native.22 ZIP SHA-256, [download the checksum](downloads/matt-pocock-codex.zip.sha256). Verify the download and your actual installation separately. Check the version in a new task after upgrading; existing tasks do not reload the package automatically.
 
 This repository hosts the documentation and download website. Sources are maintained in `docs/site/` of the [plugin project](https://github.com/ww880412/matt-pocock-plugins). Only public pages, diagrams, READMEs, and download files are published here. Plain HTML / CSS / JavaScript, with no backend or build dependencies; GitHub Pages deploys validated artifacts through an explicitly dispatched workflow on `main`.
 
