@@ -36,11 +36,14 @@
       <p class="section-note">安装与日常操作适用于 Codex native.22 的38项能力；整规格实施与只读复盘的用法见<a href="#upstream-candidate">新增能力说明</a>。</p>
 
       <section id="hosts"><h2>先确认宿主与可获取的版本</h2>
-        <p>同一套任务核心已适配 Codex、Claude Code 和 Devin CLI。当前公开下载是 <strong>Codex native.22 · 38 项能力</strong>；Claude 和 Devin 包仍为本地候选，尚未公开发布。以下 Codex 操作说明不自动适用于其他宿主。</p>
-        <h3 id="devin">Devin CLI：TTY 核心链路已验证</h3>
+        <p>同一套任务核心已适配 Codex、Claude Code 和 Devin CLI。当前公开下载分别是 <strong>Codex native.22 · 38 项能力</strong>与 <strong>Devin 0.1.1+devin.20261005 · 38 项能力</strong>；Claude 包仍为本地候选，尚未公开发布。以下 Codex 操作说明不自动适用于其他宿主。</p>
+        <h3 id="devin">Devin CLI：独立安装包，使用 TTY 交互</h3>
         <p>真实 Devin CLI 中已验证工作流、菜单、选项作答、自定义输入、Esc 后恢复、可选题、超时与会话恢复。随后对子目录启动和省略问答默认字段的两项修复完成定向复验。</p>
-        <p><strong>交互问答使用 TTY 终端。</strong>已测 ACP/print 模式可以调用工具，但没有作答通道；问题会保持待答，或按原有可选、取消和超时规则结束，不会替你选答案。精确提交边界的中断恢复仍有待补验，现有样本不代表所有恢复路径通过。</p>
-        <p>Devin 暂未提供公开下载。本机已有38项能力的旧候选安装，不包含本轮 v1.3.1 导航更新；测试者应核对实际候选与证据版本，正式发布后这里会提供独立下载和安装步骤。</p>
+        <p><strong>交互问答使用 TTY 终端。</strong>已测 ACP/print 路径没有作答通道，原生问题会自动取消且没有业务答案，不能用于交互验收。限定真实宿主场景已覆盖压缩后正文重投、残留锁自动恢复，以及答案提交两个精确边界的中断恢复；首次自动重放可能被可信会话校验拒绝，新一次调用可以恢复结果，回执没有重复。跨设备身份与真人交互仍未验证，现有样本不代表所有恢复路径通过。</p>
+        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip" download="matt-pocock-devin.zip">下载 Devin 0.1.1+devin.20261005 · ZIP</a>，解压到稳定目录，按包内 README 核对校验值、MCP 和 hooks 后安装。新版包含38项能力、implement-spec / retro 与 v1.3.1 ask-matt 导航；从旧本地候选升级时，先保存原 source 路径和会话状态，不覆盖用户修改。</p>
+        <pre><code>devin plugins info matt-pocock
+devin plugins install --local /absolute/path/matt-pocock-devin/plugins/matt-pocock</code></pre>
+        <p>安装时按宿主提示完成信任确认，再在新的 Devin TTY 会话中使用 <code>/matt-pocock:matt-pocock</code>。已有任务不会自动切换到新包；随包指南保留构建时的快照，最新分发状态以本网站为准。</p>
         <h3>Claude Code：适配已实现，验收独立进行</h3>
         <p>Claude Code 有共享源码下的独立适配包。当前候选完整宿主验收仍待完成，暂未提供公开下载；Devin 的安装和验证结果不会自动变成 Claude Code 的验收结果。</p>
         <p class="section-note">三种宿主分别打包、分别验收。正式分发状态以各自下载入口为准，不能把验收时的临时安装当作持续安装。</p>
@@ -189,7 +192,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       </section>
 
       <section id="upstream-candidate"><h2>整规格实施与只读复盘</h2>
-        <p><strong>已纳入 Codex native.22。</strong>在既有36项能力上加入 <code>implement-spec</code> 与 <code>retro</code>，共38项；ask-matt 已同步 v1.3.1 导航。Claude 和 Devin 的候选采用范围与验收单独记录。</p>
+        <p><strong>已纳入 Codex native.22。</strong>在既有36项能力上加入 <code>implement-spec</code> 与 <code>retro</code>，共38项；ask-matt 已同步 v1.3.1 导航。Devin 独立发布包也包含这两项；Claude 的候选采用范围与验收单独记录。</p>
         <table><thead><tr><th>你要做什么</th><th>独立入口</th><th>得到什么</th></tr></thead><tbody>
           <tr><td>按整份规格实施多张票</td><td><code>$matt-pocock use implement-spec</code></td><td>整合分支、逐票证据、统一评审及剩余阻塞事项</td></tr>
           <tr><td>回看一次会话，改善后续工作</td><td><code>$matt-pocock use retro</code></td><td>有会话证据的改进建议，先核对项目已有检查</td></tr>
@@ -203,7 +206,8 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       </section>
 
       <section id="updates"><h2>已发布版本变化与升级</h2>
-        <p><strong>native.22：整规格实施、只读复盘与 v1.3.1 导航。</strong>公开能力从36项增至38项，新增 implement-spec 与 retro，并更新 ask-matt 流程导航。Idea to Ship 支持逐票或整规格实施，统一评审后可选复盘；既有能力与 SDK 0.5.0 保留。Codex 已补限定失败恢复、冲突处理与依赖整合样本；Claude 候选完整宿主验收和新增真人交互仍待完成，Devin 候选暂未公开分发。</p>
+        <p><strong>Devin 0.1.1+devin.20261005：首次独立分发。</strong>包含38项能力和 v1.3.1 导航，使用 Devin hooks、MCP 与原生终端问答。已完成本机 TTY 核心链路及限定中断恢复验收；ACP/print 无作答通道，跨设备身份、真人交互与整体业务效果仍未验证。Codex native.22 ZIP 保持不变，Claude 包不在本次公开分发范围。</p>
+        <p><strong>native.22：整规格实施、只读复盘与 v1.3.1 导航。</strong>公开能力从36项增至38项，新增 implement-spec 与 retro，并更新 ask-matt 流程导航。Idea to Ship 支持逐票或整规格实施，统一评审后可选复盘；既有能力与 SDK 0.5.0 保留。Codex 已补限定失败恢复、冲突处理与依赖整合样本；Claude 候选完整宿主验收和新增真人交互仍待完成；Devin 另见独立版本记录。</p>
         <p><strong>native.21：领域文档兼容与使用路径优化。</strong>兼容项目既有 CONTEXT / GLOSSARY 命名，沿用项目指定的权威路径；更新正式 pr 能力。首页、指南与架构页改进首次使用路径和来源导航。内嵌 SDK 0.5.0，区分无效输入与内部异常；MCP 诊断版本随构建版本更新。RAC 仍使用 SDK 0.4.1；完整真实宿主和真人交互验收另行记录。</p>
         <p><strong>native.20：修正文档与版本说明。</strong>内嵌 Task State SDK 0.4.2，更新 SDK 版本指针、验证环境和已移除示例的说明；运行时代码、状态格式、36项能力与既有交互保持不变。RAC 仍使用已验收的 SDK 0.4.1 快照。本版发布不增加真实宿主或真人交互验收结论。</p>
         <p><strong>此前 native.19：升级 Task State SDK 0.4.1，集中管理 Matt 配置。</strong>补齐状态校验与公共调用接口，将路线、阶段标签和能力适配集中到目录配置；36项公开能力与既有交互保持。RAC M5 已升级并通过独立组件验收；本版通过669项组件检查与三种包校验，完整真人交互和 Claude 实际宿主验收仍待完成。</p>
