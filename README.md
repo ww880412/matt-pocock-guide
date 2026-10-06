@@ -8,7 +8,7 @@
 
 **简体中文** · [English](README.en.md)
 
-[产品主页](https://ww880412.github.io/matt-pocock-guide/) · [架构设计](https://ww880412.github.io/matt-pocock-guide/architecture.html) · [使用指南](https://ww880412.github.io/matt-pocock-guide/guide.html) · [下载 Codex 插件](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-codex.zip) · [下载 Devin 插件](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip)
+[产品主页](https://ww880412.github.io/matt-pocock-guide/) · [架构设计](https://ww880412.github.io/matt-pocock-guide/architecture.html) · [使用指南](https://ww880412.github.io/matt-pocock-guide/guide.html) · [下载 Codex 插件](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-codex.zip) · [下载 Devin 插件](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip) · [下载 Claude 插件](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip)
 
 </div>
 
@@ -47,11 +47,13 @@
 | --- | --- | --- |
 | Codex | 已发布 native.22，38 项能力 | 下方公开 ZIP；包含 implement-spec、retro 与 v1.3.1 导航 |
 | Devin CLI | 已发布 `0.1.1+devin.20261005`，38 项能力及 v1.3.1 导航 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip)；交互问答使用 TTY |
-| Claude Code | 适配与独立包已实现 | 当前候选完整宿主验收待完成，无公开下载 |
+| Claude Code | 已发布 `0.1.0`，38项能力 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip)；2.1.284的13项功能验收通过，真人体验与业务效果未外推 |
 
 Devin 的 ACP/print 在已测环境没有作答通道，问题自动取消且无业务答案。本机 TTY 与限定精确提交中断恢复已验；首次自动重放可能因可信会话校验失败而需要新一次调用，恢复后的回执不重复。跨设备身份与真人 U 未验证。详见[宿主支持说明](https://ww880412.github.io/matt-pocock-guide/guide.html#hosts)。
 
 ## 开始使用
+
+Claude Code用户[下载独立包](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip)并核对包内校验值，解压到稳定目录后运行 `claude --plugin-dir /absolute/path/matt-pocock-claude/plugins/matt-pocock`，在新会话使用 `/matt-pocock:matt-pocock`；沿用已有登录并按宿主提示确认信任。不要覆盖旧包中的用户修改；已有任务不会自动切换版本。
 
 Devin 用户先[下载独立包](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip)，按包内 README 安装，再在新的 Devin TTY 会话使用 `/matt-pocock:matt-pocock`。下面三步面向 Codex。
 
@@ -72,7 +74,7 @@ $matt-pocock 我想给项目增加一个导出功能，先帮我把需求和边�
 | 公开下载 | Codex `0.1.0-native.22+codex.20261005101334`，38项能力 |
 | 本版新增 | implement-spec / retro、ask-matt v1.3.1 导航；原36项全部保留 |
 | Devin CLI | `0.1.1+devin.20261005` 独立分发，38项能力；本机 TTY 与限定恢复证据已验 |
-| Claude Code | 独立包仍为本地候选，登录阻塞保留，暂未公开下载 |
+| Claude Code | `0.1.0` 首次独立分发；功能调用、资料加载和恢复验收已通过，真人问答、热加载及新增能力业务效果保留 |
 | Codex 原生问答 | 同步已有有限真人观察；异步卡片在回合结束后的入口仍受宿主限制 |
 | 通用 SDK | Task State SDK 0.5.0 输入错误分类修复已嵌入本版；RAC 仍使用已通过第二消费者组件验收的 0.4.1 固定快照 |
 

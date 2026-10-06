@@ -85,7 +85,7 @@
     <section class="arch-section evidence-section" id="evidence"><div class="wrap evidence-layout">
       <div><p class="arch-kicker">04 / 证据与交付边界</p><h2>实现深度，<br>与验证范围一起说明。</h2><p>设计理念参考任务插件架构研究；本页能力描述对应 Matt 当前实现。Task State SDK 已嵌入本版；图中的任务核心由 Matt 产品层与 SDK 机制共同实现。</p></div>
       <div><div class="evidence-levels"><p><strong>C / 组件</strong><span>规则、协议、资源和打包检查</span></p><p><strong>H / 宿主</strong><span>按宿主记录的真实调用链</span></p><p><strong>U / 用户</strong><span>实际观察过的真人交互场景</span></p></div>
-      <p class="evidence-boundary">版本与发布范围见下方使用指南。源码已适配 Codex、Claude Code 与 Devin CLI。Devin 0.1.1+devin.20261005 已独立发布，TTY 核心链路和限定中断恢复已实测；跨设备身份与真人交互未验证。Claude Code 的当前候选完整宿主验收待完成。Codex 同步问答已有有限真人观察，异步卡片在回合结束后的入口仍受宿主限制。整体业务效果提升尚未得到验证。</p><a class="text-link" href="guide.html#updates">查看版本变化与使用边界 <span aria-hidden="true">→</span></a></div>
+      <p class="evidence-boundary">版本与发布范围见下方使用指南。源码已适配 Codex、Claude Code 与 Devin CLI。Devin 0.1.1+devin.20261005 已独立发布，TTY 核心链路和限定中断恢复已实测；跨设备身份与真人交互未验证。Claude Code 0.1.0 已独立发布，2.1.284的功能调用、资料加载和恢复验收通过；真人问答体验与新增能力的业务效果保留。Codex 同步问答已有有限真人观察，异步卡片在回合结束后的入口仍受宿主限制。整体业务效果提升尚未得到验证。</p><a class="text-link" href="guide.html#updates">查看版本变化与使用边界 <span aria-hidden="true">→</span></a></div>
     </div></section>
     <section class="wrap"><p class="section-note">上方答复凭据图展示 Codex native 路径。Devin 使用可信 hook 关联原生问题与答案，共用任务核心，不读取 Codex 会话记录；交互问答使用 TTY。<a href="guide.html#hosts">查看三种宿主的支持状态与限制</a>。</p></section>
     <section class="arch-origin wrap"><div><p class="arch-kicker">方法与实现的来源</p><h2>工程经验 → 流程产品 → 跨宿主任务 Harness</h2><p>Matt Pocock 提供工程方法，Pi Matt 将方法组织为代码驱动流程。本项目进一步实现共享任务核心、跨宿主恢复和原生问答适配。</p><a class="text-link" href="./#sources">查看上游来源与采用范围 ↗</a></div><a class="button primary" href="guide.html#before">开始使用 →</a></section>
