@@ -6,6 +6,9 @@
   "artifacts": {
     "devin": {
       "downloadPath": "downloads/matt-pocock-devin.zip"
+    },
+    "claude": {
+      "downloadPath": "downloads/matt-pocock-claude.zip"
     }
   }
 }

@@ -34,7 +34,7 @@
     </section>
     <section class="comparison wrap" id="hosts" aria-labelledby="hosts-title">
       <div class="section-heading"><div><p class="eyebrow">选择你的宿主</p><h2 id="hosts-title">同一套工作流，三种宿主适配。</h2></div></div>
-      <p class="comparison-intro">Codex 与 Devin 已有独立公开下载；Devin 使用 TTY 终端交互，Claude Code 已有适配与独立包。各端的发布和验收进度分别列出。</p>
+      <p class="comparison-intro">Codex、Claude Code 与 Devin 均提供独立公开下载。请选择对应宿主的安装包；各端的验证范围分别列出。</p>
       <p class="table-hint">左右滑动，查看各宿主状态 →</p>
       <div class="table-scroll" role="region" tabindex="0" aria-label="宿主支持与获取方式，窄屏可横向滚动"><table>
         <caption class="sr-only">截至 2026-10-05 的宿主适配、验证与分发状态</caption>
@@ -42,10 +42,10 @@
         <tbody>
           <tr><th scope="row">Codex</th><td>已发布 native.22 · 38 项能力；原生问答与工作流</td><td><a href="guide.html#before">下载与安装</a>；包含整规格实施与只读复盘</td></tr>
           <tr><th scope="row">Devin CLI</th><td>已发布 0.1.1+devin.20261005 · 38 项能力；含 v1.3.1 导航</td><td><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip" download="matt-pocock-devin.zip">下载 Devin 包 · ZIP</a>；<a href="guide.html#devin">TTY 安装与使用边界</a></td></tr>
-          <tr><th scope="row">Claude Code</th><td>共享源码适配与独立包已实现</td><td>当前候选完整宿主验收待完成；暂未提供公开下载</td></tr>
+          <tr><th scope="row">Claude Code</th><td>已发布 0.1.0 · 38项能力</td><td><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip" download="matt-pocock-claude.zip">下载 Claude Code 插件 · ZIP</a>；2.1.284 功能验收通过，真人体验与新增业务效果待验证</td></tr>
         </tbody>
       </table></div>
-      <p class="section-note">Codex 与 Devin 分别提供下载包，Claude Code 当前候选仍未公开分发；<a href="guide.html#hosts">查看各宿主的进度与限制</a>。</p>
+      <p class="section-note">三种宿主分别提供下载包和安装说明；<a href="guide.html#hosts">查看各宿主的进度与限制</a>。</p>
     </section>
     <section class="comparison wrap" id="comparison" aria-labelledby="comparison-title">
       <div class="section-heading"><div><p class="eyebrow">按任务选择用法</p><h2 id="comparison-title">已有 Matt skills，插件多做了什么？</h2></div></div>
@@ -86,7 +86,7 @@
       <div class="source-list">
         <article><h3>Matt Pocock skills · 工程方法</h3><p>提供需求讨论、规格、实现和评审等方法。本插件选取这些能力，并保留其参考资料和来源标识。</p><p class="source-note"><a href="https://github.com/mattpocock/skills/tree/6654f6b60cd9d5be8b54c6fafe44346dabeb3b76">采用基线 · 6654f6b ↗</a>；pr、implement-spec 与 retro 固定采用 <a href="https://github.com/mattpocock/skills/tree/d81f3a183412e71a5b1e84ca21bc1a35eea03a60/skills/engineering">d81f3a1 · engineering ↗</a>；ask-matt 正文更新至 <a href="https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/ask-matt/SKILL.md">24fe0ef · v1.3.1 导航 ↗</a>。native.22 保留 CONTEXT / GLOSSARY 领域文档兼容；claude-handoff、scaffold-exercises 按需保留，Git guardrails 暂缓跨宿主定位。</p></article>
         <article><h3>Pi Matt · 工作流组织</h3><p>把方法串成路线、阶段与推进指引。本项目以其已实现行为为移植基线，按 Codex、Claude Code 与 Devin CLI 的宿主能力适配。</p><p class="source-note"><a href="https://github.com/FradSer/pi-packages/tree/eda991d4d793158f3f59d996b8ba049e9fb64d02/packages/matt-pocock">移植基线 · eda991d ↗</a>；后续从 <a href="https://github.com/FradSer/pi-packages/tree/157c21f75481f575f3c3575dc18e6f8ee271c756/packages/matt-pocock">157c21f ↗</a> 选择性采纳评审、写作指引与返工路径，未照搬 Pi 专有 UI。本次核对固定 <a href="https://github.com/FradSer/pi-packages/tree/74c7e122e67872ffcb71153848b75145439635d1/packages/matt-pocock">74c7e12 ↗</a>，较当天前次检查无新增源码变化；既有能力包括 resolving-merge-conflicts 继续保留。</p></article>
-        <article><h3>本插件 · 跨宿主实现</h3><p>实现共享任务核心、持久状态与恢复、资料加载及 Codex 原生问答适配。公开下载分别面向 Codex 与 Devin；Devin 的 TTY 和限定恢复场景已实测，Claude 当前候选完整宿主验收仍待完成。</p><p class="source-note"><a href="architecture.html">查看实现与验证边界</a> · <a href="guide.html#updates">查看本版范围</a> · <a href="https://github.com/ww880412/matt-pocock-guide">公开分发仓库 ↗</a></p></article>
+        <article><h3>本插件 · 跨宿主实现</h3><p>实现共享任务核心、持久状态与恢复、资料加载及 Codex 原生问答适配。三种宿主均有公开下载；Devin 的 TTY 和限定恢复场景已实测，Claude Code 2.1.284 的功能调用与恢复验收已通过。各端真人体验和业务效果仍分别验证。</p><p class="source-note"><a href="architecture.html">查看实现与验证边界</a> · <a href="guide.html#updates">查看本版范围</a> · <a href="https://github.com/ww880412/matt-pocock-guide">公开分发仓库 ↗</a></p></article>
       </div>
     </section>
   </main>

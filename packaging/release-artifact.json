@@ -5,6 +5,10 @@
     "devin": {
       "version": "0.1.1+devin.20261005",
       "sha256": "8e0dd61c5e8a3ed71544e0b3e7ca967e2d73483060ff56f7b5674e8c69bde833"
+    },
+    "claude": {
+      "version": "0.1.0",
+      "sha256": "7235181765c905daf3fb89e851923fb430e6691ab8bfe3d09bde68fafc613a0c"
     }
   }
 }
