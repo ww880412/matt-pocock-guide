@@ -45,9 +45,9 @@ The [architecture page](https://ww880412.github.io/matt-pocock-guide/architectur
 
 | Host | Current status | Availability and limits |
 | --- | --- | --- |
-| Codex | Released native.22 with 38 capabilities | Public ZIP below; includes implement-spec, retro, and v1.3.1 navigation |
-| Devin CLI | Released `0.1.1+devin.20261005` with 38 capabilities and v1.3.1 navigation | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip); interactive questions require TTY |
-| Claude Code | Released `0.1.0` with 38 capabilities | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip); 13 functional host cases passed on 2.1.284; human use and business outcomes remain unverified |
+| Codex | Released native.23 with 38 capabilities | Public ZIP below; includes implement-spec, retro, and full capability consultation |
+| Devin CLI | Released `0.1.2+devin.20261009` with 38 capabilities and full capability consultation | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip); interactive questions require TTY |
+| Claude Code | Released `0.1.1` with 38 capabilities | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip); 13 functional host cases passed on 2.1.284; human use and business outcomes remain unverified |
 
 The tested Devin ACP/print modes have no answer channel: questions are automatically cancelled without a business answer. Local TTY flows and bounded recovery at precise commit boundaries have been verified. The first automatic replay can fail trusted-session validation; a new call recovers the result without duplicate receipts. Cross-device identity and human acceptance remain unverified. See [host support](https://ww880412.github.io/matt-pocock-guide/guide.html#hosts) (Chinese).
 
@@ -67,18 +67,24 @@ $matt-pocock I want to add an export feature. Help me clarify the requirements a
 
 You do not need to memorize the commands. Routine progress follows the agreed goal and authorization; key scope decisions and trade-offs remain yours. See the [user guide](https://ww880412.github.io/matt-pocock-guide/guide.html) for the full workflow.
 
+## Improvements in this release
+
+Ask ask-matt about any capability and its local limits without changing the active task. Implementation and reviews require observed test evidence. Questionnaires and prototypes separate facts from proposed policy; teaching keeps application code unchanged, and handoffs point to real files. Tracker relationships and wizard input, quoting, and permissions are also updated.
+
+753 component tests, four-package verification and rollback, and seven bounded Codex synthetic business cases passed. Natural discovery, new business cases on other hosts, and human interaction are not established by those checks.
+
 ## Delivery status
 
-| Area | Status as of October 5, 2026 |
+| Area | Status as of October 9, 2026 |
 | --- | --- |
-| Public download | Codex `0.1.0-native.22+codex.20261005101334`, with 38 capabilities |
-| Added in this release | implement-spec, retro, and ask-matt v1.3.1 navigation; all 36 existing capabilities remain |
-| Devin CLI | `0.1.1+devin.20261005` published separately, with 38 capabilities; local TTY and bounded recovery verified |
-| Claude Code | `0.1.0` published separately; tool calls, resource delivery and recovery verified on 2.1.284. Human questions, hot reload and new-capability business outcomes remain unverified |
+| Public download | Codex `0.1.0-native.23+codex.20261009064436`, with 38 capabilities |
+| Added in this release | Full capability consultation, evidence boundaries, tracker, teaching/handoff and wizard fixes; still 38 capabilities |
+| Devin CLI | `0.1.2+devin.20261009` published separately, with 38 capabilities; local TTY and bounded recovery verified |
+| Claude Code | `0.1.1` published separately; tool calls, resource delivery and recovery verified on 2.1.284. Human questions, hot reload and new-capability business outcomes remain unverified |
 | Codex native questions | Limited human observation for synchronous input; asynchronous cards still have host limitations after a turn ends |
 | General-purpose SDK | Task State SDK 0.5.0 input error classification fix embedded; RAC remains on its component-accepted 0.4.1 snapshot |
 
-After ticketing, native.22 offers per-ticket `implement` or whole-spec `implement-spec`, followed by `code-review` and optional `retro`. Whole-spec execution uses existing host agents and worktrees, dependency-aware dispatch, and serial integration. Retrospectives read session evidence and propose improvements without changing checks or configuration. The implement-spec and retro sources are pinned to Matt `d81f3a1`; the ask-matt body uses v1.3.1 navigation from `24fe0ef`. All 36 existing capabilities remain; the other three specialized candidates are not included. See the [new capabilities and scope](https://ww880412.github.io/matt-pocock-guide/guide.html#upstream-candidate).
+After ticketing, native.23 offers per-ticket `implement` or whole-spec `implement-spec`, followed by `code-review` and optional `retro`. Whole-spec execution uses existing host agents and worktrees, dependency-aware dispatch, and serial integration. Retrospectives read session evidence and propose improvements without changing checks or configuration. The implement-spec and retro sources are pinned to Matt `d81f3a1`; the ask-matt body uses `b0618bc`; adapted method updates also draw on Pi `1b4d126`. All 36 existing capabilities remain; the other three specialized candidates are not included. See the [new capabilities and scope](https://ww880412.github.io/matt-pocock-guide/guide.html#upstream-candidate).
 
 A bounded synthetic scenario in the real Codex host observed preservation and recovery of work in progress after task failure, resolution of a real Git conflict, and integration in dependency order. Its 11 tests and 33 independent assertions passed. This evidence does not cover every model execution, Claude new-capability business acceptance, or new human interactions.
 
@@ -87,7 +93,7 @@ Component checks, real host call chains, and observed human interactions are dis
 <details>
 <summary>Download verification and maintenance</summary>
 
-Use the separate [Codex checksum](downloads/matt-pocock-codex.zip.sha256) and [Devin checksum](downloads/matt-pocock-devin.zip.sha256), plus the [Claude checksum](downloads/matt-pocock-claude.zip.sha256). Adding Devin does not rebuild the Codex native.22 ZIP; bundled guides retain the snapshot from each build. Verify the download and your actual installation separately. Check the version in a new task after upgrading; existing tasks do not reload the package automatically.
+Use the separate [Codex checksum](downloads/matt-pocock-codex.zip.sha256) and [Devin checksum](downloads/matt-pocock-devin.zip.sha256), plus the [Claude checksum](downloads/matt-pocock-claude.zip.sha256). All three host archives are updated; bundled guides retain the snapshot from each build. Verify the download and your actual installation separately. Check the version in a new task after upgrading; existing tasks do not reload the package automatically.
 
 This repository hosts the documentation and download website. Sources are maintained in `docs/site/` of the [plugin project](https://github.com/ww880412/matt-pocock-plugins). Only public pages, diagrams, READMEs, and download files are published here. Plain HTML / CSS / JavaScript, with no backend or build dependencies; GitHub Pages deploys validated artifacts through an explicitly dispatched workflow on `main`.
 
