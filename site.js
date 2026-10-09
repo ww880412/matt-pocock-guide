@@ -4,6 +4,7 @@ status.setAttribute('role', 'status');
 document.body.append(status);
 
 document.querySelectorAll('[data-copy]').forEach((button) => {
+  const originalLabel = button.textContent;
   button.addEventListener('click', async () => {
     const code = document.getElementById(button.dataset.copy);
     if (!code) return;
@@ -20,9 +21,79 @@ document.querySelectorAll('[data-copy]').forEach((button) => {
       button.textContent = '请手动复制';
       status.textContent = '无法访问剪贴板，已选中文本，请手动复制。';
     }
-    setTimeout(() => { button.textContent = '复制'; }, 2400);
+    setTimeout(() => { button.textContent = originalLabel; }, 2400);
   });
 });
+
+// Search and category are combined; the complete static directory also works without JS.
+const capabilityCards = [...document.querySelectorAll('[data-capability]')];
+if (capabilityCards.length) {
+  const search = document.getElementById('cap-search');
+  const category = document.getElementById('cap-category');
+  const count = document.getElementById('cap-count');
+  const empty = document.getElementById('cap-empty');
+  const filter = () => {
+    const query = search.value.trim().toLocaleLowerCase();
+    let shown = 0;
+    for (const card of capabilityCards) {
+      card.hidden = !(card.textContent.toLocaleLowerCase().includes(query) && (!category.value || card.dataset.category === category.value));
+      if (!card.hidden) shown++;
+    }
+    count.textContent = `显示 ${shown} / ${capabilityCards.length} 项能力`;
+    empty.hidden = shown !== 0;
+  };
+  const reset = () => { search.value = ''; category.value = ''; filter(); };
+  search.addEventListener('input', filter);
+  category.addEventListener('change', filter);
+  document.getElementById('cap-reset').addEventListener('click', () => { reset(); search.focus(); });
+  const revealLinkedCapability = () => {
+    const card = capabilityCards.find(card => '#' + card.id === location.hash);
+    if (!card) return;
+    reset(); card.open = true;
+    requestAnimationFrame(() => card.scrollIntoView({ block: 'start' }));
+  };
+  window.addEventListener('hashchange', revealLinkedCapability);
+  document.querySelector('.catalog-controls').hidden = false;
+  revealLinkedCapability();
+}
+
+// The frozen Live Panel keeps its original layout; only its public seek(t) is driven here.
+const atlasSource = document.getElementById('atlas-source');
+if (atlasSource) {
+  const frame = document.getElementById('atlas-frame');
+  const toggle = document.getElementById('atlas-toggle');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const desktop = matchMedia('(min-width: 980px)');
+  let playing = !reduced.matches, visible = false, time = 0, last = null, raf = null;
+  const syncButton = () => {
+    toggle.textContent = playing ? '暂停演示' : '播放演示';
+    toggle.setAttribute('aria-pressed', String(playing));
+    toggle.hidden = !desktop.matches;
+  };
+  const draw = () => {
+    if (frame.contentWindow?.__ready) frame.contentWindow.seek(time);
+  };
+  const running = () => playing && visible && desktop.matches && !document.hidden;
+  const tick = now => {
+    raf = null;
+    if (!running()) { last = null; return; }
+    if (last !== null) time = (time + Math.min((now - last) / 1000, .1)) % 24;
+    last = now; draw(); raf = requestAnimationFrame(tick);
+  };
+  const sync = () => {
+    if (desktop.matches && !frame.srcdoc) frame.srcdoc = JSON.parse(atlasSource.textContent);
+    if (!running()) { cancelAnimationFrame(raf); raf = null; last = null; }
+    else if (raf === null) raf = requestAnimationFrame(tick);
+    syncButton();
+  };
+  frame.addEventListener('load', draw);
+  toggle.addEventListener('click', () => { playing = !playing; sync(); });
+  reduced.addEventListener('change', () => { playing = false; sync(); });
+  desktop.addEventListener('change', sync);
+  document.addEventListener('visibilitychange', sync);
+  new IntersectionObserver(entries => { visible = entries[0].isIntersecting; sync(); }).observe(frame);
+  sync();
+}
 
 const links = [...document.querySelectorAll('.doc-nav a[href^="#"]')];
 function setActive(id) {
