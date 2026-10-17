@@ -8,7 +8,7 @@ Bring engineering methods, task state, and key decisions into Codex, Claude Code
 
 [简体中文](README.md) · **English**
 
-[Website](https://ww880412.github.io/matt-pocock-guide/) · [Architecture](https://ww880412.github.io/matt-pocock-guide/architecture.html) · [User guide](https://ww880412.github.io/matt-pocock-guide/guide.html) · [Download for Codex](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-codex.zip) · [Download for Devin](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip) · [Download for Claude Code](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip)
+[Website](https://ww880412.github.io/matt-pocock-guide/index.en.html) · [Architecture](https://ww880412.github.io/matt-pocock-guide/architecture.en.html) · [User guide](https://ww880412.github.io/matt-pocock-guide/guide.en.html) · [Download for Codex](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-codex.zip) · [Download for Devin](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip) · [Download for Claude Code](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip)
 
 </div>
 
@@ -33,23 +33,23 @@ Discuss → Specify → Break down tasks → Implement & verify → Review
 
 ## Explore the architecture in motion
 
-[![Matt architecture preview: the host execution environment, task core, state records, and answer provenance](assets/architecture-preview.png)](https://ww880412.github.io/matt-pocock-guide/harness-map.html)
+[Explore the English architecture diagram: host execution, task state, and answer provenance →](https://ww880412.github.io/matt-pocock-guide/harness-map.en.html)
 
-**[Open the interactive Archify diagram →](https://ww880412.github.io/matt-pocock-guide/harness-map.html)**
+**[Open the interactive Archify diagram →](https://ww880412.github.io/matt-pocock-guide/harness-map.en.html)**
 
-Explore **control flow / state flow / answer provenance** through guided chapters, node focus, zoom, light and dark themes, and image exports. This README uses a static preview; the interactive viewer runs on GitHub Pages. Animation illustrates authored relationships, not live execution telemetry. The website, guide, and diagram are currently in Chinese; this README is available in both languages.
+Explore **control flow / state flow / answer provenance** through guided chapters, node focus, zoom, light and dark themes, and image exports. The interactive viewer runs on GitHub Pages. Animation illustrates authored relationships, not live execution telemetry. The website, guide, architecture and interactive diagrams are available in Chinese and English, with a language choice that persists across pages.
 
-The [architecture page](https://ww880412.github.io/matt-pocock-guide/architecture.html) explains three concrete design problems: recovering stale state, isolating late answers, and redelivering a procedure after its state change has already been recorded.
+The [architecture page](https://ww880412.github.io/matt-pocock-guide/architecture.en.html) explains three concrete design problems: recovering stale state, isolating late answers, and redelivering a procedure after its state change has already been recorded.
 
 ## Host support and availability
 
 | Host | Current status | Availability and limits |
 | --- | --- | --- |
-| Codex | Released native.23 with 38 capabilities | Public ZIP below; includes implement-spec, retro, and full capability consultation |
-| Devin CLI | Released `0.1.2+devin.20261009` with 38 capabilities and full capability consultation | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip); interactive questions require TTY |
-| Claude Code | Released `0.1.1` with 38 capabilities | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip); 13 functional host cases passed on 2.1.284; human use and business outcomes remain unverified |
+| Codex | Released native.24 with 38 capabilities | Public ZIP below; includes implement-spec, retro, and full capability consultation |
+| Devin CLI | Released `0.1.3+devin.20261017` with 38 capabilities and full capability consultation | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip); interactive questions require TTY |
+| Claude Code | Released `0.1.2` with 38 capabilities | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip); historical package 0.1.0 passed 13 functional host cases on 2.1.284. This round’s default-profile model invocation is BLOCKED_AUTH; human use and business outcomes remain unverified |
 
-The tested Devin ACP/print modes have no answer channel: questions are automatically cancelled without a business answer. Local TTY flows and bounded recovery at precise commit boundaries have been verified. The first automatic replay can fail trusted-session validation; a new call recovers the result without duplicate receipts. Cross-device identity and human acceptance remain unverified. See [host support](https://ww880412.github.io/matt-pocock-guide/guide.html#hosts) (Chinese).
+The tested Devin ACP/print modes have no answer channel: questions are automatically cancelled without a business answer. Local TTY flows and bounded recovery at precise commit boundaries have been verified. The first automatic replay can fail trusted-session validation; a new call recovers the result without duplicate receipts. Cross-device identity and human acceptance remain unverified. See [host support](https://ww880412.github.io/matt-pocock-guide/guide.en.html#hosts).
 
 ## Get started
 
@@ -65,30 +65,32 @@ For Devin, [download the separate bundle](https://ww880412.github.io/matt-pocock
 $matt-pocock I want to add an export feature. Help me clarify the requirements and scope first.
 ```
 
-You do not need to memorize the commands. Routine progress follows the agreed goal and authorization; key scope decisions and trade-offs remain yours. See the [user guide](https://ww880412.github.io/matt-pocock-guide/guide.html) for the full workflow.
+You do not need to memorize the commands. Routine progress follows the agreed goal and authorization; key scope decisions and trade-offs remain yours. See the [user guide](https://ww880412.github.io/matt-pocock-guide/guide.en.html) for the full workflow.
 
 ## Improvements in this release
 
+The full website now offers Chinese and English. Wizard now handles plain double-quoted env defaults, clear failures, shell-variable updates without name collisions, and edits during an active run. Existing EOF, symlink and literal-value safeguards remain. Matt skills was checked through `49dd158`; Pi packages through `1c751859`, with no production change in the Matt package.
+
 Ask ask-matt about any capability and its local limits without changing the active task. Implementation and reviews require observed test evidence. Questionnaires and prototypes separate facts from proposed policy; teaching keeps application code unchanged, and handoffs point to real files. Tracker relationships and wizard input, quoting, and permissions are also updated.
 
-753 component tests, four-package verification and rollback, and seven bounded Codex synthetic business cases passed. Natural discovery, new business cases on other hosts, and human interaction are not established by those checks.
+This release is checked at the component, controlled shell/PTY and website interaction boundaries. It adds no host-model business or human-acceptance claim. The earlier 753-test run and bounded Codex synthetic business cases remain historical evidence.
 
 ## Delivery status
 
-| Area | Status as of October 9, 2026 |
+| Area | Status as of October 17, 2026 |
 | --- | --- |
-| Public download | Codex `0.1.0-native.23+codex.20261009064436`, with 38 capabilities |
-| Added in this release | Full capability consultation, evidence boundaries, tracker, teaching/handoff and wizard fixes; still 38 capabilities |
-| Devin CLI | `0.1.2+devin.20261009` published separately, with 38 capabilities; local TTY and bounded recovery verified |
-| Claude Code | `0.1.1` published separately; tool calls, resource delivery and recovery verified on 2.1.284. Human questions, hot reload and new-capability business outcomes remain unverified |
+| Public download | Codex `0.1.0-native.24+codex.20261017120217`, with 38 capabilities |
+| Added in this release | Wizard value, variable-scope, clear and mid-run edit fixes; a fully bilingual website; still 38 capabilities |
+| Devin CLI | `0.1.3+devin.20261017` published separately, with 38 capabilities; local TTY and bounded recovery verified |
+| Claude Code | `0.1.2` published separately; tool calls, resource delivery and recovery of package 0.1.0 on 2.1.284 are historical evidence. This round’s default-profile model invocation is BLOCKED_AUTH. Human questions, hot reload and new-capability business outcomes remain unverified |
 | Codex native questions | Limited human observation for synchronous input; asynchronous cards still have host limitations after a turn ends |
-| General-purpose SDK | Task State SDK 0.5.0 input error classification fix embedded; RAC remains on its component-accepted 0.4.1 snapshot |
+| General-purpose SDK | Task State SDK 0.5.1 embedded; RAC remains on its component-accepted 0.4.1 snapshot |
 
-After ticketing, native.23 offers per-ticket `implement` or whole-spec `implement-spec`, followed by `code-review` and optional `retro`. Whole-spec execution uses existing host agents and worktrees, dependency-aware dispatch, and serial integration. Retrospectives read session evidence and propose improvements without changing checks or configuration. The implement-spec and retro sources are pinned to Matt `d81f3a1`; the ask-matt body uses `b0618bc`; adapted method updates also draw on Pi `1b4d126`. All 36 existing capabilities remain; the other three specialized candidates are not included. See the [new capabilities and scope](https://ww880412.github.io/matt-pocock-guide/guide.html#upstream-candidate).
+After ticketing, native.24 offers per-ticket `implement` or whole-spec `implement-spec`, followed by `code-review` and optional `retro`. Whole-spec execution uses existing host agents and worktrees, dependency-aware dispatch, and serial integration. Retrospectives read session evidence and propose improvements without changing checks or configuration. The implement-spec and retro sources are pinned to Matt `d81f3a1`; the ask-matt body uses `b0618bc`; adapted method updates also draw on Pi `1b4d126`. All 36 existing capabilities remain; the other three specialized candidates are not included. See the [new capabilities and scope](https://ww880412.github.io/matt-pocock-guide/guide.en.html#upstream-candidate).
 
 A bounded synthetic scenario in the real Codex host observed preservation and recovery of work in progress after task failure, resolution of a real Git conflict, and integration in dependency order. Its 11 tests and 33 independent assertions passed. This evidence does not cover every model execution, Claude new-capability business acceptance, or new human interactions.
 
-Component checks, real host call chains, and observed human interactions are distinct evidence levels. Publishing the website does not constitute new user acceptance, and improvements in business outcomes have not been verified. See the [release notes and limitations](https://ww880412.github.io/matt-pocock-guide/guide.html#updates).
+Component checks, real host call chains, and observed human interactions are distinct evidence levels. Publishing the website does not constitute new user acceptance, and improvements in business outcomes have not been verified. See the [release notes and limitations](https://ww880412.github.io/matt-pocock-guide/guide.en.html#updates).
 
 <details>
 <summary>Download verification and maintenance</summary>
