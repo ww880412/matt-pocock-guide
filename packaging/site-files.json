@@ -5,5 +5,12 @@
   "harness-map.html",
   "styles.css",
   "site.js",
-  "assets/architecture-preview.png"
+  "assets/architecture-preview.png",
+  "index.en.html",
+  "guide.en.html",
+  "architecture.en.html",
+  "harness-map.en.html",
+  "site.en.js",
+  "language.js",
+  "language.css"
 ]
