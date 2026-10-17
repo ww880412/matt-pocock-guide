@@ -45,9 +45,9 @@
 
 | 宿主 | 当前状态 | 获取方式与限制 |
 | --- | --- | --- |
-| Codex | 已发布 native.23，38 项能力 | 下方公开 ZIP；包含整规格实施、复盘与完整能力咨询 |
-| Devin CLI | 已发布 `0.1.2+devin.20261009`，38 项能力及完整能力咨询 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip)；交互问答使用 TTY |
-| Claude Code | 已发布 `0.1.1`，38项能力 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip)；2.1.284的13项功能验收通过，真人体验与业务效果未外推 |
+| Codex | 已发布 native.24，38 项能力 | 下方公开 ZIP；包含整规格实施、复盘与完整能力咨询 |
+| Devin CLI | 已发布 `0.1.3+devin.20261017`，38 项能力及完整能力咨询 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip)；交互问答使用 TTY |
+| Claude Code | 已发布 `0.1.2`，38项能力 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip)；历史插件 0.1.0 在 2.1.284 的13项功能验收通过；本轮默认 profile 模型调用为 BLOCKED_AUTH，未外推真人体验与业务效果 |
 
 Devin 的 ACP/print 在已测环境没有作答通道，问题自动取消且无业务答案。本机 TTY 与限定精确提交中断恢复已验；首次自动重放可能因可信会话校验失败而需要新一次调用，恢复后的回执不重复。跨设备身份与真人 U 未验证。详见[宿主支持说明](https://ww880412.github.io/matt-pocock-guide/guide.html#hosts)。
 
@@ -69,22 +69,24 @@ $matt-pocock 我想给项目增加一个导出功能，先帮我把需求和边�
 
 ## 本版使用改进
 
+全站新增中文与 English 切换。wizard 修复普通双引号值读取、清屏失败、Shell 变量同步及同名冲突、运行中编辑脚本；保留 EOF、符号链接与字面值保护。Matt skills 核对至 `49dd158`，Pi packages 核对至 `1c751859`，Matt 包无生产变化。
+
 用 ask-matt 咨询全部能力及其本地限制，不改变当前任务。实现与评审要求真实测试证据；问卷、原型和领域定义区分事实与提案；教学保持应用只读，交接落到真实文件。票据父子/阻塞关系与 wizard 输入、引号和权限一并修复。
 
-753项组件回归、四包校验与回退、Codex七个明确任务下的合成业务样本通过；自然触发效果、其他宿主新增业务场景和真人交互未由此证明。
+本轮覆盖组件、受控 Shell / PTY 行为与网站交互验证；不新增宿主模型业务 H 或真人 U 验收。此前753项回归和限定Codex合成业务样本属于历史版本证据。
 
 ## 当前交付范围
 
-| 项目 | 状态（2026-10-09） |
+| 项目 | 状态（2026-10-17） |
 | --- | --- |
-| 公开下载 | Codex `0.1.0-native.23+codex.20261009064436`，38项能力 |
-| 本版新增 | 完整能力咨询、证据边界、tracker、教学交接与wizard修复；能力仍38项 |
-| Devin CLI | `0.1.2+devin.20261009` 独立分发，38项能力；本机 TTY 与限定恢复证据已验 |
-| Claude Code | `0.1.1` 更新分发；功能调用、资料加载和恢复验收已通过，真人问答、热加载及新增能力业务效果保留 |
+| 公开下载 | Codex `0.1.0-native.24+codex.20261017120217`，38项能力 |
+| 本版新增 | wizard 值读取、变量同步、清屏与运行中编辑修复；完整中英双语网站；能力仍38项 |
+| Devin CLI | `0.1.3+devin.20261017` 独立分发，38项能力；本机 TTY 与限定恢复证据已验 |
+| Claude Code | `0.1.2` 更新分发；插件 0.1.0 在 2.1.284 的功能调用、资料加载和恢复验收为历史记录；本轮默认 profile 模型调用为 BLOCKED_AUTH，真人问答、热加载及新增能力业务效果保留 |
 | Codex 原生问答 | 同步已有有限真人观察；异步卡片在回合结束后的入口仍受宿主限制 |
-| 通用 SDK | Task State SDK 0.5.0 输入错误分类修复已嵌入本版；RAC 仍使用已通过第二消费者组件验收的 0.4.1 固定快照 |
+| 通用 SDK | Task State SDK 0.5.1 已嵌入本版；RAC 仍使用已通过第二消费者组件验收的 0.4.1 固定快照 |
 
-native.23 在拆票后提供逐票 `implement` 与整规格 `implement-spec` 两条分支，统一 `code-review` 后可选 `retro`。整规格实施使用宿主已有 agent / worktree 工具，按依赖派发、串行整合；复盘只读会话并给建议，不自动改检查或配置。implement-spec / retro 固定采用 Matt `d81f3a1`，ask-matt 正文采用 `b0618bc`，两批语义更新参考 Pi `1b4d126`。旧36项全部保留，其他三项专用候选未纳入；详细边界见[新增能力说明](https://ww880412.github.io/matt-pocock-guide/guide.html#upstream-candidate)。
+native.24 在拆票后提供逐票 `implement` 与整规格 `implement-spec` 两条分支，统一 `code-review` 后可选 `retro`。整规格实施使用宿主已有 agent / worktree 工具，按依赖派发、串行整合；复盘只读会话并给建议，不自动改检查或配置。implement-spec / retro 固定采用 Matt `d81f3a1`，ask-matt 正文采用 `b0618bc`，两批语义更新参考 Pi `1b4d126`。旧36项全部保留，其他三项专用候选未纳入；详细边界见[新增能力说明](https://ww880412.github.io/matt-pocock-guide/guide.html#upstream-candidate)。
 
 Codex 本例已观察到任务失败后的 WIP 保留与恢复、真实 Git 冲突处理及按依赖顺序整合；11项测试、33项独立断言通过。证据来自限定真实宿主合成场景，不覆盖全部模型执行、Claude 宿主或新增真人交互。
 

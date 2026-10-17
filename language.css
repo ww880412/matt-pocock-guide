@@ -1,0 +1,9 @@
+/* A compact language choice; the page's existing design remains authoritative. */
+.language-switch{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font:600 12px/1.4 system-ui,sans-serif;border:1px solid #d8dee8;border-radius:6px;padding:3px;flex-shrink:0}
+.language-switch a{display:block;padding:5px 7px;text-decoration:none;color:inherit;border-radius:3px}
+.language-switch a[aria-current=true]{color:#1e40af;background:#dbeafe}
+.language-switch a:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
+.header-inner{flex-wrap:wrap}
+.archify-language{position:relative;display:flex;justify-content:flex-end;margin:12px auto;max-width:1350px;padding:0 20px;color:var(--text,#111827)}
+.archify-language .language-switch{border-color:var(--toolbar-border,#d8dee8);background:var(--toolbar-bg,#fff)}
+@media(max-width:600px){.header-inner>.language-switch{margin-left:auto}.header nav{order:3;width:100%;overflow-x:auto}.header .edition{display:none}}
