@@ -45,9 +45,9 @@
 
 | 宿主 | 当前状态 | 获取方式与限制 |
 | --- | --- | --- |
-| Codex | 已发布 native.25，38 项能力 | 下方公开 ZIP；包含整规格实施、复盘与完整能力咨询 |
-| Devin CLI | 已发布 `0.1.4+devin.20261024`，38 项能力及完整能力咨询 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip)；交互问答使用 TTY |
-| Claude Code | 已发布 `0.1.3`，38项能力 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip)；历史插件 0.1.0 在 2.1.284 的13项功能验收通过；本轮默认 profile 模型调用为 BLOCKED_AUTH，未外推真人体验与业务效果 |
+| Codex | 已发布 native.26，38 项能力 | 下方公开 ZIP；包含整规格实施、复盘与完整能力咨询；三选项问题同屏暂选后确认 |
+| Devin CLI | 已发布 `0.1.5+devin.20261024`，38 项能力及完整能力咨询 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip)；交互问答使用 TTY，本版问答交互未改 |
+| Claude Code | 已发布 `0.1.4`，38项能力 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip)；历史插件 0.1.0 在 2.1.284 的13项功能验收通过；默认 profile 的模型业务调用仍未验证（既有记录为 BLOCKED_AUTH），未外推真人体验与业务效果 |
 
 Devin 的 ACP/print 在已测环境没有作答通道，问题自动取消且无业务答案。本机 TTY 与限定精确提交中断恢复已验；首次自动重放可能因可信会话校验失败而需要新一次调用，恢复后的回执不重复。跨设备身份与真人 U 未验证。详见[宿主支持说明](https://ww880412.github.io/matt-pocock-guide/guide.html#hosts)。
 
@@ -69,24 +69,24 @@ $matt-pocock 我想给项目增加一个导出功能，先帮我把需求和边�
 
 ## 本版使用改进
 
-grilling 按设计树与依赖安排分轮提问，一张原生卡只承载一个决定，收到实际回答后再推进；推荐、超时和空答不替用户作决定。diagnosing-bugs 可按需读取 HITL 模板。维护工具兼容上游新旧资源目录，并保留来源哈希、校验和回退。
+**三个选项同屏比较，确认后才提交。** Codex 同步问题卡新建三选项问题时，一张卡列出全部业务选项，选中只算暂选；第二张卡显示完整暂选，“确认并继续”才提交原答案，“重新选择”回到原三项。确认卡首项仍是默认保护：必需题“暂不确认”保持待答；可选题“不提交并结束本题”会结束本题且不能恢复，不记作用户回答。两选项保持一张卡，四项及以上沿用受保护分页；已保存的旧卡不迁移；异步卡片、Claude Code 与 Devin 的问答交互不变。
 
-本轮固定核对 Pi `5a5c3a3` 与 Matt `5beb35b`，只采纳适用变化；不加入超时代选、chief-of-staff 或 Software Factory。已有 wizard 修复、中英双语网站、完整能力咨询和领域文档兼容均保留。
+同时，入口说明与实际规则一致：选中插件描述任务时只推荐能力或路线并等待选择。提问保留完整父目标；部分操作细则改为随工具结果送达，关键前置规则仍每轮提供。更大范围的跨轮规则迁移未采纳，本版不宣称 token、速度或费用下降。
 
-804项组件回归、四包及回退通过。Codex真实宿主的合成设计树规划样本通过；该样本没有真人回答或原生卡片操作，其他宿主新增业务效果和真人U仍需分别验证。
+857/857 组件检查与四包校验通过。真实 Codex 模型在一个限定业务任务的两个合成分支中自主完成暂选与确认两步；回答来自合成客户端，真人 U 未验证。Claude 经 SSH 只读复核源码与证据为 PASS，不等于 Claude 宿主中的 Matt 业务验收。上一版固定核对 Pi `5a5c3a3` 与 Matt `5beb35b` 后采纳的 grilling 设计树、HITL 模板入口与上游目录兼容均保留。
 
 ## 当前交付范围
 
 | 项目 | 状态（2026-10-24） |
 | --- | --- |
-| 公开下载 | Codex `0.1.0-native.25+codex.20261024005806`，38项能力 |
-| 本版新增 | HITL模板入口、grilling设计树与分轮提问、上游新旧目录兼容；能力仍38项 |
-| Devin CLI | `0.1.4+devin.20261024` 独立分发，38项能力；本机 TTY 与限定恢复证据已验 |
-| Claude Code | `0.1.3` 更新分发；插件 0.1.0 在 2.1.284 的功能调用、资料加载和恢复验收为历史记录；本轮默认 profile 模型调用为 BLOCKED_AUTH，真人问答、热加载及新增能力业务效果保留 |
-| Codex 原生问答 | 同步已有有限真人观察；异步卡片在回合结束后的入口仍受宿主限制 |
+| 公开下载 | Codex `0.1.0-native.26+codex.20261024142455`，38项能力 |
+| 本版新增 | Codex 三选项同屏暂选与保护式确认、入口说明对齐、提问保留父目标；能力仍38项 |
+| Devin CLI | `0.1.5+devin.20261024` 独立分发，38项能力；本机 TTY 与限定恢复证据为历史记录，本版问答交互未改 |
+| Claude Code | `0.1.4` 更新分发；插件 0.1.0 在 2.1.284 的功能调用、资料加载和恢复验收为历史记录；默认 profile 模型业务调用仍未验证（既有记录为 BLOCKED_AUTH），真人问答、热加载及新增能力业务效果保留 |
+| Codex 原生问答 | 同步已有有限真人观察；新两步确认仅有合成客户端验证；异步卡片在回合结束后的入口仍受宿主限制 |
 | 通用 SDK | Task State SDK 0.5.1 已嵌入本版；RAC 仍使用已通过第二消费者组件验收的 0.4.1 固定快照 |
 
-native.25 在拆票后提供逐票 `implement` 与整规格 `implement-spec` 两条分支，统一 `code-review` 后可选 `retro`。整规格实施使用宿主已有 agent / worktree 工具，按依赖派发、串行整合；复盘只读会话并给建议，不自动改检查或配置。implement-spec / retro 固定采用 Matt `d81f3a1`，ask-matt 正文采用 `b0618bc`，两批语义更新参考 Pi `1b4d126`。旧36项全部保留，其他三项专用候选未纳入；详细边界见[新增能力说明](https://ww880412.github.io/matt-pocock-guide/guide.html#upstream-candidate)。
+native.26 在拆票后提供逐票 `implement` 与整规格 `implement-spec` 两条分支，统一 `code-review` 后可选 `retro`。整规格实施使用宿主已有 agent / worktree 工具，按依赖派发、串行整合；复盘只读会话并给建议，不自动改检查或配置。implement-spec / retro 固定采用 Matt `d81f3a1`，ask-matt 正文采用 `b0618bc`，两批语义更新参考 Pi `1b4d126`。旧36项全部保留，其他三项专用候选未纳入；详细边界见[新增能力说明](https://ww880412.github.io/matt-pocock-guide/guide.html#upstream-candidate)。
 
 Codex 本例已观察到任务失败后的 WIP 保留与恢复、真实 Git 冲突处理及按依赖顺序整合；11项测试、33项独立断言通过。证据来自限定真实宿主合成场景，不覆盖全部模型执行、Claude 宿主或新增真人交互。
 
