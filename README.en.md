@@ -45,9 +45,9 @@ The [architecture page](https://ww880412.github.io/matt-pocock-guide/architectur
 
 | Host | Current status | Availability and limits |
 | --- | --- | --- |
-| Codex | Released native.25 with 38 capabilities | Public ZIP below; includes implement-spec, retro, and full capability consultation |
-| Devin CLI | Released `0.1.4+devin.20261024` with 38 capabilities and full capability consultation | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip); interactive questions require TTY |
-| Claude Code | Released `0.1.3` with 38 capabilities | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip); historical package 0.1.0 passed 13 functional host cases on 2.1.284. This round’s default-profile model invocation is BLOCKED_AUTH; human use and business outcomes remain unverified |
+| Codex | Released native.26 with 38 capabilities | Public ZIP below; includes implement-spec, retro, and full capability consultation; three-option questions are selected on one card, then confirmed |
+| Devin CLI | Released `0.1.5+devin.20261024` with 38 capabilities and full capability consultation | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip); interactive questions require TTY; question interaction unchanged in this release |
+| Claude Code | Released `0.1.4` with 38 capabilities | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip); historical package 0.1.0 passed 13 functional host cases on 2.1.284. Default-profile model business calls remain unverified (the existing record is BLOCKED_AUTH); human use and business outcomes remain unverified |
 
 The tested Devin ACP/print modes have no answer channel: questions are automatically cancelled without a business answer. Local TTY flows and bounded recovery at precise commit boundaries have been verified. The first automatic replay can fail trusted-session validation; a new call recovers the result without duplicate receipts. Cross-device identity and human acceptance remain unverified. See [host support](https://ww880412.github.io/matt-pocock-guide/guide.en.html#hosts).
 
@@ -69,24 +69,24 @@ You do not need to memorize the commands. Routine progress follows the agreed go
 
 ## Improvements in this release
 
-Grilling organizes discussion as a design tree with prerequisite-aware rounds, one decision per native card, and progression only after an actual answer. Recommendations, timeouts and empty input never answer for the user. Diagnosing bugs can load the HITL template on demand. Maintenance supports both upstream resource layouts with source hashes, verification and rollback.
+**Compare three options on one card; submit only after confirming.** When Codex creates a new synchronous three-option question, one card lists every business option and a selection is only tentative. A second card shows the full tentative answer: “Confirm and continue” submits the original answer, and “Choose again” returns to the original three options. The first item on the confirmation card is still the default protection: for a required question, “Do not confirm yet” keeps it pending; for an optional question, “End this question without submitting” ends it permanently without recording an answer. Two-option questions still use one card, four or more options keep protected paging, saved older cards are not migrated, and asynchronous cards, Claude Code and Devin keep their existing question interaction.
 
-This release checks Pi `5a5c3a3` and Matt `5beb35b` and adopts only applicable changes. It excludes automatic timeout selection, chief-of-staff and Software Factory. Earlier wizard fixes, bilingual help, full capability consultation and domain-document compatibility remain.
+Entry guidance now matches the actual rules: selecting the plugin and describing a task produces a recommendation and waits for your choice. Questions retain the full parent goal. Some operating details now arrive with tool results, while key prerequisite rules are still provided every turn. The broader cross-turn rule migration was not adopted, and this release makes no claim of lower token use, faster responses or lower cost.
 
-804 component tests, four-package validation and rollback passed. A real Codex host/model passed a synthetic design-tree planning sample, without a native card or human reply. New business outcomes on other hosts and human acceptance remain separately unverified.
+857/857 component checks and four-package validation passed. In two synthetic branches of one bounded business task, a real Codex model completed both the tentative-choice and confirmation steps on its own; replies came from a synthetic client, and human acceptance remains unverified. A read-only SSH review by Claude of the source and evidence passed; it is not Matt business acceptance inside the Claude host. Design-tree grilling, the HITL template entry and upstream layout compatibility, adopted in the previous release after checking Pi `5a5c3a3` and Matt `5beb35b`, remain.
 
 ## Delivery status
 
 | Area | Status as of October 24, 2026 |
 | --- | --- |
-| Public download | Codex `0.1.0-native.25+codex.20261024005806`, with 38 capabilities |
-| Added in this release | HITL template entry, design-tree rounds and upstream layout compatibility; still 38 capabilities |
-| Devin CLI | `0.1.4+devin.20261024` published separately, with 38 capabilities; local TTY and bounded recovery verified |
-| Claude Code | `0.1.3` published separately; tool calls, resource delivery and recovery of package 0.1.0 on 2.1.284 are historical evidence. This round’s default-profile model invocation is BLOCKED_AUTH. Human questions, hot reload and new-capability business outcomes remain unverified |
-| Codex native questions | Limited human observation for synchronous input; asynchronous cards still have host limitations after a turn ends |
+| Public download | Codex `0.1.0-native.26+codex.20261024142455`, with 38 capabilities |
+| Added in this release | Codex one-card tentative choice with protected confirmation, aligned entry guidance, and parent-goal retention in questions; still 38 capabilities |
+| Devin CLI | `0.1.5+devin.20261024` published separately, with 38 capabilities; local TTY and bounded recovery evidence is historical, and question interaction is unchanged |
+| Claude Code | `0.1.4` published separately; tool calls, resource delivery and recovery of package 0.1.0 on 2.1.284 are historical evidence. Default-profile model business calls remain unverified (the existing record is BLOCKED_AUTH). Human questions, hot reload and new-capability business outcomes remain unverified |
+| Codex native questions | Limited human observation for synchronous input; the new two-step confirmation is validated only with a synthetic client; asynchronous cards still have host limitations after a turn ends |
 | General-purpose SDK | Task State SDK 0.5.1 embedded; RAC remains on its component-accepted 0.4.1 snapshot |
 
-After ticketing, native.25 offers per-ticket `implement` or whole-spec `implement-spec`, followed by `code-review` and optional `retro`. Whole-spec execution uses existing host agents and worktrees, dependency-aware dispatch, and serial integration. Retrospectives read session evidence and propose improvements without changing checks or configuration. The implement-spec and retro sources are pinned to Matt `d81f3a1`; the ask-matt body uses `b0618bc`; adapted method updates also draw on Pi `1b4d126`. All 36 existing capabilities remain; the other three specialized candidates are not included. See the [new capabilities and scope](https://ww880412.github.io/matt-pocock-guide/guide.en.html#upstream-candidate).
+After ticketing, native.26 offers per-ticket `implement` or whole-spec `implement-spec`, followed by `code-review` and optional `retro`. Whole-spec execution uses existing host agents and worktrees, dependency-aware dispatch, and serial integration. Retrospectives read session evidence and propose improvements without changing checks or configuration. The implement-spec and retro sources are pinned to Matt `d81f3a1`; the ask-matt body uses `b0618bc`; adapted method updates also draw on Pi `1b4d126`. All 36 existing capabilities remain; the other three specialized candidates are not included. See the [new capabilities and scope](https://ww880412.github.io/matt-pocock-guide/guide.en.html#upstream-candidate).
 
 A bounded synthetic scenario in the real Codex host observed preservation and recovery of work in progress after task failure, resolution of a real Git conflict, and integration in dependency order. Its 11 tests and 33 independent assertions passed. This evidence does not cover every model execution, Claude new-capability business acceptance, or new human interactions.
 
