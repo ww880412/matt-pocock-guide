@@ -33,21 +33,21 @@
       <h1>从一个想法开始</h1>
       <p class="intro">先完成安装，再用“给任务列表增加标签筛选”走一遍：你提出目标与边界，agent 按进展推进，需要你决定时回到对话。</p>
       <p class="guide-shortcuts">已经安装？<a href="#start">直接开始第一个任务</a> · <a href="#reference">查命令</a> · <a href="#updates">查看升级说明</a></p>
-      <div class="article-meta"><span>已发布：Codex Desktop · native.26</span><span>更新：2026-10-24</span></div>
+      <div class="article-meta"><span>已发布：Codex Desktop · native.27</span><span>更新：2026-10-30</span></div>
 
-      <p class="section-note">安装与日常操作适用于 Codex native.26 的38项能力；整规格实施与只读复盘的用法见<a href="#upstream-candidate">新增能力说明</a>。</p>
+      <p class="section-note">安装与日常操作适用于 Codex native.27 的38项能力；整规格实施与只读复盘的用法见<a href="#upstream-candidate">新增能力说明</a>。</p>
 
       <section id="hosts"><h2>先确认宿主与可获取的版本</h2>
-        <p>同一套任务核心已适配 Codex、Claude Code 和 Devin CLI。当前公开下载分别是 <strong>Codex native.26 · 38 项能力</strong>、<strong>Devin 0.1.5+devin.20261024 · 38 项能力</strong>和 <strong>Claude Code 0.1.4 · 38 项能力</strong>。以下 Codex 操作说明不自动适用于其他宿主。</p>
+        <p>同一套任务核心已适配 Codex、Claude Code 和 Devin CLI。当前公开下载分别是 <strong>Codex native.27 · 38 项能力</strong>、<strong>Devin 0.1.6+devin.20261030 · 38 项能力</strong>和 <strong>Claude Code 0.1.5 · 38 项能力</strong>。以下 Codex 操作说明不自动适用于其他宿主。</p>
         <h3 id="devin">Devin CLI：独立安装包，使用 TTY 交互</h3>
         <p>真实 Devin CLI 中已验证工作流、菜单、选项作答、自定义输入、Esc 后恢复、可选题、超时与会话恢复。随后对子目录启动和省略问答默认字段的两项修复完成定向复验。</p>
         <p><strong>交互问答使用 TTY 终端。</strong>已测 ACP/print 路径没有作答通道，原生问题会自动取消且没有业务答案，不能用于交互验收。限定真实宿主场景已覆盖压缩后正文重投、残留锁自动恢复，以及答案提交两个精确边界的中断恢复；首次自动重放可能被可信会话校验拒绝，新一次调用可以恢复结果，回执没有重复。跨设备身份与真人交互仍未验证，现有样本不代表所有恢复路径通过。</p>
-        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip" download="matt-pocock-devin.zip">下载 Devin 0.1.5+devin.20261024 · ZIP</a>，解压到稳定目录，按包内 README 核对校验值、MCP 和 hooks 后安装。新版包含38项能力、implement-spec / retro 与完整 ask-matt 能力咨询；从旧本地候选升级时，先保存原 source 路径和会话状态，不覆盖用户修改。</p>
+        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip" download="matt-pocock-devin.zip">下载 Devin 0.1.6+devin.20261030 · ZIP</a>，解压到稳定目录，按包内 README 核对校验值、MCP 和 hooks 后安装。新版包含38项能力、implement-spec / retro 与完整 ask-matt 能力咨询；从旧本地候选升级时，先保存原 source 路径和会话状态，不覆盖用户修改。</p>
         <pre><code>devin plugins info matt-pocock
 devin plugins install --local /absolute/path/matt-pocock-devin/plugins/matt-pocock</code></pre>
         <p>安装时按宿主提示完成信任确认，再在新的 Devin TTY 会话中使用 <code>/matt-pocock:matt-pocock</code>。已有任务不会自动切换到新包；随包指南保留构建时的快照，最新分发状态以本网站为准。</p>
         <h3 id="claude">Claude Code：0.1.4 独立安装包</h3>
-        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip" download="matt-pocock-claude.zip">下载 Claude Code 0.1.4 · ZIP</a>，解压到稳定目录，按包内 README 与 SHA256SUMS 核对文件。包内不含账号或用户配置，使用你已有的 Claude 登录。</p>
+        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip" download="matt-pocock-claude.zip">下载 Claude Code 0.1.5 · ZIP</a>，解压到稳定目录，按包内 README 与 SHA256SUMS 核对文件。包内不含账号或用户配置，使用你已有的 Claude 登录。</p>
         <pre><code>claude --plugin-dir /absolute/path/matt-pocock-claude/plugins/matt-pocock</code></pre>
         <p>按宿主提示确认信任，在新会话中使用 <code>/matt-pocock:matt-pocock</code>。从旧候选升级时保留旧包与会话状态，不覆盖用户修改；已有会话不会自动热更新。</p>
         <p>历史插件 0.1.0 已在 Claude Code 2.1.284 验证工具声明、路线与阶段、正文及参考资料加载、恢复和结束等13项功能；ask描述完整下发。既有默认 profile 模型调用记录为 BLOCKED_AUTH，未新增该层验收。真人问答体验、其他宿主版本、热加载，以及 implement-spec / retro 的实际业务效果仍未验证。</p>
@@ -202,7 +202,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
 
       <section id="routes"><h2>五条工程路线与可选写作路线</h2>
         <p>可以通过插件入口描述任务，也可以用 <code>$matt-pocock 路线名</code> 明确启动对应路线。</p>
-        <div class="route-detail" id="idea-to-ship"><div><h3>从想法到交付</h3><code>idea-to-ship</code></div><p>适合新功能和多步骤实现。从需求讨论开始，可根据任务进入研究、原型、规格、拆解、实现、评审和交接。native.26 提供整规格实施与可选复盘，见<a href="#upstream-candidate">新增分支</a>。</p></div>
+        <div class="route-detail" id="idea-to-ship"><div><h3>从想法到交付</h3><code>idea-to-ship</code></div><p>适合新功能和多步骤实现。从需求讨论开始，可根据任务进入研究、原型、规格、拆解、实现、评审和交接。native.27 提供整规格实施与可选复盘，见<a href="#upstream-candidate">新增分支</a>。</p></div>
         <div class="route-detail" id="hard-bug"><div><h3>疑难故障</h3><code>hard-bug</code></div><p>适合难复现、偶发或回归问题。先建立能检验修复效果的反馈，再定位原因，随后进入实现和评审。</p></div>
         <div class="route-detail" id="triage"><div><h3>需求整理</h3><code>triage</code></div><p>适合零散请求和待处理问题。先整理成清楚的任务说明，再按需要形成规格、拆解和实现。</p></div>
         <div class="route-detail" id="wayfinding"><div><h3>方向探索</h3><code>wayfinding</code></div><p>适合规模大、未知多的工程工作。先识别调查和决策事项，必要时研究或做原型，再制定可执行的方案。</p></div>
@@ -235,7 +235,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       </section>
 
       <section id="upstream-candidate"><h2>整规格实施与只读复盘</h2>
-        <p><strong>已纳入 Codex native.26。</strong>在既有36项能力上加入 <code>implement-spec</code> 与 <code>retro</code>，共38项；ask-matt 已补齐有效正文咨询。Devin 独立发布包也包含这两项；Claude 0.1.4 也包含这两项能力；其实际业务验收与真人体验独立保留。</p>
+        <p><strong>已纳入 Codex native.27。</strong>在既有36项能力上加入 <code>implement-spec</code> 与 <code>retro</code>，共38项；ask-matt 已补齐有效正文咨询。Devin 独立发布包也包含这两项；Claude 0.1.5 也包含这两项能力；其实际业务验收与真人体验独立保留。</p>
         <div class="table-scroll" role="region" tabindex="0" aria-label="整规格实施与复盘能力对比"><table><thead><tr><th>你要做什么</th><th>独立入口</th><th>得到什么</th></tr></thead><tbody>
           <tr><td>按整份规格实施多张票</td><td><code>$matt-pocock use implement-spec</code></td><td>整合分支、逐票证据、统一评审及剩余阻塞事项</td></tr>
           <tr><td>回看一次会话，改善后续工作</td><td><code>$matt-pocock use retro</code></td><td>有会话证据的改进建议，先核对项目已有检查</td></tr>
@@ -250,6 +250,25 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
 
       <section id="updates"><h2>本版变化与升级</h2>
         <div class="release-current">
+          <p class="release-meta"><span class="release-flag-tag">当前版本</span><span>2026-10-30 · Codex native.27 / Claude Code 0.1.5 / Devin 0.1.6+devin.20261030</span></p>
+          <h3>独立代理上下文、仓库设置与任务跟踪升级</h3>
+          <p>仍为38项能力，SDK 0.5.2。研究、设计、评审和整规格实施的相关步骤明确使用新代理上下文；逐票实施保留隔离工作区和串行整合。</p>
+          <p>setup 增加目标仓库与 remote 可达性核对；GitHub / GitLab 模板补齐目标检查、阻塞关系、PR 正文与评论、关闭前说明。设置、迁移及外部写入仍需相应授权。</p>
+          <p>包含 Codex 超长聊天的原生问题证明读取修复。保留原问题、来源核验和待答状态；更新不会自动回答问题。现有 idea-to-ship 保持，未引入独立 pi-sdlc。</p>
+          <p class="section-note">Matt 更新核对至 a496f55；受影响能力的独立评审与限定 Codex 模型规划样本通过。该样本没有执行真实 tracker 写入、迁移或 worker；真人体验与 Claude / Devin 新增业务效果仍需各自验证。</p>
+        </div>
+
+        <h3 id="upgrade">如何更新</h3>
+        <ol class="upgrade-steps">
+          <li>下载对应宿主的新版 ZIP。Codex 拖入对话后，让它先保存旧插件包与工作流状态，再更新并保留现有配置，见<a href="#before">安装与启用</a>；Claude Code 与 Devin 按<a href="#hosts">各自安装说明</a>更新。</li>
+          <li>开始新任务确认新版生效。已保存的待答卡保持原题面，用“继续回答问题”恢复，不会自动改成两步确认。</li>
+        </ol>
+        <p><strong>旧版升级：</strong>先备份已有状态，新版在新任务使用；继续旧 Matt 任务前保存进度，待其他任务结束后重启 Codex，避免新旧服务同时写同一任务。新版写入的 v2 日志不能由 native.17 读取；回退需隔离的旧状态快照。更新不会自动回答或取消原待答问题。</p>
+
+        <h3 id="history">版本历史</h3>
+        <p class="section-note">按发布时间倒序；展开查看各版变化与当时的验证边界。</p>
+        <div class="release-history">
+<details><summary>2026-10-24 · native.26：三选项同屏比较与确认</summary>
           <p class="release-meta"><span class="release-flag-tag">当前版本</span><span>2026-10-24 · Codex native.26 / Claude Code 0.1.4 / Devin 0.1.5+devin.20261024</span></p>
           <h3>三个选项同屏比较，确认后才提交</h3>
           <p>仍为38项能力，SDK 0.5.1。本版改进 Codex 同步问题卡：以前三个业务选项要分三页查看，现在新建的三选项问题在一张卡上列出全部选项。你的选择先作为暂选，第二张卡确认后才提交原答案。</p>
@@ -277,18 +296,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
             <p>857/857 项组件检查与四包校验通过。真实 Codex 模型在一个限定业务任务的两个合成分支中，自主建题并完成暂选与确认两步：确认分支精确提交一次，默认结束分支没有业务答案。回答来自合成客户端，真人使用体验尚未验证。</p>
             <p>Claude 经 SSH 只读复核本次源码与证据，修订落实与交互合理性均为 PASS。这是代码与证据审查，不是 Claude Code 宿主中的 Matt 业务验收；Claude 默认 profile 的模型业务调用仍未验证。已知限制保留：无效输入之后不保证每种输入都能恢复。</p>
           </details>
-        </div>
-
-        <h3 id="upgrade">如何更新</h3>
-        <ol class="upgrade-steps">
-          <li>下载对应宿主的新版 ZIP。Codex 拖入对话后，让它先保存旧插件包与工作流状态，再更新并保留现有配置，见<a href="#before">安装与启用</a>；Claude Code 与 Devin 按<a href="#hosts">各自安装说明</a>更新。</li>
-          <li>开始新任务确认新版生效。已保存的待答卡保持原题面，用“继续回答问题”恢复，不会自动改成两步确认。</li>
-        </ol>
-        <p><strong>旧版升级：</strong>先备份已有状态，新版在新任务使用；继续旧 Matt 任务前保存进度，待其他任务结束后重启 Codex，避免新旧服务同时写同一任务。新版写入的 v2 日志不能由 native.17 读取；回退需隔离的旧状态快照。更新不会自动回答或取消原待答问题。</p>
-
-        <h3 id="history">版本历史</h3>
-        <p class="section-note">按发布时间倒序；展开查看各版变化与当时的验证边界。</p>
-        <div class="release-history">
+        </details>
         <details><summary><strong>2026-10-24 · Codex native.25 / Claude Code 0.1.3 / Devin 0.1.4：设计讨论与上游维护升级。</strong></summary><p>仍为38项能力，SDK 0.5.1。grilling 按设计树和依赖组织问题，一张原生卡只承载一个决定，实际回答后才推进；推荐和超时不代替答案。diagnosing-bugs 可按需读取 HITL 模板。维护工具兼容 Pi 新旧资源目录，保留校验与回退。</p>
         <p class="section-note">固定核对 Pi <a href="https://github.com/FradSer/pi-packages/tree/5a5c3a3fd38c0760553070b09c94ef2c7b5ffa44">5a5c3a3</a> 和 Matt <a href="https://github.com/mattpocock/skills/tree/5beb35b040e3de97e54fa9e386d7e42d15c295c2">5beb35b</a>，仅采纳适用变化。804项组件回归、四包及回退通过；Codex真实宿主的合成设计树规划样本通过。该样本没有真人回答或原生卡片操作；Claude模型认证边界与完整业务/真人验收保留。</p></details>
         <details><summary><strong>2026-10-17 · Codex native.24 / Claude Code 0.1.2 / Devin 0.1.3：wizard 修复与完整双语网站。</strong></summary><p>公开能力仍为38项，内嵌 SDK 0.5.1。网站概览、指南、架构、交互图及其动态界面均提供中文与 English，语言选择跨页面保留。</p>
