@@ -45,7 +45,7 @@
 
 | 宿主 | 当前状态 | 获取方式与限制 |
 | --- | --- | --- |
-| Codex | 已发布 native.27，38 项能力 | 下方公开 ZIP；包含整规格实施、复盘与完整能力咨询；三选项问题同屏暂选后确认 |
+| Codex | 已发布 native.27.1，38 项能力 | 下方公开 ZIP；包含整规格实施、复盘与完整能力咨询；三选项问题同屏暂选后确认 |
 | Devin CLI | 已发布 `0.1.6+devin.20261030`，38 项能力及完整能力咨询 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip)；交互问答使用 TTY，本版问答交互未改 |
 | Claude Code | 已发布 `0.1.5`，38项能力 | [独立 ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip)；历史插件 0.1.0 在 2.1.284 的13项功能验收通过；默认 profile 的模型业务调用仍未验证（既有记录为 BLOCKED_AUTH），未外推真人体验与业务效果 |
 
@@ -81,14 +81,14 @@ $matt-pocock 我想给项目增加一个导出功能，先帮我把需求和边�
 
 | 项目 | 状态（2026-10-24） |
 | --- | --- |
-| 公开下载 | Codex `0.1.0-native.27+codex.20261030060000`，38项能力 |
+| 公开下载 | Codex `0.1.0-native.27.1+codex.20261030110000`，38项能力 |
 | 本版新增 | 全新代理上下文、仓库设置与 tracker 指引；超长聊天证明读取修复；能力仍38项 |
 | Devin CLI | `0.1.6+devin.20261030` 独立分发，38项能力；本机 TTY 与限定恢复证据为历史记录，本版问答交互未改 |
 | Claude Code | `0.1.5` 更新分发；插件 0.1.0 在 2.1.284 的功能调用、资料加载和恢复验收为历史记录；默认 profile 模型业务调用仍未验证（既有记录为 BLOCKED_AUTH），真人问答、热加载及新增能力业务效果保留 |
 | Codex 原生问答 | 同步已有有限真人观察；新两步确认仅有合成客户端验证；异步卡片在回合结束后的入口仍受宿主限制 |
 | 通用 SDK | Task State SDK 0.5.2 已嵌入本版；RAC 仍使用已通过第二消费者组件验收的 0.4.1 固定快照 |
 
-native.27 在拆票后提供逐票 `implement` 与整规格 `implement-spec` 两条分支，统一 `code-review` 后可选 `retro`。整规格实施使用宿主已有 agent / worktree 工具，按依赖派发、串行整合；复盘只读会话并给建议，不自动改检查或配置。implement-spec / retro 固定采用 Matt `d81f3a1`，ask-matt 正文采用 `b0618bc`，两批语义更新参考 Pi `1b4d126`。旧36项全部保留，其他三项专用候选未纳入；详细边界见[新增能力说明](https://ww880412.github.io/matt-pocock-guide/guide.html#upstream-candidate)。
+native.27.1 在拆票后提供逐票 `implement` 与整规格 `implement-spec` 两条分支，统一 `code-review` 后可选 `retro`。整规格实施使用宿主已有 agent / worktree 工具，按依赖派发、串行整合；复盘只读会话并给建议，不自动改检查或配置。implement-spec / retro 固定采用 Matt `d81f3a1`，ask-matt 正文采用 `b0618bc`，两批语义更新参考 Pi `1b4d126`。旧36项全部保留，其他三项专用候选未纳入；详细边界见[新增能力说明](https://ww880412.github.io/matt-pocock-guide/guide.html#upstream-candidate)。
 
 Codex 本例已观察到任务失败后的 WIP 保留与恢复、真实 Git 冲突处理及按依赖顺序整合；11项测试、33项独立断言通过。证据来自限定真实宿主合成场景，不覆盖全部模型执行、Claude 宿主或新增真人交互。
 
@@ -106,3 +106,5 @@ Codex 本例已观察到任务失败后的 WIP 保留与恢复、真实 Git 冲�
 ## 方法与来源
 
 工程方法来自 **Matt Pocock**，流程设计借鉴 **Pi Matt**；本项目实现共享任务核心与宿主适配。来源及采用范围见[三方对比](https://ww880412.github.io/matt-pocock-guide/#sources)，插件源码见 [matt-pocock-plugins](https://github.com/ww880412/matt-pocock-plugins)。下载包保留相应许可证与来源说明。
+
+native.27.1 修复安装助手对当前Codex复合哈希及其他插件已知超时提示的兼容；确认当前hooks定义后由助手完成信任设置与验证，已信任则直接完成。

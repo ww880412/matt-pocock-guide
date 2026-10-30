@@ -33,12 +33,12 @@
       <h1>从一个想法开始</h1>
       <p class="intro">先完成安装，再用“给任务列表增加标签筛选”走一遍：你提出目标与边界，agent 按进展推进，需要你决定时回到对话。</p>
       <p class="guide-shortcuts">已经安装？<a href="#start">直接开始第一个任务</a> · <a href="#reference">查命令</a> · <a href="#updates">查看升级说明</a></p>
-      <div class="article-meta"><span>已发布：Codex Desktop · native.27</span><span>更新：2026-10-30</span></div>
+      <div class="article-meta"><span>已发布：Codex Desktop · native.27.1</span><span>更新：2026-10-30</span></div>
 
-      <p class="section-note">安装与日常操作适用于 Codex native.27 的38项能力；整规格实施与只读复盘的用法见<a href="#upstream-candidate">新增能力说明</a>。</p>
+      <p class="section-note">安装与日常操作适用于 Codex native.27.1 的38项能力；整规格实施与只读复盘的用法见<a href="#upstream-candidate">新增能力说明</a>。</p>
 
       <section id="hosts"><h2>先确认宿主与可获取的版本</h2>
-        <p>同一套任务核心已适配 Codex、Claude Code 和 Devin CLI。当前公开下载分别是 <strong>Codex native.27 · 38 项能力</strong>、<strong>Devin 0.1.6+devin.20261030 · 38 项能力</strong>和 <strong>Claude Code 0.1.5 · 38 项能力</strong>。以下 Codex 操作说明不自动适用于其他宿主。</p>
+        <p>同一套任务核心已适配 Codex、Claude Code 和 Devin CLI。当前公开下载分别是 <strong>Codex native.27.1 · 38 项能力</strong>、<strong>Devin 0.1.6+devin.20261030 · 38 项能力</strong>和 <strong>Claude Code 0.1.5 · 38 项能力</strong>。以下 Codex 操作说明不自动适用于其他宿主。</p>
         <h3 id="devin">Devin CLI：独立安装包，使用 TTY 交互</h3>
         <p>真实 Devin CLI 中已验证工作流、菜单、选项作答、自定义输入、Esc 后恢复、可选题、超时与会话恢复。随后对子目录启动和省略问答默认字段的两项修复完成定向复验。</p>
         <p><strong>交互问答使用 TTY 终端。</strong>已测 ACP/print 路径没有作答通道，原生问题会自动取消且没有业务答案，不能用于交互验收。限定真实宿主场景已覆盖压缩后正文重投、残留锁自动恢复，以及答案提交两个精确边界的中断恢复；首次自动重放可能被可信会话校验拒绝，新一次调用可以恢复结果，回执没有重复。跨设备身份与真人交互仍未验证，现有样本不代表所有恢复路径通过。</p>
@@ -202,7 +202,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
 
       <section id="routes"><h2>五条工程路线与可选写作路线</h2>
         <p>可以通过插件入口描述任务，也可以用 <code>$matt-pocock 路线名</code> 明确启动对应路线。</p>
-        <div class="route-detail" id="idea-to-ship"><div><h3>从想法到交付</h3><code>idea-to-ship</code></div><p>适合新功能和多步骤实现。从需求讨论开始，可根据任务进入研究、原型、规格、拆解、实现、评审和交接。native.27 提供整规格实施与可选复盘，见<a href="#upstream-candidate">新增分支</a>。</p></div>
+        <div class="route-detail" id="idea-to-ship"><div><h3>从想法到交付</h3><code>idea-to-ship</code></div><p>适合新功能和多步骤实现。从需求讨论开始，可根据任务进入研究、原型、规格、拆解、实现、评审和交接。native.27.1 提供整规格实施与可选复盘，见<a href="#upstream-candidate">新增分支</a>。</p></div>
         <div class="route-detail" id="hard-bug"><div><h3>疑难故障</h3><code>hard-bug</code></div><p>适合难复现、偶发或回归问题。先建立能检验修复效果的反馈，再定位原因，随后进入实现和评审。</p></div>
         <div class="route-detail" id="triage"><div><h3>需求整理</h3><code>triage</code></div><p>适合零散请求和待处理问题。先整理成清楚的任务说明，再按需要形成规格、拆解和实现。</p></div>
         <div class="route-detail" id="wayfinding"><div><h3>方向探索</h3><code>wayfinding</code></div><p>适合规模大、未知多的工程工作。先识别调查和决策事项，必要时研究或做原型，再制定可执行的方案。</p></div>
@@ -235,7 +235,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       </section>
 
       <section id="upstream-candidate"><h2>整规格实施与只读复盘</h2>
-        <p><strong>已纳入 Codex native.27。</strong>在既有36项能力上加入 <code>implement-spec</code> 与 <code>retro</code>，共38项；ask-matt 已补齐有效正文咨询。Devin 独立发布包也包含这两项；Claude 0.1.5 也包含这两项能力；其实际业务验收与真人体验独立保留。</p>
+        <p><strong>已纳入 Codex native.27.1。</strong>在既有36项能力上加入 <code>implement-spec</code> 与 <code>retro</code>，共38项；ask-matt 已补齐有效正文咨询。Devin 独立发布包也包含这两项；Claude 0.1.5 也包含这两项能力；其实际业务验收与真人体验独立保留。</p>
         <div class="table-scroll" role="region" tabindex="0" aria-label="整规格实施与复盘能力对比"><table><thead><tr><th>你要做什么</th><th>独立入口</th><th>得到什么</th></tr></thead><tbody>
           <tr><td>按整份规格实施多张票</td><td><code>$matt-pocock use implement-spec</code></td><td>整合分支、逐票证据、统一评审及剩余阻塞事项</td></tr>
           <tr><td>回看一次会话，改善后续工作</td><td><code>$matt-pocock use retro</code></td><td>有会话证据的改进建议，先核对项目已有检查</td></tr>
@@ -250,8 +250,9 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
 
       <section id="updates"><h2>本版变化与升级</h2>
         <div class="release-current">
-          <p class="release-meta"><span class="release-flag-tag">当前版本</span><span>2026-10-30 · Codex native.27 / Claude Code 0.1.5 / Devin 0.1.6+devin.20261030</span></p>
-          <h3>独立代理上下文、仓库设置与任务跟踪升级</h3>
+          <p class="release-meta"><span class="release-flag-tag">当前版本</span><span>2026-10-30 · Codex native.27.1 / Claude Code 0.1.5 / Devin 0.1.6+devin.20261030</span></p>
+          <h3>安装助手兼容更新</h3>
+          <p>安装助手已兼容当前 Codex 的复合哈希，并识别其他插件的已知超时提示。需要新的 hooks 信任时，你确认当前定义后，由助手完成设置和验证；已信任时直接完成。</p>
           <p>仍为38项能力，SDK 0.5.2。研究、设计、评审和整规格实施的相关步骤明确使用新代理上下文；逐票实施保留隔离工作区和串行整合。</p>
           <p>setup 增加目标仓库与 remote 可达性核对；GitHub / GitLab 模板补齐目标检查、阻塞关系、PR 正文与评论、关闭前说明。设置、迁移及外部写入仍需相应授权。</p>
           <p>包含 Codex 超长聊天的原生问题证明读取修复。保留原问题、来源核验和待答状态；更新不会自动回答问题。现有 idea-to-ship 保持，未引入独立 pi-sdlc。</p>
