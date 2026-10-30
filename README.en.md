@@ -45,9 +45,9 @@ The [architecture page](https://ww880412.github.io/matt-pocock-guide/architectur
 
 | Host | Current status | Availability and limits |
 | --- | --- | --- |
-| Codex | Released native.26 with 38 capabilities | Public ZIP below; includes implement-spec, retro, and full capability consultation; three-option questions are selected on one card, then confirmed |
-| Devin CLI | Released `0.1.5+devin.20261024` with 38 capabilities and full capability consultation | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip); interactive questions require TTY; question interaction unchanged in this release |
-| Claude Code | Released `0.1.4` with 38 capabilities | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip); historical package 0.1.0 passed 13 functional host cases on 2.1.284. Default-profile model business calls remain unverified (the existing record is BLOCKED_AUTH); human use and business outcomes remain unverified |
+| Codex | Released native.27 with 38 capabilities | Public ZIP below; includes implement-spec, retro, and full capability consultation; three-option questions are selected on one card, then confirmed |
+| Devin CLI | Released `0.1.6+devin.20261030` with 38 capabilities and full capability consultation | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip); interactive questions require TTY; question interaction unchanged in this release |
+| Claude Code | Released `0.1.5` with 38 capabilities | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip); historical package 0.1.0 passed 13 functional host cases on 2.1.284. Default-profile model business calls remain unverified (the existing record is BLOCKED_AUTH); human use and business outcomes remain unverified |
 
 The tested Devin ACP/print modes have no answer channel: questions are automatically cancelled without a business answer. Local TTY flows and bounded recovery at precise commit boundaries have been verified. The first automatic replay can fail trusted-session validation; a new call recovers the result without duplicate receipts. Cross-device identity and human acceptance remain unverified. See [host support](https://ww880412.github.io/matt-pocock-guide/guide.en.html#hosts).
 
@@ -79,14 +79,14 @@ Entry guidance now matches the actual rules: selecting the plugin and describing
 
 | Area | Status as of October 24, 2026 |
 | --- | --- |
-| Public download | Codex `0.1.0-native.26+codex.20261024142455`, with 38 capabilities |
+| Public download | Codex `0.1.0-native.27+codex.20261030060000`, with 38 capabilities |
 | Added in this release | Codex one-card tentative choice with protected confirmation, aligned entry guidance, and parent-goal retention in questions; still 38 capabilities |
-| Devin CLI | `0.1.5+devin.20261024` published separately, with 38 capabilities; local TTY and bounded recovery evidence is historical, and question interaction is unchanged |
-| Claude Code | `0.1.4` published separately; tool calls, resource delivery and recovery of package 0.1.0 on 2.1.284 are historical evidence. Default-profile model business calls remain unverified (the existing record is BLOCKED_AUTH). Human questions, hot reload and new-capability business outcomes remain unverified |
+| Devin CLI | `0.1.6+devin.20261030` published separately, with 38 capabilities; local TTY and bounded recovery evidence is historical, and question interaction is unchanged |
+| Claude Code | `0.1.5` published separately; tool calls, resource delivery and recovery of package 0.1.0 on 2.1.284 are historical evidence. Default-profile model business calls remain unverified (the existing record is BLOCKED_AUTH). Human questions, hot reload and new-capability business outcomes remain unverified |
 | Codex native questions | Limited human observation for synchronous input; the new two-step confirmation is validated only with a synthetic client; asynchronous cards still have host limitations after a turn ends |
-| General-purpose SDK | Task State SDK 0.5.1 embedded; RAC remains on its component-accepted 0.4.1 snapshot |
+| General-purpose SDK | Task State SDK 0.5.2 embedded; RAC remains on its component-accepted 0.4.1 snapshot |
 
-After ticketing, native.26 offers per-ticket `implement` or whole-spec `implement-spec`, followed by `code-review` and optional `retro`. Whole-spec execution uses existing host agents and worktrees, dependency-aware dispatch, and serial integration. Retrospectives read session evidence and propose improvements without changing checks or configuration. The implement-spec and retro sources are pinned to Matt `d81f3a1`; the ask-matt body uses `b0618bc`; adapted method updates also draw on Pi `1b4d126`. All 36 existing capabilities remain; the other three specialized candidates are not included. See the [new capabilities and scope](https://ww880412.github.io/matt-pocock-guide/guide.en.html#upstream-candidate).
+After ticketing, native.27 offers per-ticket `implement` or whole-spec `implement-spec`, followed by `code-review` and optional `retro`. Whole-spec execution uses existing host agents and worktrees, dependency-aware dispatch, and serial integration. Retrospectives read session evidence and propose improvements without changing checks or configuration. The implement-spec and retro sources are pinned to Matt `d81f3a1`; the ask-matt body uses `b0618bc`; adapted method updates also draw on Pi `1b4d126`. All 36 existing capabilities remain; the other three specialized candidates are not included. See the [new capabilities and scope](https://ww880412.github.io/matt-pocock-guide/guide.en.html#upstream-candidate).
 
 A bounded synthetic scenario in the real Codex host observed preservation and recovery of work in progress after task failure, resolution of a real Git conflict, and integration in dependency order. Its 11 tests and 33 independent assertions passed. This evidence does not cover every model execution, Claude new-capability business acceptance, or new human interactions.
 
@@ -104,3 +104,5 @@ This repository hosts the documentation and download website. Sources are mainta
 ## Methods and attribution
 
 Engineering methods come from **Matt Pocock**, and workflow design draws on **Pi Matt**. This project implements the shared task core and host adapters. See the [comparison and adoption scope](https://ww880412.github.io/matt-pocock-guide/#sources) and the [plugin source repository](https://github.com/ww880412/matt-pocock-plugins). The download bundle retains the relevant licenses and attribution.
+
+Native.27 adds fresh-agent context guidance, repository and remote checks, tracker updates, and the long Codex transcript proof-reader fix. Existing idea-to-ship remains; standalone pi-sdlc is not included.

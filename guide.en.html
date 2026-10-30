@@ -33,21 +33,21 @@
       <h1>Start with an idea</h1>
       <p class="intro">Install first, then try “Add tag filtering to the task list”: you describe the goal and boundaries, the agent proceeds with the work, and returns to the conversation when you need to decide.</p>
       <p class="guide-shortcuts">Already installed? <a href="#start">Start your first task</a> · <a href="#reference">Find a command</a> · <a href="#updates">Read upgrade notes</a></p>
-      <div class="article-meta"><span>Released: Codex Desktop · native.26</span> <span>Updated: 2026-10-24</span></div>
+      <div class="article-meta"><span>Released: Codex Desktop · native.27</span> <span>Updated: 2026-10-30</span></div>
 
-      <p class="section-note">Installation and daily operations cover the 38 capabilities in Codex native.26. For whole-spec implementation and read-only retrospectives, see <a href="#upstream-candidate">New capabilities</a>. </p>
+      <p class="section-note">Installation and daily operations cover the 38 capabilities in Codex native.27. For whole-spec implementation and read-only retrospectives, see <a href="#upstream-candidate">New capabilities</a>. </p>
 
       <section id="hosts"><h2>Check your host and available version first</h2>
-        <p>The same task core supports Codex, Claude Code, and Devin CLI. Current public downloads are <strong>Codex native.26 · 38 capabilities</strong>, <strong>Devin 0.1.5+devin.20261024 · 38 capabilities</strong> and <strong>Claude Code 0.1.4 · 38 capabilities</strong>. The Codex instructions below do not automatically apply to other hosts.</p>
+        <p>The same task core supports Codex, Claude Code, and Devin CLI. Current public downloads are <strong>Codex native.27 · 38 capabilities</strong>, <strong>Devin 0.1.6+devin.20261030 · 38 capabilities</strong> and <strong>Claude Code 0.1.5 · 38 capabilities</strong>. The Codex instructions below do not automatically apply to other hosts.</p>
         <h3 id="devin">Devin CLI: separate package with TTY interaction</h3>
         <p>Real Devin CLI tests covered workflows, menus, choice answers, custom input, recovery after Esc, optional questions, timeouts, and session recovery. Two later fixes for subdirectory startup and omitted question defaults received targeted rechecks.</p>
         <p><strong>Interactive questions use a TTY terminal.</strong> The tested ACP/print path has no answer channel: native questions cancel automatically without a business answer, so it cannot validate interaction. Bounded real-host scenarios covered content redelivery after compaction, stale-lock recovery, and interruption recovery at two exact answer-submission boundaries. Trusted-session validation may reject the first automatic replay; a new invocation can recover the result without duplicate receipts. Cross-device identity and human interaction remain unverified; these samples do not cover every recovery path.</p>
-        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip" download="matt-pocock-devin.zip">Download Devin 0.1.5+devin.20261024 · ZIP</a>, extract to a stable directory, then follow the bundled README to verify checksums, MCP, and hooks before installing. This version includes 38 capabilities, implement-spec / retro, and full ask-matt capability consultation. When upgrading an older local candidate, save its source path and session state first; preserve user changes.</p>
+        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip" download="matt-pocock-devin.zip">Download Devin 0.1.6+devin.20261030 · ZIP</a>, extract to a stable directory, then follow the bundled README to verify checksums, MCP, and hooks before installing. This version includes 38 capabilities, implement-spec / retro, and full ask-matt capability consultation. When upgrading an older local candidate, save its source path and session state first; preserve user changes.</p>
         <pre><code>devin plugins info matt-pocock
 devin plugins install --local /absolute/path/matt-pocock-devin/plugins/matt-pocock</code></pre>
         <p>Complete the host trust confirmation during installation, then use a new Devin TTY session to run <code>/matt-pocock:matt-pocock</code>. Existing tasks do not switch packages automatically. The bundled guide is a build-time snapshot; this website carries the latest distribution status.</p>
         <h3 id="claude">Claude Code: separate 0.1.4 package</h3>
-        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip" download="matt-pocock-claude.zip">Download Claude Code 0.1.4 · ZIP</a>, extract to a stable directory, and verify files against the bundled README and SHA256SUMS. The package contains no account or user configuration; use your existing Claude login.</p>
+        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip" download="matt-pocock-claude.zip">Download Claude Code 0.1.5 · ZIP</a>, extract to a stable directory, and verify files against the bundled README and SHA256SUMS. The package contains no account or user configuration; use your existing Claude login.</p>
         <pre><code>claude --plugin-dir /absolute/path/matt-pocock-claude/plugins/matt-pocock</code></pre>
         <p>Confirm trust when the host prompts you, then use a new session to run <code>/matt-pocock:matt-pocock</code>. Keep the old package and session state when upgrading a candidate, and preserve user changes. Existing sessions do not hot-update automatically.</p>
         <p>Historical package 0.1.0 passed 13 functional checks on Claude Code 2.1.284, including tool declarations, routes and phases, main content and reference loading, recovery, and ending workflows; the full ask description was delivered. The existing default-profile model invocation record is BLOCKED_AUTH, adding no acceptance evidence at that layer. Human question-answering experience, other host versions, hot loading, and business outcomes of implement-spec / retro remain unverified.</p>
@@ -202,7 +202,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
 
       <section id="routes"><h2>Five engineering routes and an optional writing route</h2>
         <p>Describe a task through the plugin entry point, or use <code>$matt-pocock ROUTE_NAME</code> to start a specific route explicitly.</p>
-        <div class="route-detail" id="idea-to-ship"><div><h3>Idea to ship</h3><code>idea-to-ship</code></div><p>For new features and multi-step implementation. Start with requirements discussion, then move into research, prototypes, specifications, task breakdown, implementation, review, and handoff as needed. native.26 offers whole-spec implementation and optional retrospectives. See <a href="#upstream-candidate">New branches</a>. </p></div>
+        <div class="route-detail" id="idea-to-ship"><div><h3>Idea to ship</h3><code>idea-to-ship</code></div><p>For new features and multi-step implementation. Start with requirements discussion, then move into research, prototypes, specifications, task breakdown, implementation, review, and handoff as needed. native.27 offers whole-spec implementation and optional retrospectives. See <a href="#upstream-candidate">New branches</a>. </p></div>
         <div class="route-detail" id="hard-bug"><div><h3>Difficult bugs</h3><code>hard-bug</code></div><p>For hard-to-reproduce, intermittent, or regression issues. Establish feedback that can verify a fix, identify the cause, then implement and review.</p></div>
         <div class="route-detail" id="triage"><div><h3>Organize requirements</h3><code>triage</code></div><p>For scattered requests and open issues. Turn them into clear task descriptions, then specify, break down, and implement as needed.</p></div>
         <div class="route-detail" id="wayfinding"><div><h3>Explore a direction</h3><code>wayfinding</code></div><p>For large engineering efforts with many unknowns. Identify investigation and decision needs, research or prototype where useful, then create an actionable plan.</p></div>
@@ -235,7 +235,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       </section>
 
       <section id="upstream-candidate"><h2>Whole-spec implementation and read-only retrospectives</h2>
-        <p><strong>Included in Codex native.26.</strong> Adds <code>implement-spec</code> and <code>retro</code> to the existing 36 capabilities for a total of 38, with effective-content consultation completed in ask-matt. Both are also included in the separate Devin release and Claude 0.1.4. Their business validation and human experience remain independently tracked.</p>
+        <p><strong>Included in Codex native.27.</strong> Adds <code>implement-spec</code> and <code>retro</code> to the existing 36 capabilities for a total of 38, with effective-content consultation completed in ask-matt. Both are also included in the separate Devin release and Claude 0.1.5. Their business validation and human experience remain independently tracked.</p>
         <div class="table-scroll" role="region" tabindex="0" aria-label="Whole-spec implementation and retrospective comparison"><table><thead><tr><th>What you want to do</th><th>Standalone entry</th><th>What you get</th></tr></thead><tbody>
           <tr><td>Implement multiple tickets from a whole specification</td><td><code>$matt-pocock use implement-spec</code></td><td>An integration branch, per-ticket evidence, a unified review, and remaining blockers</td></tr>
           <tr><td>Review a session to improve future work</td><td><code>$matt-pocock use retro</code></td><td>Evidence-backed improvement proposals that check existing project controls first</td></tr>
@@ -250,6 +250,25 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
 
       <section id="updates"><h2>Release changes and upgrades</h2>
         <div class="release-current">
+          <p class="release-meta"><span class="release-flag-tag">Current release</span> <span>2026-10-30 · Codex native.27 / Claude Code 0.1.5 / Devin 0.1.6+devin.20261030</span></p>
+          <h3>Fresh agent contexts, repository setup and tracker updates</h3>
+          <p>Still 38 capabilities, with SDK 0.5.2. Relevant research, design, review and full-spec implementation steps explicitly use fresh agent contexts; per-ticket implementation retains isolated workspaces and serial integration.</p>
+          <p>Setup checks the target repository and remote reachability. GitHub / GitLab templates add target checks, blocking relationships, PR bodies and comments, and explanations before closing. Setup, migration and external writes still require the applicable authorization.</p>
+          <p>Includes the Codex native-question proof reader fix for long chats. Existing questions, source verification and pending state are preserved; updating never answers a question. Existing idea-to-ship remains; standalone pi-sdlc is not included.</p>
+          <p class="section-note">Matt changes were checked through a496f55. Independent review and a bounded Codex model planning sample passed. The sample did not execute real tracker writes, migrations or workers; human experience and new Claude / Devin business behavior require their own validation.</p>
+        </div>
+
+        <h3 id="upgrade">How to update</h3>
+        <ol class="upgrade-steps">
+          <li>Download the new ZIP for your host. In Codex, drag it into the conversation and have Codex save the old plugin package and workflow state first, then update while keeping existing configuration; see <a href="#before">Install and enable</a>. For Claude Code and Devin, follow <a href="#hosts">their own installation notes</a> to update.</li>
+          <li>Start a new task to confirm the new version is active. Saved pending cards keep their original form; recover them with “continue answering questions”. They are not converted to two-step confirmation.</li>
+        </ol>
+        <p><strong>Upgrading older versions:</strong> Back up existing state and use the new version in a new task. Save progress before continuing an old Matt task, then restart Codex after other tasks finish to prevent old and new servers writing the same task. native.17 cannot read v2 logs written by the new version; rollback requires an isolated old-state snapshot. Updating does not automatically answer or cancel pending questions.</p>
+
+        <h3 id="history">Release history</h3>
+        <p class="section-note">Newest first. Expand an entry to see its changes and the validation limits at that time.</p>
+        <div class="release-history">
+<details><summary>2026-10-24 · native.26: Compare three options together, then confirm</summary>
           <p class="release-meta"><span class="release-flag-tag">Current release</span> <span>2026-10-24 · Codex native.26 / Claude Code 0.1.4 / Devin 0.1.5+devin.20261024</span></p>
           <h3>Compare three options on one card; submit only after confirming</h3>
           <p>Still 38 capabilities with SDK 0.5.1. This release improves Codex synchronous question cards. Three business options used to span three pages; a new three-option question now lists every option on one card. Your selection is saved as tentative, and the original answer is submitted only after you confirm it on a second card.</p>
@@ -277,18 +296,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
             <p>857/857 component checks and four-package validation passed. In two synthetic branches of one bounded business task, a real Codex model created the question itself and completed both the tentative-choice and confirmation steps: the confirm branch submitted the exact answer once, and the default-ending branch produced no business answer. Replies came from a synthetic client; human use remains unverified.</p>
             <p>Claude reviewed this release’s source and evidence read-only over SSH; both the fix implementation and interaction reasonableness were PASS. This is a code and evidence review, not Matt business acceptance inside the Claude Code host; default-profile Claude model business calls remain unverified. A known limitation remains: after an invalid input, recovery is not guaranteed for every kind of input.</p>
           </details>
-        </div>
-
-        <h3 id="upgrade">How to update</h3>
-        <ol class="upgrade-steps">
-          <li>Download the new ZIP for your host. In Codex, drag it into the conversation and have Codex save the old plugin package and workflow state first, then update while keeping existing configuration; see <a href="#before">Install and enable</a>. For Claude Code and Devin, follow <a href="#hosts">their own installation notes</a> to update.</li>
-          <li>Start a new task to confirm the new version is active. Saved pending cards keep their original form; recover them with “continue answering questions”. They are not converted to two-step confirmation.</li>
-        </ol>
-        <p><strong>Upgrading older versions:</strong> Back up existing state and use the new version in a new task. Save progress before continuing an old Matt task, then restart Codex after other tasks finish to prevent old and new servers writing the same task. native.17 cannot read v2 logs written by the new version; rollback requires an isolated old-state snapshot. Updating does not automatically answer or cancel pending questions.</p>
-
-        <h3 id="history">Release history</h3>
-        <p class="section-note">Newest first. Expand an entry to see its changes and the validation limits at that time.</p>
-        <div class="release-history">
+        </details>
         <details><summary><strong>2026-10-24 · Codex native.25 / Claude Code 0.1.3 / Devin 0.1.4: design discussions and upstream maintenance.</strong></summary><p>Still 38 capabilities with SDK 0.5.1. Grilling organizes questions as a design tree, respects prerequisites, and presents one decision per native card. Only an actual answer resolves a decision; recommendations and timeouts do not. Diagnosing bugs can load the HITL template on demand. Maintenance supports both upstream resource layouts with verification and rollback.</p>
         <p class="section-note">Pinned comparison: Pi <a href="https://github.com/FradSer/pi-packages/tree/5a5c3a3fd38c0760553070b09c94ef2c7b5ffa44">5a5c3a3</a> and Matt <a href="https://github.com/mattpocock/skills/tree/5beb35b040e3de97e54fa9e386d7e42d15c295c2">5beb35b</a>; only applicable changes are adopted. 804 component tests, four-package validation and rollback passed. A real Codex host/model passed a synthetic design-tree planning sample, with no native-card interaction or human reply. Claude authentication and broader business/human acceptance remain separate.</p></details>
         <details><summary><strong>2026-10-17 · Codex native.24 / Claude Code 0.1.2 / Devin 0.1.3: wizard fixes and a fully bilingual website.</strong></summary><p>The public catalog remains at 38 capabilities, with SDK 0.5.1 embedded. The overview, guide, architecture, interactive map, and their dynamic interfaces support Chinese and English, with language choice preserved across pages.</p>
