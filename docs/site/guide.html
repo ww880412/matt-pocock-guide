@@ -46,7 +46,7 @@
         <pre><code>devin plugins info matt-pocock
 devin plugins install --local /absolute/path/matt-pocock-devin/plugins/matt-pocock</code></pre>
         <p>安装时按宿主提示完成信任确认，再在新的 Devin TTY 会话中使用 <code>/matt-pocock:matt-pocock</code>。已有任务不会自动切换到新包；随包指南保留构建时的快照，最新分发状态以本网站为准。</p>
-        <h3 id="claude">Claude Code：0.1.4 独立安装包</h3>
+        <h3 id="claude">Claude Code：0.1.5 独立安装包</h3>
         <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip" download="matt-pocock-claude.zip">下载 Claude Code 0.1.5 · ZIP</a>，解压到稳定目录，按包内 README 与 SHA256SUMS 核对文件。包内不含账号或用户配置，使用你已有的 Claude 登录。</p>
         <pre><code>claude --plugin-dir /absolute/path/matt-pocock-claude/plugins/matt-pocock</code></pre>
         <p>按宿主提示确认信任，在新会话中使用 <code>/matt-pocock:matt-pocock</code>。从旧候选升级时保留旧包与会话状态，不覆盖用户修改；已有会话不会自动热更新。</p>
@@ -269,7 +269,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
         <p class="section-note">按发布时间倒序；展开查看各版变化与当时的验证边界。</p>
         <div class="release-history">
 <details><summary>2026-10-24 · native.26：三选项同屏比较与确认</summary>
-          <p class="release-meta"><span class="release-flag-tag">当前版本</span><span>2026-10-24 · Codex native.26 / Claude Code 0.1.4 / Devin 0.1.5+devin.20261024</span></p>
+          <p class="release-meta"><span class="release-flag-tag">历史版本</span><span>2026-10-24 · Codex native.26 / Claude Code 0.1.4 / Devin 0.1.5+devin.20261024</span></p>
           <h3>三个选项同屏比较，确认后才提交</h3>
           <p>仍为38项能力，SDK 0.5.1。本版改进 Codex 同步问题卡：以前三个业务选项要分三页查看，现在新建的三选项问题在一张卡上列出全部选项。你的选择先作为暂选，第二张卡确认后才提交原答案。</p>
           <ol class="answer-flow" aria-label="三选项问答步骤示意">

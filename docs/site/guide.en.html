@@ -46,7 +46,7 @@
         <pre><code>devin plugins info matt-pocock
 devin plugins install --local /absolute/path/matt-pocock-devin/plugins/matt-pocock</code></pre>
         <p>Complete the host trust confirmation during installation, then use a new Devin TTY session to run <code>/matt-pocock:matt-pocock</code>. Existing tasks do not switch packages automatically. The bundled guide is a build-time snapshot; this website carries the latest distribution status.</p>
-        <h3 id="claude">Claude Code: separate 0.1.4 package</h3>
+        <h3 id="claude">Claude Code: standalone 0.1.5 package</h3>
         <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip" download="matt-pocock-claude.zip">Download Claude Code 0.1.5 · ZIP</a>, extract to a stable directory, and verify files against the bundled README and SHA256SUMS. The package contains no account or user configuration; use your existing Claude login.</p>
         <pre><code>claude --plugin-dir /absolute/path/matt-pocock-claude/plugins/matt-pocock</code></pre>
         <p>Confirm trust when the host prompts you, then use a new session to run <code>/matt-pocock:matt-pocock</code>. Keep the old package and session state when upgrading a candidate, and preserve user changes. Existing sessions do not hot-update automatically.</p>
@@ -269,7 +269,7 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
         <p class="section-note">Newest first. Expand an entry to see its changes and the validation limits at that time.</p>
         <div class="release-history">
 <details><summary>2026-10-24 · native.26: Compare three options together, then confirm</summary>
-          <p class="release-meta"><span class="release-flag-tag">Current release</span> <span>2026-10-24 · Codex native.26 / Claude Code 0.1.4 / Devin 0.1.5+devin.20261024</span></p>
+          <p class="release-meta"><span class="release-flag-tag">Previous release</span> <span>2026-10-24 · Codex native.26 / Claude Code 0.1.4 / Devin 0.1.5+devin.20261024</span></p>
           <h3>Compare three options on one card; submit only after confirming</h3>
           <p>Still 38 capabilities with SDK 0.5.1. This release improves Codex synchronous question cards. Three business options used to span three pages; a new three-option question now lists every option on one card. Your selection is saved as tentative, and the original answer is submitted only after you confirm it on a second card.</p>
           <ol class="answer-flow" aria-label="Illustration of the three-option question steps">
