@@ -1,6 +1,6 @@
 {
-  "version": "0.1.0-native.27+codex.20261030060000",
-  "sha256": "46ae4ff974bd55e397a81cbcde1663926b5c701d5a74db3068391b393a50e2c6",
+  "version": "0.1.0-native.27.1+codex.20261030110000",
+  "sha256": "f9d1870e1237e4cd8f932d20e00d65a96b937de5ca6a594efbaa9fac09cbd24b",
   "artifacts": {
     "devin": {
       "version": "0.1.6+devin.20261030",
