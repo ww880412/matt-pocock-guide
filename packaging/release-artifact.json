@@ -1,14 +1,14 @@
 {
-  "version": "0.1.0-native.27.1+codex.20261030110000",
-  "sha256": "f9d1870e1237e4cd8f932d20e00d65a96b937de5ca6a594efbaa9fac09cbd24b",
+  "version": "0.1.0-native.28+codex.20261106060000",
+  "sha256": "f73da7aea4ac454c0dc4b063368af43878266c6c22083e6584c572eae43b2f8d",
   "artifacts": {
-    "devin": {
-      "version": "0.1.6+devin.20261030",
-      "sha256": "7a124aa95de087ac2cd915dbf7e4f3274cf17283b3eda12be1e62221f0d3bb2d"
-    },
     "claude": {
-      "version": "0.1.5",
-      "sha256": "0e00d90b2311b3b714ac22fd30da97efa87ba41b513a6d339a2f1c903859cd9b"
+      "version": "0.1.6",
+      "sha256": "ba17cfaa2af1813072552d36ab186645cda2d89aeec84e67b81a89a82e00296f"
+    },
+    "devin": {
+      "version": "0.1.7+devin.20261106",
+      "sha256": "05cbf5a75e09637835defef6ec07c4d179ab49828c2da8b639c6a8459ec665ec"
     }
   }
 }
