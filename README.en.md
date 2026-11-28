@@ -26,7 +26,7 @@ Discuss → Specify → Break down tasks → Implement & verify → Review
 | What you need | What Matt provides |
 | --- | --- |
 | Take an idea through implementation | Five engineering routes connecting discussion, specifications, tasks, implementation, and review |
-| Perform one focused action | 38 released Codex capabilities, with direct invocation and task-based recommendations |
+| Perform one focused action | 40 released Codex capabilities, with direct invocation and task-based recommendations |
 | Resume a long task | Session events, source verification, and recovery rules that distinguish active and terminal states |
 | Get a human decision when needed | Native question association and answer provenance checks; no model-supplied answers |
 | Preserve the method's context | Declared procedures and supporting resources, loaded and checked against fixed versions |
@@ -45,9 +45,9 @@ The [architecture page](https://ww880412.github.io/matt-pocock-guide/architectur
 
 | Host | Current status | Availability and limits |
 | --- | --- | --- |
-| Codex | Released native.29 with 38 capabilities | Public ZIP below; includes implement-spec, retro, and full capability consultation; three-option questions are selected on one card, then confirmed |
-| Devin CLI | Released `0.1.8+devin.20261123` with 38 capabilities and full capability consultation | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip); interactive questions require TTY; question interaction unchanged in this release |
-| Claude Code | Released `0.1.7` with 38 capabilities | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip); historical package 0.1.0 passed 13 functional host cases on 2.1.284. Default-profile model business calls remain unverified (the existing record is BLOCKED_AUTH); human use and business outcomes remain unverified |
+| Codex | Released native.30 with 40 capabilities | Public ZIP below; includes implement-spec, retro, and full capability consultation; three-option questions are selected on one card, then confirmed |
+| Devin CLI | Released `0.1.9+devin.20261128` with 40 capabilities and full capability consultation | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip); interactive questions require TTY; question interaction unchanged in this release |
+| Claude Code | Released `0.1.8` with 40 capabilities | [Separate ZIP](https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip); historical package 0.1.0 passed 13 functional host cases on 2.1.284. Default-profile model business calls remain unverified (the existing record is BLOCKED_AUTH); human use and business outcomes remain unverified |
 
 The tested Devin ACP/print modes have no answer channel: questions are automatically cancelled without a business answer. Local TTY flows and bounded recovery at precise commit boundaries have been verified. The first automatic replay can fail trusted-session validation; a new call recovers the result without duplicate receipts. Cross-device identity and human acceptance remain unverified. See [host support](https://ww880412.github.io/matt-pocock-guide/guide.en.html#hosts).
 
@@ -79,10 +79,10 @@ Entry guidance now matches the actual rules: selecting the plugin and describing
 
 | Area | Status as of October 24, 2026 |
 | --- | --- |
-| Public download | Codex `0.1.0-native.29+codex.20261123010000`, with 38 capabilities |
-| Added in this release | Codex one-card tentative choice with protected confirmation, aligned entry guidance, and parent-goal retention in questions; still 38 capabilities |
-| Devin CLI | `0.1.8+devin.20261123` published separately, with 38 capabilities; local TTY and bounded recovery evidence is historical, and question interaction is unchanged |
-| Claude Code | `0.1.7` published separately; tool calls, resource delivery and recovery of package 0.1.0 on 2.1.284 are historical evidence. Default-profile model business calls remain unverified (the existing record is BLOCKED_AUTH). Human questions, hot reload and new-capability business outcomes remain unverified |
+| Public download | Codex `0.1.0-native.30+codex.20261128010000`, with 40 capabilities |
+| Added in this release | Invoke software-factory to design an automation pilot or chief-of-staff to coordinate delegated work from the Matt entry point |
+| Devin CLI | `0.1.9+devin.20261128` published separately, with 40 capabilities; local TTY and bounded recovery evidence is historical, and question interaction is unchanged |
+| Claude Code | `0.1.8` published separately; tool calls, resource delivery and recovery of package 0.1.0 on 2.1.284 are historical evidence. Default-profile model business calls remain unverified (the existing record is BLOCKED_AUTH). Human questions, hot reload and new-capability business outcomes remain unverified |
 | Codex native questions | Limited human observation for synchronous input; the new two-step confirmation is validated only with a synthetic client; asynchronous cards still have host limitations after a turn ends |
 | General-purpose SDK | Task State SDK 0.5.2 embedded; RAC remains on its component-accepted 0.4.1 snapshot |
 
