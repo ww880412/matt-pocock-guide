@@ -33,21 +33,21 @@
       <h1>从一个想法开始</h1>
       <p class="intro">先完成安装，再用“给任务列表增加标签筛选”走一遍：你提出目标与边界，agent 按进展推进，需要你决定时回到对话。</p>
       <p class="guide-shortcuts">已经安装？<a href="#start">直接开始第一个任务</a> · <a href="#reference">查命令</a> · <a href="#updates">查看升级说明</a></p>
-      <div class="article-meta"><span>已发布：Codex Desktop · native.29</span><span>更新：2026-11-23</span></div>
+      <div class="article-meta"><span>已发布：Codex Desktop · native.30</span><span>更新：2026-11-28</span></div>
 
-      <p class="section-note">安装与日常操作适用于 Codex native.29 的38项能力；整规格实施与只读复盘的用法见<a href="#upstream-candidate">新增能力说明</a>。</p>
+      <p class="section-note">安装与日常操作适用于 Codex native.30 的40项能力；整规格实施与只读复盘的用法见<a href="#upstream-candidate">新增能力说明</a>。</p>
 
       <section id="hosts"><h2>先确认宿主与可获取的版本</h2>
-        <p>同一套任务核心已适配 Codex、Claude Code 和 Devin CLI。当前公开下载分别是 <strong>Codex native.29 · 38 项能力</strong>、<strong>Devin 0.1.8+devin.20261123 · 38 项能力</strong>和 <strong>Claude Code 0.1.7 · 38 项能力</strong>。以下 Codex 操作说明不自动适用于其他宿主。</p>
+        <p>同一套任务核心已适配 Codex、Claude Code 和 Devin CLI。当前公开下载分别是 <strong>Codex native.30 · 40 项能力</strong>、<strong>Devin 0.1.9+devin.20261128 · 40 项能力</strong>和 <strong>Claude Code 0.1.8 · 40 项能力</strong>。以下 Codex 操作说明不自动适用于其他宿主。</p>
         <h3 id="devin">Devin CLI：独立安装包，使用 TTY 交互</h3>
         <p>真实 Devin CLI 中已验证工作流、菜单、选项作答、自定义输入、Esc 后恢复、可选题、超时与会话恢复。随后对子目录启动和省略问答默认字段的两项修复完成定向复验。</p>
         <p><strong>交互问答使用 TTY 终端。</strong>已测 ACP/print 路径没有作答通道，原生问题会自动取消且没有业务答案，不能用于交互验收。限定真实宿主场景已覆盖压缩后正文重投、残留锁自动恢复，以及答案提交两个精确边界的中断恢复；首次自动重放可能被可信会话校验拒绝，新一次调用可以恢复结果，回执没有重复。跨设备身份与真人交互仍未验证，现有样本不代表所有恢复路径通过。</p>
-        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip" download="matt-pocock-devin.zip">下载 Devin 0.1.8+devin.20261123 · ZIP</a>，解压到稳定目录，按包内 README 核对校验值、MCP 和 hooks 后安装。新版包含38项能力、implement-spec / retro 与完整 ask-matt 能力咨询；从旧本地候选升级时，先保存原 source 路径和会话状态，不覆盖用户修改。</p>
+        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-devin.zip" download="matt-pocock-devin.zip">下载 Devin 0.1.9+devin.20261128 · ZIP</a>，解压到稳定目录，按包内 README 核对校验值、MCP 和 hooks 后安装。新版包含40项能力、implement-spec / retro 与完整 ask-matt 能力咨询；从旧本地候选升级时，先保存原 source 路径和会话状态，不覆盖用户修改。</p>
         <pre><code>devin plugins info matt-pocock
 devin plugins install --local /absolute/path/matt-pocock-devin/plugins/matt-pocock</code></pre>
         <p>安装时按宿主提示完成信任确认，再在新的 Devin TTY 会话中使用 <code>/matt-pocock:matt-pocock</code>。已有任务不会自动切换到新包；随包指南保留构建时的快照，最新分发状态以本网站为准。</p>
-        <h3 id="claude">Claude Code：0.1.7 独立安装包</h3>
-        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip" download="matt-pocock-claude.zip">下载 Claude Code 0.1.7 · ZIP</a>，解压到稳定目录，按包内 README 与 SHA256SUMS 核对文件。包内不含账号或用户配置，使用你已有的 Claude 登录。</p>
+        <h3 id="claude">Claude Code：0.1.8 独立安装包</h3>
+        <p><a href="https://ww880412.github.io/matt-pocock-guide/downloads/matt-pocock-claude.zip" download="matt-pocock-claude.zip">下载 Claude Code 0.1.8 · ZIP</a>，解压到稳定目录，按包内 README 与 SHA256SUMS 核对文件。包内不含账号或用户配置，使用你已有的 Claude 登录。</p>
         <pre><code>claude --plugin-dir /absolute/path/matt-pocock-claude/plugins/matt-pocock</code></pre>
         <p>按宿主提示确认信任，在新会话中使用 <code>/matt-pocock:matt-pocock</code>。从旧候选升级时保留旧包与会话状态，不覆盖用户修改；已有会话不会自动热更新。</p>
         <p>历史插件 0.1.0 已在 Claude Code 2.1.284 验证工具声明、路线与阶段、正文及参考资料加载、恢复和结束等13项功能；ask描述完整下发。既有默认 profile 模型调用记录为 BLOCKED_AUTH，未新增该层验收。真人问答体验、其他宿主版本、热加载，以及 implement-spec / retro 的实际业务效果仍未验证。</p>
@@ -153,10 +153,14 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
       <section id="capabilities">
 <!-- CAPABILITIES:START -->
 <h2>能力目录与独立使用</h2>
-<p>38 项公开能力都能独立调用；其中 20 项也作为路线阶段。能力数量包含这些阶段，不与六条路线相加。</p>
+<p>40 项公开能力都能独立调用；其中 20 项也作为路线阶段。能力数量包含这些阶段，不与六条路线相加。</p>
 <p>不知道名称时，发送 <code>$matt-pocock skills 你的任务</code> 获得推荐；选定后使用 <code>$matt-pocock use 能力名</code> 并说明目标与范围。<a href="index.html#everyday">先看六个常用场景 →</a></p>
+<p>两个 Beta 都已加入入口。下面的命令可直接用于新版。</p>
+<div class="code-block"><div class="code-top"><span>Codex · 复制后发送</span><button class="copy" data-copy="beta-factory" aria-label="复制示例">复制</button></div><pre id="beta-factory">$matt-pocock 用 software-factory 设计处理积压 PR 的审查流程，交付设计草稿。</pre></div>
+<div class="code-block"><div class="code-top"><span>Codex · 复制后发送</span><button class="copy" data-copy="beta-chief" aria-label="复制示例">复制</button></div><pre id="beta-chief">$matt-pocock 用 chief-of-staff 协调两项调查，把结论和下一步写入我指定的交接记录。</pre></div>
+<p>只想了解用法时可以问“chief-of-staff 怎么用”；选好能力后可以直接说明要它执行的任务。</p>
 <div class="catalog-controls" hidden><div><label for="cap-search">搜索名称、用途或产出</label><input id="cap-search" type="search" placeholder="例如：解释、测试、skill" autocomplete="off"></div><div><label for="cap-category">按任务筛选</label><select id="cap-category"><option value="">全部任务</option><option>理解与规划</option><option>实现与质量</option><option>写作与学习</option><option>项目设置</option><option>复盘与交付</option></select></div><button type="button" class="filter-reset" id="cap-reset">重置</button></div>
-<p id="cap-count" role="status" aria-live="polite">显示 38 / 38 项能力</p><p id="cap-empty" hidden>没有匹配的能力。试试其他关键词，或重置筛选。</p>
+<p id="cap-count" role="status" aria-live="polite">显示 40 / 40 项能力</p><p id="cap-empty" hidden>没有匹配的能力。试试其他关键词，或重置筛选。</p>
 <div class="capability-list"><details class="capability" id="cap-ask-matt" data-capability="ask-matt" data-category="理解与规划"><summary><span><strong>选择能力或工程路线，理解触发与交接</strong><code>ask-matt</code></span><span class="relation-tag">未编入路线依赖</span></summary><div class="capability-body"><p><strong>产出：</strong>能力与流程地图</p><p><strong>任务类别：</strong>理解与规划 · engineering</p><p><strong>与路线的关系：</strong>未编入路线依赖。所有公开能力都可独立调用，完成后保留原路线。</p><div class="code-block"><div class="code-top"><span>Codex · 复制后发送</span><button class="copy" data-copy="cap-command-ask-matt" aria-label="复制 ask-matt 命令">复制</button></div><pre id="cap-command-ask-matt">$matt-pocock use ask-matt</pre></div></div></details>
 <details class="capability" id="cap-loop-me" data-capability="loop-me" data-category="理解与规划"><summary><span><strong>梳理反复进行的业务活动</strong><code>loop-me</code></span><span class="relation-tag">未编入路线依赖</span></summary><div class="capability-body"><p><strong>产出：</strong>业务循环规格</p><p><strong>任务类别：</strong>理解与规划 · Beta（上游层级）</p><p><strong>与路线的关系：</strong>未编入路线依赖。所有公开能力都可独立调用，完成后保留原路线。</p><div class="code-block"><div class="code-top"><span>Codex · 复制后发送</span><button class="copy" data-copy="cap-command-loop-me" aria-label="复制 loop-me 命令">复制</button></div><pre id="cap-command-loop-me">$matt-pocock use loop-me</pre></div></div></details>
 <details class="capability" id="cap-writing-fragments" data-capability="writing-fragments" data-category="写作与学习"><summary><span><strong>访谈并积累原始写作素材</strong><code>writing-fragments</code></span><span class="relation-tag">也作为路线阶段</span></summary><div class="capability-body"><p><strong>产出：</strong>素材 Markdown</p><p><strong>任务类别：</strong>写作与学习 · Beta（上游层级）</p><p><strong>与路线的关系：</strong>也作为路线阶段。所有公开能力都可独立调用，完成后保留原路线。</p><div class="code-block"><div class="code-top"><span>Codex · 复制后发送</span><button class="copy" data-copy="cap-command-writing-fragments" aria-label="复制 writing-fragments 命令">复制</button></div><pre id="cap-command-writing-fragments">$matt-pocock use writing-fragments</pre></div></div></details>
@@ -194,7 +198,9 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
 <details class="capability" id="cap-writing-for-agents" data-capability="writing-for-agents" data-category="写作与学习"><summary><span><strong>编写或改进供代理消费的说明文档</strong><code>writing-for-agents</code></span><span class="relation-tag">可按需引用</span></summary><div class="capability-body"><p><strong>产出：</strong>有清晰指针和完成条件的文档</p><p><strong>任务类别：</strong>写作与学习 · Pi frozen</p><p><strong>与路线的关系：</strong>可按需引用。所有公开能力都可独立调用，完成后保留原路线。</p><div class="code-block"><div class="code-top"><span>Codex · 复制后发送</span><button class="copy" data-copy="cap-command-writing-for-agents" aria-label="复制 writing-for-agents 命令">复制</button></div><pre id="cap-command-writing-for-agents">$matt-pocock use writing-for-agents</pre></div></div></details>
 <details class="capability" id="cap-writing-great-skills" data-capability="writing-great-skills" data-category="写作与学习"><summary><span><strong>设计技能的调用方式和指令结构</strong><code>writing-great-skills</code></span><span class="relation-tag">可按需引用</span></summary><div class="capability-body"><p><strong>产出：</strong>有明确触发与执行过程的技能说明</p><p><strong>任务类别：</strong>写作与学习 · Pi frozen</p><p><strong>与路线的关系：</strong>可按需引用。所有公开能力都可独立调用，完成后保留原路线。</p><div class="code-block"><div class="code-top"><span>Codex · 复制后发送</span><button class="copy" data-copy="cap-command-writing-great-skills" aria-label="复制 writing-great-skills 命令">复制</button></div><pre id="cap-command-writing-great-skills">$matt-pocock use writing-great-skills</pre></div></div></details>
 <details class="capability" id="cap-deslop" data-capability="deslop" data-category="实现与质量"><summary><span><strong>在授权修改范围内清理低证据代码且保持行为</strong><code>deslop</code></span><span class="relation-tag">未编入路线依赖</span></summary><div class="capability-body"><p><strong>产出：</strong>经过验证的清理或有证据的问题清单</p><p><strong>任务类别：</strong>实现与质量 · Pi selected</p><p><strong>与路线的关系：</strong>未编入路线依赖。所有公开能力都可独立调用，完成后保留原路线。</p><div class="code-block"><div class="code-top"><span>Codex · 复制后发送</span><button class="copy" data-copy="cap-command-deslop" aria-label="复制 deslop 命令">复制</button></div><pre id="cap-command-deslop">$matt-pocock use deslop</pre></div></div></details>
-<details class="capability" id="cap-pr" data-capability="pr" data-category="复盘与交付"><summary><span><strong>编写便于审阅的 PR 正文</strong><code>pr</code></span><span class="relation-tag">未编入路线依赖</span></summary><div class="capability-body"><p><strong>产出：</strong>图示摘要、前后证据与合并风险说明</p><p><strong>任务类别：</strong>复盘与交付 · engineering</p><p><strong>与路线的关系：</strong>未编入路线依赖。所有公开能力都可独立调用，完成后保留原路线。</p><div class="code-block"><div class="code-top"><span>Codex · 复制后发送</span><button class="copy" data-copy="cap-command-pr" aria-label="复制 pr 命令">复制</button></div><pre id="cap-command-pr">$matt-pocock use pr</pre></div></div></details></div>
+<details class="capability" id="cap-pr" data-capability="pr" data-category="复盘与交付"><summary><span><strong>编写便于审阅的 PR 正文</strong><code>pr</code></span><span class="relation-tag">未编入路线依赖</span></summary><div class="capability-body"><p><strong>产出：</strong>图示摘要、前后证据与合并风险说明</p><p><strong>任务类别：</strong>复盘与交付 · engineering</p><p><strong>与路线的关系：</strong>未编入路线依赖。所有公开能力都可独立调用，完成后保留原路线。</p><div class="code-block"><div class="code-top"><span>Codex · 复制后发送</span><button class="copy" data-copy="cap-command-pr" aria-label="复制 pr 命令">复制</button></div><pre id="cap-command-pr">$matt-pocock use pr</pre></div></div></details>
+<details class="capability" id="cap-software-factory" data-capability="software-factory" data-category="理解与规划"><summary><span><strong>为积压工单或待审 PR 设计自动化任务和服务</strong><code>software-factory</code></span><span class="relation-tag">可按需引用</span></summary><div class="capability-body"><p><strong>产出：</strong>服务表、逐任务流程、去重、限速与人工接管点</p><p><strong>任务类别：</strong>理解与规划 · Beta（上游层级）</p><p><strong>与路线的关系：</strong>可按需引用。所有公开能力都可独立调用，完成后保留原路线。</p><div class="code-block"><div class="code-top"><span>Codex · 复制后发送</span><button class="copy" data-copy="cap-command-software-factory" aria-label="复制 software-factory 命令">复制</button></div><pre id="cap-command-software-factory">$matt-pocock use software-factory</pre></div></div></details>
+<details class="capability" id="cap-chief-of-staff" data-capability="chief-of-staff" data-category="理解与规划"><summary><span><strong>按明确范围跨任务、跨会话委派并追踪决定</strong><code>chief-of-staff</code></span><span class="relation-tag">未编入路线依赖</span></summary><div class="capability-body"><p><strong>产出：</strong>执行者回报与证据、已授权的共享 wiki 历史记录</p><p><strong>任务类别：</strong>理解与规划 · Beta（上游层级）</p><p><strong>与路线的关系：</strong>未编入路线依赖。所有公开能力都可独立调用，完成后保留原路线。</p><div class="code-block"><div class="code-top"><span>Codex · 复制后发送</span><button class="copy" data-copy="cap-command-chief-of-staff" aria-label="复制 chief-of-staff 命令">复制</button></div><pre id="cap-command-chief-of-staff">$matt-pocock use chief-of-staff</pre></div></div></details></div>
 <p class="section-note">“自动加载 / 按需引用”描述当前目录中的资料关系，不代表该能力已经执行，也不涵盖所有业务关联。推荐后仍需选择；不会因为安装就自动使用全部能力。内部模板与参考资料不计入公开能力。</p>
 <p class="section-note">以上命令面向 Codex。loop-me 只形成业务循环规格；pr 只写 PR 正文；设置类能力仍需核对修改范围与授权。<a href="#hosts">查看其他宿主 →</a></p>
 <!-- CAPABILITIES:END -->
@@ -250,10 +256,10 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
 
       <section id="updates"><h2>本版变化与升级</h2>
         <div class="release-current">
-          <p class="release-meta"><span class="release-flag-tag">当前版本</span><span>2026-11-23 · Codex native.29 / Claude Code 0.1.7 / Devin 0.1.8+devin.20261123</span></p>
-          <h3>完成证据与任务范围</h3>
-          <p>新工作流可以按要求登记验证命令和文件。运行未结束、退出失败或候选文件发生变化时，工作流会保留未完成状态。</p>
-          <p>状态同时列出初始范围和当前范围。调整范围时需要引用用户指令，定性评审则保留判断依据。</p>
+          <p class="release-meta"><span class="release-flag-tag">当前版本</span><span>2026-11-28 · Codex native.30 / Claude Code 0.1.8 / Devin 0.1.9+devin.20261128</span></p>
+          <h3>自动化设计与多任务协调</h3>
+          <p>本版新增 software-factory 和 chief-of-staff。点名即可执行，只描述任务时会先推荐并等待选择。</p>
+          <p>software-factory 交付自动化试点设计；chief-of-staff 按授权派工、核对来源，并把结果写入指定的交接记录。</p>
         </div>
 
         <h3 id="upgrade">如何更新</h3>
@@ -266,7 +272,13 @@ codex plugin add matt-pocock@matt-pocock-team</code></pre></div>
         <h3 id="history">版本历史</h3>
         <p class="section-note">按发布时间倒序；展开查看各版变化与当时的验证边界。</p>
         <div class="release-history">
-<details><summary><strong>native.28 · 自动化设计、交接与复盘</strong></summary>
+<details><summary><strong>native.29 · 完成证据与任务范围</strong></summary>
+          <p class="release-meta"><span class="release-flag-tag">历史版本</span><span>2026-11-23 · Codex native.29 / Claude Code 0.1.7 / Devin 0.1.8+devin.20261123</span></p>
+          <h3>完成证据与任务范围</h3>
+          <p>新工作流可以按要求登记验证命令和文件。运行未结束、退出失败或候选文件发生变化时，工作流会保留未完成状态。</p>
+          <p>状态同时列出初始范围和当前范围。调整范围时需要引用用户指令，定性评审则保留判断依据。</p>
+        </details>
+        <details><summary><strong>native.28 · 自动化设计、交接与复盘</strong></summary>
           <p class="release-meta"><span class="release-flag-tag">历史版本</span><span>2026-11-06 · Codex native.28 / Claude Code 0.1.6 / Devin 0.1.7+devin.20261106</span></p>
           <h3>自动化设计、交接与复盘</h3>
           <p>设计重复运行的任务时，Matt 会与你确认触发方式、读写内容、后续动作、人工决策点和防重方式。</p>
